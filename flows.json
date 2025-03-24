@@ -25,6 +25,47 @@
         "x": 410,
         "y": 180,
         "wires": [
+            [
+                "c0206bed4e1384b2"
+            ]
+        ]
+    },
+    {
+        "id": "8f635c89818b3868",
+        "type": "udp in",
+        "z": "5eaf6ab5280755d9",
+        "name": "",
+        "iface": "",
+        "port": "",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 810,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0206bed4e1384b2",
+        "type": "csv",
+        "z": "5eaf6ab5280755d9",
+        "name": "",
+        "spec": "rfc",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 810,
+        "y": 500,
+        "wires": [
             []
         ]
     }

@@ -1,1 +1,31 @@
-[]
+[
+    {
+        "id": "5eaf6ab5280755d9",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a9da908503ca2c6d",
+        "type": "tcp in",
+        "z": "5eaf6ab5280755d9",
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "trim": false,
+        "base64": false,
+        "tls": "",
+        "x": 410,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]

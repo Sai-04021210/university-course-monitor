@@ -8,78 +8,108 @@
         "env": []
     },
     {
-        "id": "a9da908503ca2c6d",
-        "type": "tcp in",
+        "id": "c911f8132ac9fc3e",
+        "type": "http request",
         "z": "5eaf6ab5280755d9",
         "name": "",
-        "server": "server",
-        "host": "",
-        "port": "",
-        "datamode": "stream",
-        "datatype": "buffer",
-        "newline": "",
-        "topic": "",
-        "trim": false,
-        "base64": false,
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "",
         "tls": "",
-        "x": 210,
-        "y": 160,
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 830,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "19cb6095721c76af",
+        "type": "inject",
+        "z": "5eaf6ab5280755d9",
+        "name": "YearOfConstruction",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"208823\"",
+        "payloadType": "str",
+        "x": 410,
+        "y": 220,
         "wires": [
             [
-                "c0206bed4e1384b2"
+                "29690288b743fcc2",
+                "2a7f2de82b7d18be"
             ]
         ]
     },
     {
-        "id": "8f635c89818b3868",
-        "type": "udp in",
+        "id": "2a7f2de82b7d18be",
+        "type": "debug",
         "z": "5eaf6ab5280755d9",
-        "name": "",
-        "iface": "",
-        "port": "",
-        "ipv": "udp4",
-        "multicast": "false",
-        "group": "",
-        "datatype": "buffer",
-        "x": 810,
-        "y": 180,
-        "wires": [
-            []
-        ]
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 60,
+        "wires": []
     },
     {
-        "id": "c0206bed4e1384b2",
-        "type": "csv",
+        "id": "29690288b743fcc2",
+        "type": "change",
         "z": "5eaf6ab5280755d9",
         "name": "",
-        "spec": "rfc",
-        "sep": ",",
-        "hdrin": "",
-        "hdrout": "none",
-        "multi": "one",
-        "ret": "\\r\\n",
-        "temp": "",
-        "skip": "0",
-        "strings": true,
-        "include_empty_strings": "",
-        "include_null_values": "",
-        "x": 550,
-        "y": 180,
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "PATCH",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "http://100.76.111.20:8081/submodels/aHR0cHM6Ly9aZU1BLmRlL2lkcy9zbS8zMTMyXzQxODJfODA0Ml8yOTc5/submodel-elements/YearOfConstruction/$value",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{\"Content-Type\": \"application/json\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 460,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "5b1de22191917aea",
-        "type": "complete",
-        "z": "5eaf6ab5280755d9",
-        "name": "",
-        "scope": [],
-        "uncaught": false,
-        "x": 350,
-        "y": 140,
-        "wires": [
-            []
+            [
+                "c911f8132ac9fc3e"
+            ]
         ]
     }
 ]

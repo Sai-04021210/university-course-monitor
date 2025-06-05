@@ -1,5 +1,9 @@
 {
   "files.exclude": {
+    "workspace/.config.*": true,
+    "workspace/lib": true,
+    "workspace/node_modules": true,
+    "workspace/.npm": true,
     "**/.config.runtime.json*": true,
     "**/.sessions.json": true,
     "**/.config.json": true,

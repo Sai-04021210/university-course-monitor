@@ -1,24 +1,19 @@
 [
     {
-        "id": "f1ab33777b1c2620",
+        "id": "flow-tab",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Sample Flow",
         "disabled": false,
-        "info": "",
-        "env": []
+        "info": ""
     },
     {
-        "id": "7f06b0a21c7f1b05",
+        "id": "inject-node",
         "type": "inject",
-        "z": "f1ab33777b1c2620",
-        "name": "",
+        "z": "flow-tab",
+        "name": "Inject Hello",
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -26,55 +21,29 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 220,
-        "y": 60,
+        "payload": "Hello, Node-RED!",
+        "payloadType": "str",
+        "x": 180,
+        "y": 100,
         "wires": [
             [
-                "7b11b488590b5c00"
+                "debug-node"
             ]
         ]
     },
     {
-        "id": "7b11b488590b5c00",
+        "id": "debug-node",
         "type": "debug",
-        "z": "f1ab33777b1c2620",
-        "name": "debug 1",
+        "z": "flow-tab",
+        "name": "Debug Output",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 460,
-        "y": 140,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 440,
+        "y": 100,
         "wires": []
-    },
-    {
-        "id": "8509e7f9d2884af9",
-        "type": "catch",
-        "z": "f1ab33777b1c2620",
-        "name": "",
-        "scope": null,
-        "uncaught": false,
-        "x": 260,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d02d25d71c229dbd",
-        "type": "status",
-        "z": "f1ab33777b1c2620",
-        "name": "",
-        "scope": null,
-        "x": 340,
-        "y": 300,
-        "wires": [
-            []
-        ]
     }
 ]

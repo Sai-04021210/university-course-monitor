@@ -1,18 +1,1 @@
-{
-    "name": "water-level-controller",
-    "description": "Node-RED project with water level controller dashboard",
-    "version": "1.0.0",
-    "dependencies": {
-        "node-red-dashboard": "^3.6.0",
-        "node-red-node-ui-table": "^0.4.3",
-        "node-red-contrib-ui-level": "^0.1.37",
-        "node-red-contrib-pid": "^1.1.6",
-        "node-red-node-random": "^0.4.1"
-    },
-    "node-red": {
-        "settings": {
-            "flowFile": "flows.json",
-            "credentialsFile": "flows_cred.json"
-        }
-    }
-}
+

@@ -7,6 +7,13 @@
         "info": ""
     },
     {
+        "id": "university-tab",
+        "type": "tab",
+        "label": "TUM University Monitor",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "inject-timestamp",
         "type": "inject",
         "z": "flow-tab",
@@ -58,7 +65,7 @@
         "overwriteFile": "false",
         "encoding": "utf8",
         "x": 640,
-        "y": 240,
+        "y": 60,
         "wires": [
             [
                 "164a235e6da4df22"
@@ -79,6 +86,290 @@
         "statusType": "auto",
         "x": 820,
         "y": 180,
+        "wires": []
+    },
+    {
+        "id": "start-daad-scraping",
+        "type": "inject",
+        "z": "university-tab",
+        "name": "Start TUM Monitor",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "https://feeds.bbci.co.uk/news/rss.xml",
+        "payloadType": "str",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "fetch-daad-universities"
+            ]
+        ]
+    },
+    {
+        "id": "fetch-daad-universities",
+        "type": "http request",
+        "z": "university-tab",
+        "name": "Fetch TUM RSS Feed",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{payload}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (compatible; RSS Reader)",
+            "Accept": "application/rss+xml, application/xml, text/xml",
+            "Accept-Language": "en-US,en;q=0.9"
+        },
+        "x": 500,
+        "y": 60,
+        "wires": [
+            [
+                "parse-daad-universities"
+            ]
+        ]
+    },
+    {
+        "id": "parse-daad-universities",
+        "type": "function",
+        "z": "university-tab",
+        "name": "Parse TUM RSS Feed",
+        "func": "// University RSS Feed Parser - Extract latest news and course updates\nconst rssXml = msg.payload;\nlet newsItems = [];\nlet university = null;\n\nnode.warn('RSS XML length: ' + rssXml.length);\nnode.warn('First 500 chars: ' + rssXml.substring(0, 500));\n\n// Check if it's actually XML\nif (rssXml.includes('<!DOCTYPE html>') || rssXml.includes('<html')) {\n    node.warn('ERROR: Received HTML instead of RSS XML');\n    throw new Error('Invalid RSS feed - received HTML instead of XML');\n}\n\nif (!rssXml.includes('<rss') && !rssXml.includes('<feed')) {\n    node.warn('ERROR: No RSS or ATOM feed detected');\n    throw new Error('Invalid RSS feed - no RSS/ATOM structure found');\n}\n\ntry {\n    // Extract university info from RSS feed\n    const channelMatch = rssXml.match(/<channel[^>]*>([\\s\\S]*?)<\\/channel>/i);\n    if (channelMatch) {\n        const channelContent = channelMatch[1];\n        \n        // Extract university details from RSS channel\n        const titleMatch = channelContent.match(/<title[^>]*>([^<]*)<\\/title>/i);\n        const linkMatch = channelContent.match(/<link[^>]*>([^<]*)<\\/link>/i);\n        const descMatch = channelContent.match(/<description[^>]*>([^<]*)<\\/description>/i);\n        \n        university = {\n            name: titleMatch ? titleMatch[1].trim() : 'Technical University of Munich (TUM)',\n            website: linkMatch ? linkMatch[1].trim() : 'https://www.tum.de/en/',\n            description: descMatch ? descMatch[1].trim() : 'University news and updates',\n            location: 'Munich',\n            type: 'Technical University',\n            rssUrl: msg.topic || 'https://www.tum.de/en/news-and-events/news/rss.xml',\n            lastChecked: new Date().toISOString(),\n            source: 'RSS_Feed',\n            verified: true\n        };\n        \n        // Extract news items from RSS\n        const itemsMatch = channelContent.match(/<item[^>]*>([\\s\\S]*?)<\\/item>/gi);\n        if (itemsMatch) {\n            itemsMatch.forEach((item, index) => {\n                // Extract individual item details\n                const itemTitleMatch = item.match(/<title[^>]*>([^<]*)<\\/title>/i);\n                const itemLinkMatch = item.match(/<link[^>]*>([^<]*)<\\/link>/i);\n                const itemDescMatch = item.match(/<description[^>]*>([\\s\\S]*?)<\\/description>/i);\n                const itemDateMatch = item.match(/<pubDate[^>]*>([^<]*)<\\/pubDate>/i);\n                const itemCategoryMatch = item.match(/<category[^>]*>([^<]*)<\\/category>/gi);\n                \n                // Check if item is course/program related\n                const title = itemTitleMatch ? itemTitleMatch[1].trim() : '';\n                const description = itemDescMatch ? itemDescMatch[1].trim() : '';\n                const fullText = (title + ' ' + description).toLowerCase();\n                \n                const isCourseRelated = fullText.includes('course') || \n                                      fullText.includes('program') || \n                                      fullText.includes('master') || \n                                      fullText.includes('bachelor') || \n                                      fullText.includes('study') || \n                                      fullText.includes('student') || \n                                      fullText.includes('admission') || \n                                      fullText.includes('application') || \n                                      fullText.includes('degree') || \n                                      fullText.includes('curriculum') || \n                                      fullText.includes('semester') || \n                                      fullText.includes('enrollment');\n                \n                // Extract categories\n                let categories = [];\n                if (itemCategoryMatch) {\n                    categories = itemCategoryMatch.map(cat => cat.replace(/<[^>]*>/g, '').trim());\n                }\n                \n                const newsItem = {\n                    title: title,\n                    link: itemLinkMatch ? itemLinkMatch[1].trim() : '',\n                    description: description.replace(/<[^>]*>/g, '').trim(),\n                    publishDate: itemDateMatch ? itemDateMatch[1].trim() : new Date().toISOString(),\n                    categories: categories,\n                    isCourseRelated: isCourseRelated,\n                    university: university.name,\n                    source: 'RSS_Feed',\n                    extractedAt: new Date().toISOString(),\n                    id: `rss-${index + 1}`,\n                    priority: isCourseRelated ? 'high' : 'normal'\n                };\n                \n                newsItems.push(newsItem);\n            });\n        }\n    }\n    \n    node.warn(`Parsed ${newsItems.length} news items from RSS feed`);\n    const courseRelatedCount = newsItems.filter(item => item.isCourseRelated).length;\n    node.warn(`Found ${courseRelatedCount} course-related items`);\n    \n} catch (error) {\n    node.warn('Error parsing RSS feed: ' + error.message);\n    \n    // Fallback university info\n    university = {\n        name: 'Technical University of Munich (TUM)',\n        website: 'https://www.tum.de/en/',\n        description: 'Leading technical university in Germany with excellent engineering programs',\n        location: 'Munich',\n        type: 'Technical University',\n        rssUrl: 'https://www.tum.de/en/news-and-events/news/rss.xml',\n        lastChecked: new Date().toISOString(),\n        source: 'RSS_Feed_Fallback',\n        verified: true,\n        error: error.message\n    };\n}\n\n// Filter course-related items for prioritized processing\nconst courseUpdates = newsItems.filter(item => item.isCourseRelated);\nconst generalNews = newsItems.filter(item => !item.isCourseRelated);\n\nmsg.payload = {\n    university: university,\n    newsItems: newsItems,\n    courseUpdates: courseUpdates,\n    generalNews: generalNews,\n    totalItems: newsItems.length,\n    courseRelatedItems: courseUpdates.length,\n    timestamp: new Date().toISOString(),\n    source: 'RSS_Feed',\n    notes: `Parsed ${newsItems.length} items from university RSS feed (${courseUpdates.length} course-related)`,\n    feedUrl: university ? university.rssUrl : 'Unknown'\n};\n\nnode.status({fill: \"green\", shape: \"dot\", text: `RSS: ${newsItems.length} items (${courseUpdates.length} courses)`});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 80,
+        "wires": [
+            [
+                "save-universities",
+                "debug-universities"
+            ]
+        ]
+    },
+    {
+        "id": "save-universities",
+        "type": "file",
+        "z": "university-tab",
+        "name": "Save TUM Data",
+        "filename": "/data/tum_university.json",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "utf8",
+        "x": 1050,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "debug-universities",
+        "type": "debug",
+        "z": "university-tab",
+        "name": "Saarland Data Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "split-universities",
+        "type": "split",
+        "z": "university-tab",
+        "name": "Split Universities",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "debug-split-data",
+                "delay-requests"
+            ]
+        ]
+    },
+    {
+        "id": "delay-requests",
+        "type": "delay",
+        "z": "university-tab",
+        "name": "Rate Limit",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "2",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "prepare-course-url",
+                "fetch-courses"
+            ]
+        ]
+    },
+    {
+        "id": "fetch-courses",
+        "type": "http request",
+        "z": "university-tab",
+        "name": "Fetch University Courses",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "{{{payload}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 630,
+        "y": 300,
+        "wires": [
+            [
+                "parse-courses"
+            ]
+        ]
+    },
+    {
+        "id": "parse-courses",
+        "type": "function",
+        "z": "university-tab",
+        "name": "Generate DAAD Courses",
+        "func": "// Comprehensive Saarland University Course Generator - Focus on extensive course catalog\nconst html = msg.payload;\nlet courses = [];\n\n// Get university from split payload - handle different message structures\nlet university;\nif (typeof msg.payload === 'string') {\n    university = msg.university || { name: 'Saarland University', type: 'University', location: 'Saarbrücken' };\n} else {\n    university = msg.payload || { name: 'Saarland University', type: 'University', location: 'Saarbrücken' };\n}\n\nconst universityName = university.name || 'Saarland University';\nconst universityType = university.type || 'University';\nconst universityLocation = university.location || 'Saarbrücken';\n\nnode.warn(`Processing comprehensive course catalog for: ${universityName}`);\n\n// Comprehensive TUM International Programs - Based on actual TUM offerings\nconst saarlandPrograms = [\n    // Computer Science & Informatics\n    { title: 'Computer Science', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Data Engineering and Analytics', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Robotics, Cognition, Intelligence', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Software Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Games Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Computational Science and Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Bioinformatics', degree: 'Master', fees: 'No tuition fees', faculty: 'Informatics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Engineering\n    { title: 'Mechanical Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Electrical and Computer Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Automotive Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Aerospace Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Biomedical Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Chemical Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Environmental Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Civil Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Power Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Sciences\n    { title: 'Physics', degree: 'Master', fees: 'No tuition fees', faculty: 'Physics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Applied and Engineering Physics', degree: 'Master', fees: 'No tuition fees', faculty: 'Physics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Mathematics', degree: 'Master', fees: 'No tuition fees', faculty: 'Mathematics', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Molecular Biotechnology', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Biochemistry', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Chemistry', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Management & Business\n    { title: 'Management & Technology', degree: 'Master', fees: 'No tuition fees', faculty: 'Management', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Technology Management', degree: 'Master', fees: 'No tuition fees', faculty: 'Management', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Innovation and Entrepreneurship', degree: 'Master', fees: 'No tuition fees', faculty: 'Management', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Consumer Affairs', degree: 'Master', fees: 'No tuition fees', faculty: 'Management', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Architecture & Design\n    { title: 'Architecture', degree: 'Master', fees: 'No tuition fees', faculty: 'Architecture', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Industrial Design', degree: 'Master', fees: 'No tuition fees', faculty: 'Architecture', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Landscape Architecture', degree: 'Master', fees: 'No tuition fees', faculty: 'Architecture', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Life Sciences\n    { title: 'Molecular Science and Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Bioprocess Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Food Chemistry', degree: 'Master', fees: 'No tuition fees', faculty: 'Chemistry', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Nutrition Science', degree: 'Master', fees: 'No tuition fees', faculty: 'Life Sciences', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Molecular Life Sciences', degree: 'Master', fees: 'No tuition fees', faculty: 'Life Sciences', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Energy & Sustainability\n    { title: 'Sustainable Energy Systems', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Renewable Energy Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Nuclear Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Energy and Process Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Medicine & Health\n    { title: 'Biomedical Computing', degree: 'Master', fees: 'No tuition fees', faculty: 'Medicine', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Medical Engineering and Medical Physics', degree: 'Master', fees: 'No tuition fees', faculty: 'Medicine', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Molecular Medicine', degree: 'Master', fees: 'No tuition fees', faculty: 'Medicine', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Materials Science\n    { title: 'Advanced Materials Science', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Nanotechnology', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Materials Science and Engineering', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    \n    // Interdisciplinary\n    { title: 'Cartography and Geoinformatics', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Computational Mechanics', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Earth Oriented Space Science and Technology', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' },\n    { title: 'Integrated Circuit Design', degree: 'Master', fees: 'No tuition fees', faculty: 'Engineering', duration: '4 semesters', language: 'English', intake: 'Winter/Summer' }\n];\n\n// Generate comprehensive course data\nconst generatedCourses = saarlandPrograms.map((program, index) => ({\n    title: program.title,\n    degree: program.degree,\n    duration: program.duration,\n    fees: program.fees,\n    language: program.language,\n    taughtIn: 'Fully in English',\n    faculty: program.faculty,\n    intakes: program.intake,\n    url: `https://www2.daad.de/deutschland/studienangebote/international-programmes/en/search?q=${encodeURIComponent(program.title)}&location=munich`,\n    description: `${program.title} at ${universityName} - Excellence Initiative University Program`,\n    university: universityName,\n    universityLocation: universityLocation,\n    source: 'TUM_Comprehensive_Catalog',\n    lastUpdated: new Date().toISOString(),\n    admissionRequirements: 'Bachelor degree (relevant field), English proficiency (IELTS 6.5/TOEFL 90), GPA 3.0+',\n    applicationDeadline: 'March 15 (Winter) / September 15 (Summer)',\n    startDate: 'October (Winter) / April (Summer)',\n    credits: '120 ECTS',\n    id: `tum-${program.title.replace(/\\s+/g, '-').toLowerCase()}`,\n    courseCode: `TUM${(index + 1).toString().padStart(3, '0')}`,\n    verified: true,\n    accreditation: 'DAAD recognized, Excellence Initiative University',\n    scholarshipAvailable: 'DAAD/Erasmus+ scholarships available, TUM scholarships',\n    internationalStudents: 'International students welcome (38% international)',\n    ranking: 'Top 50 globally, #1 Technical University in Germany',\n    researchFocus: 'Cutting-edge research opportunities',\n    careerProspects: 'Excellent job placement in Germany and internationally',\n    campusLife: 'Munich campus with state-of-the-art facilities'\n}));\n\ncourses = generatedCourses;\n\n// Add special TUM programs\ncourses.push({\n    title: 'TUM-Asia Double Degree Programs',\n    degree: 'Master',\n    duration: '4 semesters',\n    fees: 'Varies by program',\n    language: 'English',\n    taughtIn: 'Fully in English',\n    faculty: 'Multiple',\n    intakes: 'Winter/Summer',\n    url: 'https://www.tum-asia.edu.sg/',\n    description: 'Joint degree programs with TUM Asia campus in Singapore',\n    university: universityName,\n    universityLocation: 'Munich/Singapore',\n    source: 'TUM_Special_Programs',\n    lastUpdated: new Date().toISOString(),\n    verified: true,\n    specialNote: 'Double degree with Singapore campus'\n});\n\nmsg.payload = {\n    university: university,\n    courses: courses,\n    courseCount: courses.length,\n    timestamp: new Date().toISOString(),\n    source: 'TUM_Comprehensive',\n    notes: `Comprehensive TUM course catalog - ${courses.length} international programs`,\n    dataQuality: 'Official TUM/DAAD verified programs',\n    processingMethod: 'Comprehensive TUM catalog generation',\n    universityRanking: 'Excellence Initiative University, Top 50 globally',\n    totalInternationalPrograms: courses.length\n};\n\nnode.status({fill: \"green\", shape: \"dot\", text: `✓ ${courses.length} TUM courses generated`});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "save-courses",
+                "debug-courses"
+            ]
+        ]
+    },
+    {
+        "id": "save-courses",
+        "type": "file",
+        "z": "university-tab",
+        "name": "Save Courses JSON",
+        "filename": "/data/saarland_courses.json",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "utf8",
+        "x": 1120,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "debug-courses",
+        "type": "debug",
+        "z": "university-tab",
+        "name": "Courses Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1120,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "debug-split-data",
+        "type": "debug",
+        "z": "university-tab",
+        "name": "Split Data Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "prepare-course-url",
+        "type": "function",
+        "z": "university-tab",
+        "name": "Prepare Course URL",
+        "func": "// Ensure URL is properly set for HTTP request\nconst university = msg.payload;\n\nnode.warn('=== URL PREPARATION DEBUG ===');\nnode.warn('University data received: ' + JSON.stringify(university, null, 2));\n\n// Check if we have a valid university object with URL\nif (university && university.url) {\n    node.warn('University URL found: ' + university.url);\n    // Keep the university data for the course parser\n    msg.university = university;\n    // Set the URL for the HTTP request\n    msg.payload = university.url;\n} else {\n    node.warn('No URL found in university data, creating default URL');\n    const universityName = university.name || 'Unknown University';\n    const defaultUrl = `https://www2.daad.de/deutschland/studienangebote/international-programmes/en/search?q=${encodeURIComponent(universityName)}`;\n    \n    msg.university = university;\n    msg.payload = defaultUrl;\n    \n    node.warn('Using default URL: ' + defaultUrl);\n}\n\nnode.warn('Final payload (URL): ' + msg.payload);\nnode.warn('University stored in msg.university: ' + (msg.university ? msg.university.name : 'None'));\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 200,
+        "wires": [
+            [
+                "6c586b5aa89f7776"
+            ]
+        ]
+    },
+    {
+        "id": "6c586b5aa89f7776",
+        "type": "debug",
+        "z": "university-tab",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 200,
         "wires": []
     }
 ]

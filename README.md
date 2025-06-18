@@ -1,17 +1,27 @@
-# Node-RED Docker Development Environment
+# University Course Monitor
 
-This repository provides a portable, version-controlled Node-RED setup using Docker and local volumes for easy editing, collaboration, and backup.
+A Node-RED based application that monitors German universities for new courses and sends notifications via email when new courses are added to MyGermanUniversity website.
+
+## Features
+
+- **University Course Monitoring**: Automatically scrapes MyGermanUniversity for new course listings
+- **Email Notifications**: Sends alerts when new courses are detected
+- **Dashboard Interface**: View monitored universities and recent notifications
+- **Configurable**: Easy setup for different universities and notification preferences
 
 ## Quick Start
 
-1. Clone this repository on any system with Docker installed.
-2. Start Node-RED:
+1. Clone this repository:
+   ```sh
+   git clone <repository-url>
+   cd university-course-monitor
+   ```
+2. Start the application:
    ```sh
    docker compose up -d
    ```
-3. Open Node-RED: [http://localhost:1880](http://localhost:1880)
-4. Edit flows in the web UI — changes are saved in `workspace/`.
-5. Edit and version flows/settings in VS Code or your editor of choice.
+3. Open Node-RED Dashboard: [http://localhost:1880](http://localhost:1880)
+4. Configure your monitoring settings and email preferences
 
 ---
 

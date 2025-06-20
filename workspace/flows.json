@@ -98,65 +98,7 @@
         }
     },
     {
-        "id": "load_on_startup",
-        "type": "inject",
-        "z": "main_tab",
-        "name": "Load Dashboard on Startup",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 3,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 220,
-        "y": 140,
-        "wires": [
-            [
-                "load_existing_data",
-                "notify_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "load_existing_data",
-        "type": "function",
-        "z": "main_tab",
-        "name": "Load Existing Data",
-        "func": "// Load data from context or provide defaults\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst newCourses = flow.get('newCourses') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\nif (courses.length === 0) {\n    // No data yet, show loading message\n    msg.payload = \"Loading... Please wait for API data\";\n    msg.topic = \"loading\";\n} else {\n    // Load existing data into dashboard\n    const stats = {\n        totalCourses: courses.length,\n        totalUniversities: universities.length,\n        lastUpdated: lastUpdated\n    };\n    \n    // Send to update dashboard\n    const universityData = universities.slice(0, 20);\n    \n    return [\n        { payload: stats.totalCourses, topic: \"total_courses\" },\n        { payload: stats.totalUniversities, topic: \"total_universities\" },\n        { payload: stats.lastUpdated, topic: \"last_updated\" },\n        { payload: universityData, topic: \"university_table\" },\n        { payload: newCourses.slice(0, 10), topic: \"new_courses\" }\n    ];\n}\n\nreturn msg;",
-        "outputs": 5,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 470,
-        "y": 80,
-        "wires": [
-            [
-                "ui_gauge_total_courses"
-            ],
-            [
-                "ui_gauge_total_universities"
-            ],
-            [
-                "ui_text_last_updated"
-            ],
-            [
-                "ui_table_universities"
-            ],
-            [
-                "ui_table_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "ui_gauge_total_courses",
+        "id": "be6c7eff2c1cd630",
         "type": "ui_gauge",
         "z": "main_tab",
         "name": "",
@@ -179,12 +121,12 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 740,
-        "y": 60,
+        "x": 2080,
+        "y": 760,
         "wires": []
     },
     {
-        "id": "ui_gauge_total_universities",
+        "id": "57f94c4b3fbe219c",
         "type": "ui_gauge",
         "z": "main_tab",
         "name": "",
@@ -207,12 +149,12 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 770,
-        "y": 140,
+        "x": 2090,
+        "y": 880,
         "wires": []
     },
     {
-        "id": "ui_text_last_updated",
+        "id": "4db4717ae5376421",
         "type": "ui_text",
         "z": "main_tab",
         "group": "ui_group_stats",
@@ -223,12 +165,12 @@
         "label": "Last Updated",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 820,
-        "y": 180,
+        "x": 2100,
+        "y": 920,
         "wires": []
     },
     {
-        "id": "ui_table_universities",
+        "id": "f0938154c1f233d9",
         "type": "ui_table",
         "z": "main_tab",
         "group": "ui_group_universities",
@@ -270,12 +212,12 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 850,
-        "y": 240,
+        "x": 2070,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "ui_table_new_courses",
+        "id": "48dc04fc966d1424",
         "type": "ui_table",
         "z": "main_tab",
         "group": "ui_group_new_courses",
@@ -327,12 +269,12 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 850,
-        "y": 360,
+        "x": 2070,
+        "y": 1000,
         "wires": []
     },
     {
-        "id": "ui_template_data_sources",
+        "id": "b83d6188736c9f48",
         "type": "ui_template",
         "z": "main_tab",
         "group": "ui_group_data_sources",
@@ -346,14 +288,14 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 160,
-        "y": 400,
+        "x": 120,
+        "y": 1180,
         "wires": [
             []
         ]
     },
     {
-        "id": "ui_template_table_styles",
+        "id": "2915ee5c04e7f5b1",
         "type": "ui_template",
         "z": "main_tab",
         "group": "ui_group_new_courses",
@@ -367,10 +309,105 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 140,
-        "y": 300,
+        "x": 100,
+        "y": 1080,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "610fb7c1abfec3a7",
+        "type": "inject",
+        "z": "main_tab",
+        "name": "🔄 Load DB on Startup",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 730,
+        "y": 940,
+        "wires": [
+            [
+                "f6b6a91e8fd6a27d"
+            ]
+        ]
+    },
+    {
+        "id": "f6b6a91e8fd6a27d",
+        "type": "file in",
+        "z": "main_tab",
+        "name": "Read DB",
+        "filename": "/data/course_database.json",
+        "format": "utf8",
+        "x": 1000,
+        "y": 960,
+        "wires": [
+            [
+                "01c2b672b9e605ab"
+            ]
+        ]
+    },
+    {
+        "id": "01c2b672b9e605ab",
+        "type": "json",
+        "z": "main_tab",
+        "name": "Parse JSON",
+        "x": 1230,
+        "y": 960,
+        "wires": [
+            [
+                "4387649ad40e0abe"
+            ]
+        ]
+    },
+    {
+        "id": "4387649ad40e0abe",
+        "type": "function",
+        "z": "main_tab",
+        "name": "Set flow context",
+        "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
+        "outputs": 1,
+        "x": 1500,
+        "y": 960,
+        "wires": [
+            [
+                "4836d526aba8c061"
+            ]
+        ]
+    },
+    {
+        "id": "4836d526aba8c061",
+        "type": "function",
+        "z": "main_tab",
+        "name": "Load Existing Data",
+        "func": "const courses = flow.get('courses') || [];\nconst unis = flow.get('universities') || [];\nconst newC = flow.get('newCourses') || [];\nconst last = flow.get('lastUpdated') || 'Never';\n\nconst payloads = [\n    { payload: courses.length, topic: 'total_courses' },\n    { payload: unis.length, topic: 'total_universities' },\n    { payload: last, topic: 'last_updated' },\n    { payload: unis.slice(0, 20), topic: 'university_table' },\n    { payload: newC.slice(0, 10), topic: 'new_courses' }\n];\n\nreturn payloads;",
+        "outputs": 5,
+        "x": 1800,
+        "y": 960,
+        "wires": [
+            [
+                "be6c7eff2c1cd630"
+            ],
+            [
+                "57f94c4b3fbe219c"
+            ],
+            [
+                "4db4717ae5376421"
+            ],
+            [
+                "f0938154c1f233d9"
+            ],
+            [
+                "48dc04fc966d1424"
+            ]
         ]
     },
     {
@@ -390,12 +427,11 @@
         "topic": "",
         "payload": "start_api_polling",
         "payloadType": "str",
-        "x": 150,
-        "y": 80,
+        "x": 190,
+        "y": 40,
         "wires": [
             [
-                "fetch_daad_api",
-                "fetch_hochschulkompass"
+                "fetch_daad_api"
             ]
         ]
     },
@@ -420,8 +456,7 @@
         "y": 160,
         "wires": [
             [
-                "fetch_daad_api",
-                "fetch_hochschulkompass"
+                "fetch_daad_api"
             ]
         ]
     },
@@ -503,8 +538,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 200,
+        "x": 960,
+        "y": 280,
         "wires": [
             [
                 "notify_new_courses"
@@ -543,9 +578,7 @@
         "x": 1330,
         "y": 220,
         "wires": [
-            [
-                "ui_table_new_courses"
-            ]
+            []
         ]
     },
     {
@@ -563,67 +596,84 @@
         "x": 1310,
         "y": 120,
         "wires": [
-            [
-                "ui_gauge_total_courses"
-            ],
-            [
-                "ui_gauge_total_universities"
-            ],
-            [
-                "ui_text_last_updated"
-            ],
-            [
-                "ui_table_universities"
-            ]
+            [],
+            [],
+            [],
+            []
         ]
     },
     {
-        "id": "fetch_hochschulkompass",
-        "type": "http request",
-        "z": "api_tab",
-        "name": "Fetch Hochschulkompass",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "https://www.hochschulkompass.de/studium/suche.html?tx_szhrksearch_pi1%5Bsearch%5D=1&tx_szhrksearch_pi1%5BQUICK%5D=1&tx_szhrksearch_pi1%5Bstudtyp%5D%5B%5D=1&tx_szhrksearch_pi1%5Bstudtyp%5D%5B%5D=2&tx_szhrksearch_pi1%5Bstudtyp%5D%5B%5D=3",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [
-            {
-                "keyType": "User-Agent",
-                "keyValue": "",
-                "valueType": "Mozilla/5.0 (compatible; UniversityMonitor/1.0)"
-            }
-        ],
-        "x": 470,
-        "y": 200,
-        "wires": [
-            [
-                "process_hochschulkompass_data"
-            ]
-        ]
-    },
-    {
-        "id": "process_hochschulkompass_data",
+        "id": "e88871c03a08b266",
         "type": "function",
         "z": "api_tab",
-        "name": "Process Hochschulkompass Data",
-        "func": "// Simple approach: Add additional German universities not in DAAD\nconst timestamp = new Date().toISOString();\n\n// Extended list of German universities missing from DAAD to reach closer to 428 total\nconst additionalUniversities = [\n    // Technical Universities\n    { name: 'Technische Universität Berlin', courses: 180, type: 'Technical University' },\n    { name: 'Universität Stuttgart', courses: 165, type: 'Technical University' },\n    { name: 'Karlsruher Institut für Technologie', courses: 195, type: 'Technical University' },\n    { name: 'Technische Universität Darmstadt', courses: 120, type: 'Technical University' },\n    { name: 'Technische Universität Braunschweig', courses: 110, type: 'Technical University' },\n    { name: 'Technische Universität Clausthal', courses: 85, type: 'Technical University' },\n    { name: 'Technische Universität Ilmenau', courses: 95, type: 'Technical University' },\n    \n    // Universities of Applied Sciences\n    { name: 'Hochschule München', courses: 85, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Karlsruhe', courses: 70, type: 'University of Applied Sciences' },\n    { name: 'Fachhochschule Köln', courses: 90, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Düsseldorf', courses: 75, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Mannheim', courses: 65, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Darmstadt', courses: 80, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Bremen', courses: 60, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Hamburg', courses: 70, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Kiel', courses: 55, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Magdeburg-Stendal', courses: 50, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Pforzheim', courses: 45, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Reutlingen', courses: 40, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Ulm', courses: 35, type: 'University of Applied Sciences' },\n    { name: 'Hochschule Würzburg-Schweinfurt', courses: 42, type: 'University of Applied Sciences' },\n    \n    // Traditional Universities\n    { name: 'Universität Frankfurt am Main', courses: 210, type: 'University' },\n    { name: 'Universität Mannheim', courses: 95, type: 'University' },\n    { name: 'Ludwig-Maximilians-Universität München', courses: 250, type: 'University' },\n    { name: 'Humboldt-Universität zu Berlin', courses: 185, type: 'University' },\n    { name: 'Universität zu Köln', courses: 175, type: 'University' },\n    { name: 'Westfälische Wilhelms-Universität Münster', courses: 155, type: 'University' },\n    { name: 'Eberhard Karls Universität Tübingen', courses: 140, type: 'University' },\n    { name: 'Universität Heidelberg', courses: 165, type: 'University' },\n    { name: 'Universität Freiburg', courses: 145, type: 'University' },\n    { name: 'Universität Würzburg', courses: 125, type: 'University' },\n    { name: 'Universität Mainz', courses: 135, type: 'University' },\n    { name: 'Universität Kiel', courses: 115, type: 'University' },\n    { name: 'Universität Oldenburg', courses: 105, type: 'University' },\n    { name: 'Universität Osnabrück', courses: 95, type: 'University' },\n    { name: 'Universität Bamberg', courses: 85, type: 'University' },\n    { name: 'Universität Bayreuth', courses: 90, type: 'University' },\n    { name: 'Universität Bielefeld', courses: 110, type: 'University' },\n    { name: 'Universität Bochum', courses: 160, type: 'University' },\n    { name: 'Universität Dortmund', courses: 140, type: 'University' },\n    { name: 'Universität Duisburg-Essen', courses: 130, type: 'University' },\n    \n    // Art and Music Colleges\n    { name: 'Hochschule für Musik und Theater München', courses: 25, type: 'Arts/Music University' },\n    { name: 'Staatliche Hochschule für Musik Stuttgart', courses: 20, type: 'Arts/Music University' },\n    { name: 'Hochschule für Musik Köln', courses: 22, type: 'Arts/Music University' },\n    { name: 'Universität der Künste Berlin', courses: 30, type: 'Arts/Music University' },\n    { name: 'Staatliche Akademie der Bildenden Künste Stuttgart', courses: 15, type: 'Arts/Music University' },\n    { name: 'Kunsthochschule Kassel', courses: 18, type: 'Arts/Music University' },\n    \n    // Specialized Institutions\n    { name: 'Deutsche Sporthochschule Köln', courses: 35, type: 'Specialized Institution' },\n    { name: 'Hochschule für Verwaltung NRW', courses: 20, type: 'Public Administration College' },\n    { name: 'Fachhochschule für öffentliche Verwaltung Bayern', courses: 18, type: 'Public Administration College' },\n    { name: 'Theologische Hochschule Reutlingen', courses: 12, type: 'Theological College' },\n    { name: 'Augustana-Hochschule Neuendettelsau', courses: 10, type: 'Theological College' }\n];\n\nconst universities = additionalUniversities.map(uni => ({\n    name: uni.name,\n    courses: uni.courses,\n    country: 'Germany',\n    source: 'Hochschulkompass'\n}));\n\n// Generate some courses for these universities\nconst courses = [];\nadditionalUniversities.forEach(uni => {\n    for (let i = 1; i <= Math.min(uni.courses, 20); i++) {\n        courses.push({\n            id: `hsk_${uni.name.replace(/\\s+/g, '_').toLowerCase()}_${i}`,\n            title: `Study Program ${i}`,\n            university: uni.name,\n            country: 'Germany',\n            degree: 'Various',\n            language: 'German',\n            source: 'Hochschulkompass',\n            url: 'https://www.hochschulkompass.de',\n            lastUpdated: timestamp,\n            fees: 'Varies',\n            duration: 'Various'\n        });\n    }\n});\n\nmsg.payload = {\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    source: 'Hochschulkompass',\n    timestamp: timestamp\n};\n\nnode.status({fill: \"blue\", shape: \"dot\", text: `Hochschulkompass: ${universities.length} institutions`});\n\nreturn msg;",
+        "name": "Update Main Dashboard",
+        "func": "// … your existing stats + uniData logic …\n// then fire link out:\nreturn msg;",
         "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 780,
-        "y": 180,
+        "x": 790,
+        "y": 720,
         "wires": [
             [
-                "store_course_data"
+                "d2410cdfd6a1ab2c"
+            ]
+        ]
+    },
+    {
+        "id": "d2410cdfd6a1ab2c",
+        "type": "link out",
+        "z": "api_tab",
+        "name": "reload dashboard",
+        "links": [
+            "reload_dash_link"
+        ],
+        "x": 1175,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3833ecb6c6a97520",
+        "type": "ui_button",
+        "z": "api_tab",
+        "name": "Emergency Flush",
+        "group": "ui_group_data_sources",
+        "order": 2,
+        "label": "🚨 Flush All Data",
+        "bgcolor": "#d9534f",
+        "icon": "fa-trash",
+        "x": 250,
+        "y": 660,
+        "wires": [
+            [
+                "c6575511a55cc273"
+            ]
+        ]
+    },
+    {
+        "id": "c6575511a55cc273",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Flush DB & Context",
+        "func": "const empty={courses:[],universities:[],newCourses:[],lastUpdated:'Never'};\nflow.set('courses',empty.courses);\nflow.set('universities',empty.universities);\nflow.set('newCourses',empty.newCourses);\nflow.set('lastUpdated',empty.lastUpdated);\nflow.set('knownCourseIds',[]);\nmsg.payload=JSON.stringify(empty,null,2);\nreturn msg;",
+        "outputs": 1,
+        "x": 490,
+        "y": 620,
+        "wires": [
+            [
+                "3a542954ebbdfc43"
+            ]
+        ]
+    },
+    {
+        "id": "3a542954ebbdfc43",
+        "type": "file",
+        "z": "api_tab",
+        "name": "Overwrite DB",
+        "filename": "/data/course_database.json",
+        "overwriteFile": "true",
+        "x": 790,
+        "y": 620,
+        "wires": [
+            [
+                "d2410cdfd6a1ab2c"
             ]
         ]
     }

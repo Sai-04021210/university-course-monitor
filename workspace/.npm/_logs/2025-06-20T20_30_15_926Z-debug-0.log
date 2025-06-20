@@ -1,0 +1,13 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.7.0
+2 info using node@v18.20.3
+3 silly config:load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config:load:file:/usr/src/node-red/.npmrc
+5 silly config:load:file:/usr/local/etc/npmrc
+6 verbose title npm list cheerio
+7 verbose argv "list" "--global" "cheerio"
+8 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-06-20T20_30_15_926Z-
+9 verbose logfile /data/.npm/_logs/2025-06-20T20_30_15_926Z-debug-0.log
+10 silly logfile done cleaning log files
+11 verbose exit 1
+12 verbose code 1

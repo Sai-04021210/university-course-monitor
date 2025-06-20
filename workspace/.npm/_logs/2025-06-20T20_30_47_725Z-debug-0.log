@@ -1,0 +1,49 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.7.0
+2 info using node@v18.20.3
+3 silly config:load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config:load:file:/data/.npmrc
+5 silly config:load:file:/usr/src/node-red/.npmrc
+6 silly config:load:file:/usr/local/etc/npmrc
+7 verbose title npm install cheerio
+8 verbose argv "install" "cheerio"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-06-20T20_30_47_725Z-
+10 verbose logfile /data/.npm/_logs/2025-06-20T20_30_47_725Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly idealTree buildDeps
+13 silly fetch manifest cheerio@^1.1.0
+14 http fetch GET 200 https://registry.npmjs.org/cheerio 183ms (cache revalidated)
+15 silly placeDep ROOT cheerio@1.1.0 REPLACE for: node-red-project@0.0.1 want: ^1.1.0
+16 warn EBADENGINE Unsupported engine {
+16 warn EBADENGINE   package: 'undici@7.10.0',
+16 warn EBADENGINE   required: { node: '>=20.18.1' },
+16 warn EBADENGINE   current: { node: 'v18.20.3', npm: '10.7.0' }
+16 warn EBADENGINE }
+17 silly reify moves {}
+18 silly audit bulk request {
+18 silly audit   boolbase: [ '1.0.0' ],
+18 silly audit   'cheerio-select': [ '2.1.0' ],
+18 silly audit   'css-select': [ '5.1.0' ],
+18 silly audit   'css-what': [ '6.1.0' ],
+18 silly audit   'dom-serializer': [ '2.0.0' ],
+18 silly audit   domelementtype: [ '2.3.0' ],
+18 silly audit   domhandler: [ '5.0.3' ],
+18 silly audit   domutils: [ '3.2.2' ],
+18 silly audit   'encoding-sniffer': [ '0.2.1' ],
+18 silly audit   entities: [ '4.5.0', '6.0.1' ],
+18 silly audit   htmlparser2: [ '10.0.0' ],
+18 silly audit   'iconv-lite': [ '0.6.3' ],
+18 silly audit   'nth-check': [ '2.1.1' ],
+18 silly audit   parse5: [ '7.3.0' ],
+18 silly audit   'parse5-htmlparser2-tree-adapter': [ '7.1.0' ],
+18 silly audit   'parse5-parser-stream': [ '7.1.2' ],
+18 silly audit   'safer-buffer': [ '2.1.2' ],
+18 silly audit   undici: [ '7.10.0' ],
+18 silly audit   'whatwg-encoding': [ '3.1.1' ],
+18 silly audit   'whatwg-mimetype': [ '4.0.0' ],
+18 silly audit   cheerio: [ '1.1.0' ]
+18 silly audit }
+19 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 237ms
+20 silly audit report {}
+21 verbose exit 0
+22 info ok

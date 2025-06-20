@@ -1,0 +1,172 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.7.0
+2 info using node@v18.20.3
+3 silly config:load:file:/usr/local/lib/node_modules/npm/npmrc
+4 warn config production Use `--omit=dev` instead.
+5 silly config:load:file:/data/.npmrc
+6 silly config:load:file:/usr/src/node-red/.npmrc
+7 silly config:load:file:/usr/local/etc/npmrc
+8 verbose title npm install node-red-contrib-puppeteer-core@1.1.1
+9 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--production" "--engine-strict" "node-red-contrib-puppeteer-core@1.1.1"
+10 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-06-20T21_01_40_692Z-
+11 verbose logfile /data/.npm/_logs/2025-06-20T21_01_40_692Z-debug-0.log
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest node-red-contrib-puppeteer-core@1.1.1
+15 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-puppeteer-core 778ms (cache miss)
+16 silly placeDep ROOT node-red-contrib-puppeteer-core@1.1.1 OK for: node-red-project@0.0.1 want: 1.1.1
+17 silly fetch manifest puppeteer-core@^10.0.0
+18 http fetch GET 200 https://registry.npmjs.org/puppeteer-core 51ms (cache revalidated)
+19 silly placeDep node_modules/node-red-contrib-puppeteer-core puppeteer-core@10.4.0 OK for: node-red-contrib-puppeteer-core@1.1.1 want: ^10.0.0
+20 silly fetch manifest ws@7.4.6
+21 silly fetch manifest debug@4.3.1
+22 silly fetch manifest rimraf@3.0.2
+23 silly fetch manifest tar-fs@2.0.0
+24 silly fetch manifest pkg-dir@4.2.0
+25 silly fetch manifest progress@2.0.1
+26 silly fetch manifest node-fetch@2.6.1
+27 http fetch GET 200 https://registry.npmjs.org/rimraf 55ms (cache miss)
+28 silly fetch manifest unbzip2-stream@1.3.3
+29 http fetch GET 200 https://registry.npmjs.org/unbzip2-stream 44ms (cache miss)
+30 silly fetch manifest devtools-protocol@0.0.901419
+31 http fetch GET 200 https://registry.npmjs.org/pkg-dir 114ms (cache miss)
+32 silly fetch manifest https-proxy-agent@5.0.0
+33 http fetch GET 200 https://registry.npmjs.org/ws 129ms (cache revalidated)
+34 http fetch GET 200 https://registry.npmjs.org/debug 131ms (cache revalidated)
+35 http fetch GET 200 https://registry.npmjs.org/progress 135ms (cache revalidated)
+36 http fetch GET 200 https://registry.npmjs.org/tar-fs 137ms (cache revalidated)
+37 http fetch GET 200 https://registry.npmjs.org/devtools-protocol 48ms (cache revalidated)
+38 http fetch GET 200 https://registry.npmjs.org/node-fetch 166ms (cache miss)
+39 http fetch GET 200 https://registry.npmjs.org/https-proxy-agent 61ms (cache revalidated)
+40 silly fetch manifest bufferutil@^4.0.1
+41 http fetch GET 200 https://registry.npmjs.org/bufferutil 41ms (cache revalidated)
+42 silly fetch manifest utf-8-validate@^5.0.2
+43 http fetch GET 200 https://registry.npmjs.org/utf-8-validate 42ms (cache revalidated)
+44 silly placeDep node_modules/node-red-contrib-puppeteer-core debug@4.3.1 OK for: puppeteer-core@10.4.0 want: 4.3.1
+45 silly placeDep node_modules/node-red-contrib-puppeteer-core devtools-protocol@0.0.901419 OK for: puppeteer-core@10.4.0 want: 0.0.901419
+46 silly placeDep node_modules/node-red-contrib-puppeteer-core https-proxy-agent@5.0.0 OK for: puppeteer-core@10.4.0 want: 5.0.0
+47 silly placeDep ROOT node-fetch@2.6.1 OK for: puppeteer-core@10.4.0 want: 2.6.1
+48 silly placeDep ROOT pkg-dir@4.2.0 OK for: puppeteer-core@10.4.0 want: 4.2.0
+49 silly placeDep node_modules/node-red-contrib-puppeteer-core progress@2.0.1 OK for: puppeteer-core@10.4.0 want: 2.0.1
+50 silly placeDep ROOT rimraf@3.0.2 OK for: puppeteer-core@10.4.0 want: 3.0.2
+51 silly placeDep node_modules/node-red-contrib-puppeteer-core tar-fs@2.0.0 OK for: puppeteer-core@10.4.0 want: 2.0.0
+52 silly placeDep ROOT unbzip2-stream@1.3.3 OK for: puppeteer-core@10.4.0 want: 1.3.3
+53 silly placeDep node_modules/node-red-contrib-puppeteer-core ws@7.4.6 OK for: puppeteer-core@10.4.0 want: 7.4.6
+54 silly fetch manifest ms@2.1.2
+55 silly fetch manifest agent-base@6
+56 silly fetch manifest find-up@^4.0.0
+57 silly fetch manifest glob@^7.1.3
+58 silly fetch manifest chownr@^1.1.1
+59 silly fetch manifest mkdirp@^0.5.1
+60 silly fetch manifest tar-stream@^2.0.0
+61 http fetch GET 200 https://registry.npmjs.org/agent-base 51ms (cache revalidated)
+62 silly fetch manifest buffer@^5.2.1
+63 http fetch GET 200 https://registry.npmjs.org/tar-stream 52ms (cache revalidated)
+64 silly fetch manifest through@^2.3.8
+65 http fetch GET 200 https://registry.npmjs.org/ms 58ms (cache revalidated)
+66 http fetch GET 200 https://registry.npmjs.org/mkdirp 57ms (cache miss)
+67 http fetch GET 200 https://registry.npmjs.org/find-up 70ms (cache miss)
+68 http fetch GET 200 https://registry.npmjs.org/glob 71ms (cache miss)
+69 http fetch GET 200 https://registry.npmjs.org/chownr 75ms (cache miss)
+70 http fetch GET 200 https://registry.npmjs.org/buffer 47ms (cache miss)
+71 http fetch GET 200 https://registry.npmjs.org/through 45ms (cache miss)
+72 silly placeDep ROOT find-up@4.1.0 OK for: pkg-dir@4.2.0 want: ^4.0.0
+73 silly fetch manifest locate-path@^5.0.0
+74 silly fetch manifest path-exists@^4.0.0
+75 http fetch GET 200 https://registry.npmjs.org/path-exists 33ms (cache miss)
+76 http fetch GET 200 https://registry.npmjs.org/locate-path 59ms (cache miss)
+77 silly placeDep ROOT locate-path@5.0.0 OK for: find-up@4.1.0 want: ^5.0.0
+78 silly placeDep ROOT path-exists@4.0.0 OK for: find-up@4.1.0 want: ^4.0.0
+79 silly fetch manifest p-locate@^4.1.0
+80 http fetch GET 200 https://registry.npmjs.org/p-locate 41ms (cache miss)
+81 silly placeDep ROOT p-locate@4.1.0 OK for: locate-path@5.0.0 want: ^4.1.0
+82 silly fetch manifest p-limit@^2.2.0
+83 http fetch GET 200 https://registry.npmjs.org/p-limit 49ms (cache miss)
+84 silly placeDep ROOT p-limit@2.3.0 OK for: p-locate@4.1.0 want: ^2.2.0
+85 silly fetch manifest p-try@^2.0.0
+86 http fetch GET 200 https://registry.npmjs.org/p-try 42ms (cache miss)
+87 silly placeDep ROOT p-try@2.2.0 OK for: p-limit@2.3.0 want: ^2.0.0
+88 silly placeDep ROOT glob@7.2.3 OK for: rimraf@3.0.2 want: ^7.1.3
+89 silly fetch manifest inflight@^1.0.4
+90 silly fetch manifest inherits@2
+91 silly fetch manifest minimatch@^3.1.1
+92 silly fetch manifest fs.realpath@^1.0.0
+93 silly fetch manifest path-is-absolute@^1.0.0
+94 http fetch GET 200 https://registry.npmjs.org/inflight 39ms (cache miss)
+95 http fetch GET 200 https://registry.npmjs.org/fs.realpath 53ms (cache miss)
+96 http fetch GET 200 https://registry.npmjs.org/inherits 56ms (cache miss)
+97 http fetch GET 200 https://registry.npmjs.org/path-is-absolute 56ms (cache miss)
+98 http fetch GET 200 https://registry.npmjs.org/minimatch 65ms (cache miss)
+99 silly placeDep ROOT fs.realpath@1.0.0 OK for: glob@7.2.3 want: ^1.0.0
+100 silly placeDep ROOT inflight@1.0.6 OK for: glob@7.2.3 want: ^1.0.4
+101 silly placeDep ROOT inherits@2.0.4 OK for: glob@7.2.3 want: 2
+102 silly placeDep ROOT minimatch@3.1.2 OK for: glob@7.2.3 want: ^3.1.1
+103 silly placeDep ROOT path-is-absolute@1.0.1 OK for: glob@7.2.3 want: ^1.0.0
+104 silly fetch manifest brace-expansion@^1.1.7
+105 http fetch GET 200 https://registry.npmjs.org/brace-expansion 49ms (cache miss)
+106 silly placeDep ROOT brace-expansion@1.1.12 OK for: minimatch@3.1.2 want: ^1.1.7
+107 silly fetch manifest balanced-match@^1.0.0
+108 silly fetch manifest concat-map@0.0.1
+109 http fetch GET 200 https://registry.npmjs.org/balanced-match 41ms (cache miss)
+110 http fetch GET 200 https://registry.npmjs.org/concat-map 42ms (cache miss)
+111 silly placeDep ROOT balanced-match@1.0.2 OK for: brace-expansion@1.1.12 want: ^1.0.0
+112 silly placeDep ROOT concat-map@0.0.1 OK for: brace-expansion@1.1.12 want: 0.0.1
+113 silly placeDep ROOT buffer@5.7.1 OK for: unbzip2-stream@1.3.3 want: ^5.2.1
+114 silly placeDep ROOT through@2.3.8 OK for: unbzip2-stream@1.3.3 want: ^2.3.8
+115 silly fetch manifest base64-js@^1.3.1
+116 silly fetch manifest ieee754@^1.1.13
+117 http fetch GET 200 https://registry.npmjs.org/ieee754 47ms (cache miss)
+118 http fetch GET 200 https://registry.npmjs.org/base64-js 50ms (cache miss)
+119 silly placeDep ROOT base64-js@1.5.1 OK for: buffer@5.7.1 want: ^1.3.1
+120 silly placeDep ROOT ieee754@1.2.1 OK for: buffer@5.7.1 want: ^1.1.13
+121 silly placeDep node_modules/node-red-contrib-puppeteer-core ms@2.1.2 OK for: debug@4.3.1 want: 2.1.2
+122 silly placeDep node_modules/node-red-contrib-puppeteer-core agent-base@6.0.2 OK for: https-proxy-agent@5.0.0 want: 6
+123 silly placeDep ROOT chownr@1.1.4 OK for: tar-fs@2.0.0 want: ^1.1.1
+124 silly placeDep ROOT mkdirp@0.5.6 OK for: tar-fs@2.0.0 want: ^0.5.1
+125 silly placeDep node_modules/node-red-contrib-puppeteer-core tar-stream@2.2.0 OK for: tar-fs@2.0.0 want: ^2.0.0
+126 silly fetch manifest minimist@^1.2.6
+127 silly fetch manifest bl@^4.0.3
+128 silly fetch manifest fs-constants@^1.0.0
+129 silly fetch manifest readable-stream@^3.1.1
+130 http fetch GET 200 https://registry.npmjs.org/fs-constants 45ms (cache miss)
+131 http fetch GET 200 https://registry.npmjs.org/bl 52ms (cache miss)
+132 http fetch GET 200 https://registry.npmjs.org/minimist 55ms (cache miss)
+133 http fetch GET 200 https://registry.npmjs.org/readable-stream 59ms (cache miss)
+134 silly placeDep ROOT minimist@1.2.8 OK for: mkdirp@0.5.6 want: ^1.2.6
+135 silly placeDep ROOT bl@4.1.0 OK for: tar-stream@2.2.0 want: ^4.0.3
+136 silly placeDep ROOT fs-constants@1.0.0 OK for: tar-stream@2.2.0 want: ^1.0.0
+137 silly placeDep ROOT readable-stream@3.6.2 OK for: tar-stream@2.2.0 want: ^3.1.1
+138 silly fetch manifest readable-stream@^3.4.0
+139 silly fetch manifest string_decoder@^1.1.1
+140 silly fetch manifest util-deprecate@^1.0.1
+141 http fetch GET 200 https://registry.npmjs.org/util-deprecate 41ms (cache miss)
+142 http fetch GET 200 https://registry.npmjs.org/string_decoder 49ms (cache miss)
+143 silly placeDep ROOT string_decoder@1.3.0 OK for: readable-stream@3.6.2 want: ^1.1.1
+144 silly placeDep ROOT util-deprecate@1.0.2 OK for: readable-stream@3.6.2 want: ^1.0.1
+145 silly fetch manifest safe-buffer@~5.2.0
+146 http fetch GET 200 https://registry.npmjs.org/safe-buffer 38ms (cache miss)
+147 silly placeDep ROOT safe-buffer@5.2.1 OK for: string_decoder@1.3.0 want: ~5.2.0
+148 verbose stack Error: Unsupported engine
+148 verbose stack     at checkEngine (/usr/local/lib/node_modules/npm/node_modules/npm-install-checks/lib/index.js:14:25)
+148 verbose stack     at #checkEngineAndPlatform (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:220:11)
+148 verbose stack     at Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:206:41)
+148 verbose stack     at async Promise.all (index 1)
+148 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:131:5)
+148 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:150:5)
+148 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:74:5)
+149 verbose pkgid undici@7.10.0
+150 verbose cwd /data
+151 verbose Linux 6.10.14-linuxkit
+152 verbose node v18.20.3
+153 verbose npm  v10.7.0
+154 error code EBADENGINE
+155 error engine Unsupported engine
+156 error engine Not compatible with your version of node/npm: undici@7.10.0
+157 error notsup Not compatible with your version of node/npm: undici@7.10.0
+157 error notsup Required: {"node":">=20.18.1"}
+157 error notsup Actual:   {"npm":"10.7.0","node":"v18.20.3"}
+158 verbose exit 1
+159 verbose code 1
+160 silly unfinished npm timer reify 1750453300863
+161 silly unfinished npm timer reify:loadTrees 1750453300864
+162 error A complete log of this run can be found in: /data/.npm/_logs/2025-06-20T21_01_40_692Z-debug-0.log

@@ -98,6 +98,16 @@
         }
     },
     {
+        "id": "ui_group_filters",
+        "type": "ui_group",
+        "name": "Course Filters",
+        "tab": "ui_tab_main",
+        "order": 0,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
         "id": "be6c7eff2c1cd630",
         "type": "ui_gauge",
         "z": "main_tab",
@@ -422,6 +432,258 @@
             ],
             [
                 "48dc04fc966d1424"
+            ]
+        ]
+    },
+    {
+        "id": "filter_degree_type",
+        "type": "ui_dropdown",
+        "z": "main_tab",
+        "name": "Degree Type",
+        "label": "Course Type",
+        "tooltip": "Filter by degree type",
+        "place": "Select degree type",
+        "group": "ui_group_filters",
+        "order": 1,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "multiple": true,
+        "options": [
+            {
+                "label": "All",
+                "value": "all",
+                "type": "str"
+            },
+            {
+                "label": "Bachelor's",
+                "value": "bachelor",
+                "type": "str"
+            },
+            {
+                "label": "Master's",
+                "value": "master",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "filter_degree",
+        "topicType": "str",
+        "className": "",
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [
+                "apply_filters"
+            ]
+        ]
+    },
+    {
+        "id": "filter_tuition_fee",
+        "type": "ui_dropdown",
+        "z": "main_tab",
+        "name": "Tuition Fee",
+        "label": "Tuition Fee",
+        "tooltip": "Filter by tuition fee range",
+        "place": "Select fee range",
+        "group": "ui_group_filters",
+        "order": 2,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "All",
+                "value": "all",
+                "type": "str"
+            },
+            {
+                "label": "No Fee",
+                "value": "no_fee",
+                "type": "str"
+            },
+            {
+                "label": "Up to 500€/semester",
+                "value": "up_to_500",
+                "type": "str"
+            },
+            {
+                "label": "No Fee or Up to 500€",
+                "value": "affordable",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "filter_fee",
+        "topicType": "str",
+        "className": "",
+        "x": 400,
+        "y": 320,
+        "wires": [
+            [
+                "apply_filters"
+            ]
+        ]
+    },
+    {
+        "id": "filter_language",
+        "type": "ui_dropdown",
+        "z": "main_tab",
+        "name": "Course Language",
+        "label": "Language",
+        "tooltip": "Filter by course language",
+        "place": "Select language",
+        "group": "ui_group_filters",
+        "order": 3,
+        "width": "4",
+        "height": "1",
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "All",
+                "value": "all",
+                "type": "str"
+            },
+            {
+                "label": "English",
+                "value": "english",
+                "type": "str"
+            },
+            {
+                "label": "German",
+                "value": "german",
+                "type": "str"
+            },
+            {
+                "label": "English or German",
+                "value": "en_de",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "filter_language",
+        "topicType": "str",
+        "className": "",
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "apply_filters"
+            ]
+        ]
+    },
+    {
+        "id": "apply_filters",
+        "type": "function",
+        "z": "main_tab",
+        "name": "Apply Filters",
+        "func": "// Store filter values in context\nconst topic = msg.topic;\nconst value = msg.payload;\n\n// Initialize filters if not exist\nlet filters = flow.get('courseFilters') || {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n};\n\n// Update the specific filter\nif (topic === 'filter_degree') {\n    filters.degree = Array.isArray(value) ? value : [value];\n} else if (topic === 'filter_fee') {\n    filters.fee = value;\n} else if (topic === 'filter_language') {\n    filters.language = value;\n}\n\n// Store updated filters\nflow.set('courseFilters', filters);\n\n// Get all courses and universities\nconst allCourses = flow.get('courses') || [];\nconst allUniversities = flow.get('universities') || [];\n\n// Apply filters to courses\nlet filteredCourses = allCourses.filter(course => {\n    // Degree filter\n    if (!filters.degree.includes('all')) {\n        const degreeMatch = filters.degree.some(deg => {\n            if (deg === 'bachelor') {\n                return course.degree && course.degree.toLowerCase().includes('bachelor');\n            } else if (deg === 'master') {\n                return course.degree && course.degree.toLowerCase().includes('master');\n            }\n            return false;\n        });\n        if (!degreeMatch) return false;\n    }\n    \n    // Fee filter\n    if (filters.fee !== 'all') {\n        const feeText = (course.fees || '').toLowerCase();\n        if (filters.fee === 'no_fee') {\n            if (!feeText.includes('no fee') && !feeText.includes('free') && !feeText.includes('none')) {\n                return false;\n            }\n        } else if (filters.fee === 'up_to_500') {\n            // Check if fee is numeric and <= 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            if (feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!feeText.includes('no fee') && !feeText.includes('free')) {\n                return false;\n            }\n        } else if (filters.fee === 'affordable') {\n            // No fee OR up to 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            const isNoFee = feeText.includes('no fee') || feeText.includes('free') || feeText.includes('none');\n            if (!isNoFee && feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!isNoFee && !feeMatch) {\n                return false;\n            }\n        }\n    }\n    \n    // Language filter\n    if (filters.language !== 'all') {\n        const langText = (course.language || '').toLowerCase();\n        if (filters.language === 'english') {\n            if (!langText.includes('english')) return false;\n        } else if (filters.language === 'german') {\n            if (!langText.includes('german') && !langText.includes('deutsch')) return false;\n        } else if (filters.language === 'en_de') {\n            if (!langText.includes('english') && !langText.includes('german') && !langText.includes('deutsch')) {\n                return false;\n            }\n        }\n    }\n    \n    return true;\n});\n\n// Calculate filtered university counts\nconst universityCourseCounts = {};\nfilteredCourses.forEach(course => {\n    if (!universityCourseCounts[course.university]) {\n        universityCourseCounts[course.university] = 0;\n    }\n    universityCourseCounts[course.university]++;\n});\n\n// Update university data with filtered counts\nconst filteredUniversities = allUniversities.map((uni, idx) => {\n    const filteredCount = universityCourseCounts[uni.name] || 0;\n    if (filteredCount === 0) return null; // Hide universities with no matching courses\n    \n    // Determine category\n    const name = uni.name.toLowerCase();\n    let category = 'University';\n    if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical university')) {\n        category = 'Technical University';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        sn: idx + 1,\n        name: uni.name,\n        category: category,\n        courses: filteredCount\n    };\n}).filter(uni => uni !== null)\n  .sort((a, b) => a.name.localeCompare(b.name))\n  .map((uni, idx) => ({ ...uni, sn: idx + 1 })); // Re-number after filtering\n\n// Return updated data\nreturn [\n    { payload: filteredCourses.length, topic: \"total_courses\" },\n    { payload: filteredUniversities.length, topic: \"total_universities\" },\n    { payload: filteredUniversities, topic: \"university_table\" }\n];",
+        "outputs": 3,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 320,
+        "wires": [
+            [
+                "be6c7eff2c1cd630"
+            ],
+            [
+                "57f94c4b3fbe219c"
+            ],
+            [
+                "f0938154c1f233d9"
+            ]
+        ]
+    },
+    {
+        "id": "reset_filters",
+        "type": "ui_button",
+        "z": "main_tab",
+        "name": "Reset Filters",
+        "group": "ui_group_filters",
+        "order": 4,
+        "width": "2",
+        "height": "1",
+        "label": "Reset",
+        "tooltip": "Reset all filters",
+        "color": "",
+        "bgcolor": "#0094CE",
+        "className": "",
+        "icon": "fa-refresh",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "reset_filters",
+        "topicType": "str",
+        "x": 200,
+        "y": 400,
+        "wires": [
+            [
+                "reset_filter_values"
+            ]
+        ]
+    },
+    {
+        "id": "reset_filter_values",
+        "type": "function",
+        "z": "main_tab",
+        "name": "Reset Filter Values",
+        "func": "// Reset all filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// Get original data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\n// Prepare original university data\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\n// Send reset values to dropdowns and update dashboard\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" }\n];",
+        "outputs": 6,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "be6c7eff2c1cd630"
+            ],
+            [
+                "57f94c4b3fbe219c"
+            ],
+            [
+                "f0938154c1f233d9"
+            ],
+            [
+                "filter_degree_type"
+            ],
+            [
+                "filter_tuition_fee"
+            ],
+            [
+                "filter_language"
+            ]
+        ]
+    },
+    {
+        "id": "init_filters",
+        "type": "inject",
+        "z": "main_tab",
+        "name": "Initialize Filters",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 2,
+        "topic": "init_filters",
+        "payload": "",
+        "payloadType": "str",
+        "x": 170,
+        "y": 480,
+        "wires": [
+            [
+                "reset_filter_values"
             ]
         ]
     },

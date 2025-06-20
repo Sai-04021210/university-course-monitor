@@ -121,7 +121,7 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 2080,
+        "x": 2100,
         "y": 760,
         "wires": []
     },
@@ -150,7 +150,7 @@
         "diff": false,
         "className": "",
         "x": 2090,
-        "y": 880,
+        "y": 840,
         "wires": []
     },
     {
@@ -179,6 +179,16 @@
         "width": 0,
         "height": 8,
         "columns": [
+            {
+                "field": "sn",
+                "title": "#",
+                "width": "5%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
             {
                 "field": "name",
                 "title": "University",
@@ -213,7 +223,7 @@
         "outputs": 0,
         "cts": false,
         "x": 2070,
-        "y": 960,
+        "y": 1000,
         "wires": []
     },
     {
@@ -270,7 +280,7 @@
         "outputs": 0,
         "cts": false,
         "x": 2070,
-        "y": 1000,
+        "y": 1100,
         "wires": []
     },
     {
@@ -388,8 +398,13 @@
         "type": "function",
         "z": "main_tab",
         "name": "Load Existing Data",
-        "func": "const courses = flow.get('courses') || [];\nconst unis = flow.get('universities') || [];\nconst newC = flow.get('newCourses') || [];\nconst last = flow.get('lastUpdated') || 'Never';\n\nconst payloads = [\n    { payload: courses.length, topic: 'total_courses' },\n    { payload: unis.length, topic: 'total_universities' },\n    { payload: last, topic: 'last_updated' },\n    { payload: unis.slice(0, 20), topic: 'university_table' },\n    { payload: newC.slice(0, 10), topic: 'new_courses' }\n];\n\nreturn payloads;",
+        "func": "// Load Existing Data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst newCourses = flow.get('newCourses') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\nif (courses.length === 0) {\n    return [\n        { payload: 0, topic: \"total_courses\" },\n        { payload: 0, topic: \"total_universities\" },\n        { payload: lastUpdated, topic: \"last_updated\" },\n        { payload: [], topic: \"university_table\" },\n        { payload: [], topic: \"new_courses\" }\n    ];\n}\n\n// Map each uni to include sn, category, and counts\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        // determine category\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: lastUpdated, topic: \"last_updated\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: newCourses.slice(0, 10), topic: \"new_courses\" }\n];\n",
         "outputs": 5,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 1800,
         "y": 960,
         "wires": [
@@ -489,7 +504,7 @@
         "type": "function",
         "z": "api_tab",
         "name": "Process DAAD Data",
-        "func": "const results = msg.payload.courses || [];\nconst timestamp = new Date().toISOString();\n\n// Process each course\nconst courses = results.map(course => ({\n    id: `daad_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: course.languages ? course.languages.join(', ') : 'English',\n    source: 'DAAD',\n    url: `https://www2.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'Varies',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university for statistics\nconst universityCounts = {};\ncourses.forEach(course => {\n    const uni = course.university;\n    if (!universityCounts[uni]) {\n        universityCounts[uni] = { name: uni, courses: 0, country: course.country, source: 'DAAD' };\n    }\n    universityCounts[uni].courses++;\n});\n\nconst universities = Object.values(universityCounts);\n\nmsg.payload = {\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    source: 'DAAD',\n    timestamp: timestamp\n};\n\nnode.status({fill: \"green\", shape: \"dot\", text: `DAAD: ${courses.length} courses`});\n\nreturn msg;",
+        "func": "// 1) grab raw array and dedupe by raw ID\nconst raw = msg.payload.courses || [];\nconst dedupedById = {};\nraw.forEach(c => {\n    dedupedById[c.id] = c;\n});\nconst unique = Object.values(dedupedById);\n\n// 2) map to normalized courses\nconst timestamp = new Date().toISOString();\nconst courses = unique.map(course => ({\n    id: `daad_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD',\n    url: `https://www2.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'Varies',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// 3) group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = { name: c.university, courses: 0 };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// 4) output\nmsg.payload = {\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD: ${courses.length} unique courses`\n});\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -652,8 +667,13 @@
         "type": "function",
         "z": "api_tab",
         "name": "Flush DB & Context",
-        "func": "const empty={courses:[],universities:[],newCourses:[],lastUpdated:'Never'};\nflow.set('courses',empty.courses);\nflow.set('universities',empty.universities);\nflow.set('newCourses',empty.newCourses);\nflow.set('lastUpdated',empty.lastUpdated);\nflow.set('knownCourseIds',[]);\nmsg.payload=JSON.stringify(empty,null,2);\nreturn msg;",
+        "func": "// 1) clear context & disk\nconst empty = { courses: [], universities: [], newCourses: [], lastUpdated: 'Never' };\nflow.set('courses', empty.courses);\nflow.set('universities', empty.universities);\nflow.set('newCourses', empty.newCourses);\nflow.set('lastUpdated', empty.lastUpdated);\nflow.set('knownCourseIds', []);\n\n// 2) write empty DB to disk\nmsg.payload = JSON.stringify(empty, null, 2);\n\n// 3) ALSO emit clear‐UI messages on a second output:\nconst clearMsgs = [\n    { payload: 0, topic: \"total_courses\" }, // gauge 1\n    { payload: 0, topic: \"total_universities\" }, // gauge 2\n    { payload: 'Never', topic: \"last_updated\" }, // text\n    { payload: [], topic: \"university_table\" }, // table 1\n    { payload: [], topic: \"new_courses\" }  // table 2\n];\n\nreturn [msg, clearMsgs];\n",
         "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
         "x": 490,
         "y": 620,
         "wires": [

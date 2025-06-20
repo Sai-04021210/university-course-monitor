@@ -121,8 +121,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 2100,
-        "y": 760,
+        "x": 1220,
+        "y": 40,
         "wires": []
     },
     {
@@ -149,8 +149,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 2090,
-        "y": 840,
+        "x": 1210,
+        "y": 120,
         "wires": []
     },
     {
@@ -165,8 +165,8 @@
         "label": "Last Updated",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 2100,
-        "y": 920,
+        "x": 1220,
+        "y": 200,
         "wires": []
     },
     {
@@ -222,8 +222,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 2070,
-        "y": 1000,
+        "x": 1190,
+        "y": 280,
         "wires": []
     },
     {
@@ -279,8 +279,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 2070,
-        "y": 1100,
+        "x": 1190,
+        "y": 380,
         "wires": []
     },
     {
@@ -298,8 +298,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 120,
-        "y": 1180,
+        "x": 170,
+        "y": 100,
         "wires": [
             []
         ]
@@ -319,8 +319,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 100,
-        "y": 1080,
+        "x": 150,
+        "y": 40,
         "wires": [
             []
         ]
@@ -342,8 +342,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "str",
-        "x": 730,
-        "y": 940,
+        "x": 170,
+        "y": 180,
         "wires": [
             [
                 "f6b6a91e8fd6a27d"
@@ -357,8 +357,8 @@
         "name": "Read DB",
         "filename": "/data/course_database.json",
         "format": "utf8",
-        "x": 1000,
-        "y": 960,
+        "x": 400,
+        "y": 180,
         "wires": [
             [
                 "01c2b672b9e605ab"
@@ -370,8 +370,8 @@
         "type": "json",
         "z": "main_tab",
         "name": "Parse JSON",
-        "x": 1230,
-        "y": 960,
+        "x": 570,
+        "y": 180,
         "wires": [
             [
                 "4387649ad40e0abe"
@@ -385,8 +385,8 @@
         "name": "Set flow context",
         "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
         "outputs": 1,
-        "x": 1500,
-        "y": 960,
+        "x": 760,
+        "y": 180,
         "wires": [
             [
                 "4836d526aba8c061"
@@ -405,8 +405,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1800,
-        "y": 960,
+        "x": 950,
+        "y": 180,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -492,7 +492,7 @@
         "senderr": false,
         "headers": [],
         "x": 440,
-        "y": 100,
+        "y": 120,
         "wires": [
             [
                 "process_daad_data"

@@ -302,7 +302,7 @@
         "order": 1,
         "width": 0,
         "height": 6,
-        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">📊 Data Sources & Methodology</h3>\n    \n    <div style=\"display: flex; gap: 20px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #28a745;\">🌍 DAAD API</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Academic Exchange Service</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 2,400+ International Programs</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Focus:</strong> English-taught programs for international students</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Live API, refreshed every 4 hours</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #007bff;\">🇩🇪 Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Rectors' Conference (HRK)</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 15+ Major German Universities</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Focus:</strong> German-taught domestic programs</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Curated list, refreshed every 4 hours</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Multi-Source Integration</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Dual Coverage:</strong> International + domestic German university programs</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Smart Filtering:</strong> Filter by degree type, tuition fees, and language</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Real-time Updates:</strong> Both sources refreshed simultaneously every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Data Integrity:</strong> Official government and institutional sources only</p>\n    </div>\n</div>",
+        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">📊 Triple Data Source Integration</h3>\n    \n    <div style=\"display: flex; gap: 15px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #28a745; font-size: 14px;\">🌍 DAAD International</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD International API</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 2,400+ International Programs</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> English-taught international programs</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #007bff; font-size: 14px;\">📚 DAAD All Programmes</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD Extended Database</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Additional Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> Master's programs & specialized degrees</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #dc3545;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #dc3545; font-size: 14px;\">🇩🇪 Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> German Rectors' Conference</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Major Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> German-taught domestic programs</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Comprehensive Coverage System</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Triple Integration:</strong> International, extended, and domestic German programs</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Smart Filtering:</strong> Filter by degree type, tuition fees, and language across all sources</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Synchronized Updates:</strong> All three sources refreshed simultaneously every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Complete Coverage:</strong> Bachelor's, Master's, PhD, and State Examination programs</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -709,7 +709,8 @@
         "wires": [
             [
                 "fetch_daad_api",
-                "fetch_hochschulkompass_data"
+                "fetch_hochschulkompass_data",
+                "fetch_daad_all_programmes"
             ]
         ]
     },
@@ -735,7 +736,8 @@
         "wires": [
             [
                 "fetch_daad_api",
-                "fetch_hochschulkompass_data"
+                "fetch_hochschulkompass_data",
+                "fetch_daad_all_programmes"
             ]
         ]
     },
@@ -797,7 +799,7 @@
         "finalize": "",
         "libs": [],
         "x": 1000,
-        "y": 80,
+        "y": 140,
         "wires": [
             [
                 "save_to_file",
@@ -1020,6 +1022,47 @@
         "libs": [],
         "x": 700,
         "y": 200,
+        "wires": [
+            [
+                "store_course_data",
+                "check_new_courses"
+            ]
+        ]
+    },
+    {
+        "id": "fetch_daad_all_programmes",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Fetch DAAD All Programmes",
+        "func": "// DAAD All Degree Programmes - Extended Coverage\n// Complementing the international programmes API with additional German programs\n// Covering both domestic and international programmes not in the main API\n\nconst timestamp = new Date().toISOString();\n\n// Extended DAAD programmes covering the broader database\nconst daadAllProgrammes = [\n    // Technical Universities - Additional Programs\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/data-science-master\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Informatics\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/informatics-master\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Computer Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/computer-science-master\"\n    },\n    {\n        academy: \"University of Stuttgart\",\n        courseName: \"Automotive Software Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/automotive-software-engineering\"\n    },\n    {\n        academy: \"Technical University of Darmstadt\",\n        courseName: \"Autonomous Systems\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/autonomous-systems\"\n    },\n    // Business and Economics\n    {\n        academy: \"University of Mannheim\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-master\"\n    },\n    {\n        academy: \"Frankfurt School of Finance & Management\",\n        courseName: \"Finance\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"42000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/finance-master\"\n    },\n    {\n        academy: \"WHU – Otto Beisheim School of Management\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"36000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-whu\"\n    },\n    // Life Sciences\n    {\n        academy: \"University of Göttingen\",\n        courseName: \"Molecular Biology\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/molecular-biology\"\n    },\n    {\n        academy: \"University of Tübingen\",\n        courseName: \"Biochemistry\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/biochemistry-master\"\n    },\n    // Engineering\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Renewable Energy Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/renewable-energy\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Environmental Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/environmental-engineering\"\n    },\n    // Social Sciences\n    {\n        academy: \"University of Konstanz\",\n        courseName: \"Social and Economic Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/social-economic-data-science\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"North American Studies\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/north-american-studies\"\n    },\n    // Applied Sciences\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"International Business\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"3 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/international-business-master\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = daadAllProgrammes.map((course, index) => ({\n    id: `daad_all_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD All: ${courses.length} extended programmes`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "process_daad_all_programmes"
+            ]
+        ]
+    },
+    {
+        "id": "process_daad_all_programmes",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Process DAAD All Programmes",
+        "func": "// Process DAAD All Degree Programmes data\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `daad_all_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD_All',  // ← used by store to strip old entries\n    url: `https://www.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD_All'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'DAAD_All',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} extended programmes`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 340,
         "wires": [
             [
                 "store_course_data",

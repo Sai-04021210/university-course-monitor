@@ -17,6 +17,7 @@
         "id": "ea553a0b38d67ae1",
         "type": "group",
         "z": "main_tab",
+        "name": "📂 Data Initialization & Loading",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -33,8 +34,8 @@
             "4387649ad40e0abe",
             "4836d526aba8c061"
         ],
-        "x": 14,
-        "y": 216.5,
+        "x": 34,
+        "y": 176.5,
         "w": 1092,
         "h": 127
     },
@@ -42,6 +43,7 @@
         "id": "6b00bc2cfff9870a",
         "type": "group",
         "z": "main_tab",
+        "name": "🔍 Filter Controls & Logic",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -69,6 +71,7 @@
         "id": "09254e3fcc8249fb",
         "type": "group",
         "z": "main_tab",
+        "name": "📊 Dashboard Statistics",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -85,8 +88,8 @@
             "f0938154c1f233d9",
             "48dc04fc966d1424"
         ],
-        "x": 1534,
-        "y": 159,
+        "x": 1614,
+        "y": 259,
         "w": 212,
         "h": 422
     },
@@ -94,6 +97,7 @@
         "id": "60ee1b8cd88bd9c1",
         "type": "group",
         "z": "main_tab",
+        "name": "🎨 Styling & Templates",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -116,6 +120,7 @@
         "id": "c19452ddee5fb968",
         "type": "group",
         "z": "api_tab",
+        "name": "🧹 Data Flush & Reset",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -140,6 +145,7 @@
         "id": "3c03637913376ef3",
         "type": "group",
         "z": "api_tab",
+        "name": "🔄 Dashboard Reload",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -162,6 +168,7 @@
         "id": "6eaffb013b6195d9",
         "type": "group",
         "z": "api_tab",
+        "name": "🌐 API Data Sources & Processing",
         "style": {
             "stroke": "#999999",
             "stroke-opacity": "1",
@@ -310,8 +317,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1640,
-        "y": 200,
+        "x": 1720,
+        "y": 300,
         "wires": []
     },
     {
@@ -339,8 +346,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1630,
-        "y": 280,
+        "x": 1710,
+        "y": 380,
         "wires": []
     },
     {
@@ -356,8 +363,8 @@
         "label": "Last Updated",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 1640,
-        "y": 360,
+        "x": 1720,
+        "y": 460,
         "wires": []
     },
     {
@@ -414,8 +421,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1610,
-        "y": 440,
+        "x": 1690,
+        "y": 540,
         "wires": []
     },
     {
@@ -472,8 +479,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1610,
-        "y": 540,
+        "x": 1690,
+        "y": 640,
         "wires": []
     },
     {
@@ -538,8 +545,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "str",
-        "x": 170,
-        "y": 280,
+        "x": 190,
+        "y": 240,
         "wires": [
             [
                 "f6b6a91e8fd6a27d"
@@ -554,8 +561,8 @@
         "name": "Read DB",
         "filename": "/data/course_database.json",
         "format": "utf8",
-        "x": 400,
-        "y": 280,
+        "x": 420,
+        "y": 240,
         "wires": [
             [
                 "01c2b672b9e605ab"
@@ -568,8 +575,8 @@
         "z": "main_tab",
         "g": "ea553a0b38d67ae1",
         "name": "Parse JSON",
-        "x": 570,
-        "y": 280,
+        "x": 590,
+        "y": 240,
         "wires": [
             [
                 "4387649ad40e0abe"
@@ -584,8 +591,8 @@
         "name": "Set flow context",
         "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
         "outputs": 1,
-        "x": 760,
-        "y": 280,
+        "x": 780,
+        "y": 240,
         "wires": [
             [
                 "4836d526aba8c061"
@@ -605,8 +612,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 990,
-        "y": 280,
+        "x": 1010,
+        "y": 240,
         "wires": [
             [
                 "be6c7eff2c1cd630"

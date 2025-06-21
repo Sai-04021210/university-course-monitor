@@ -416,7 +416,7 @@
         "finalize": "",
         "libs": [],
         "x": 950,
-        "y": 180,
+        "y": 140,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -470,8 +470,8 @@
         "topic": "filter_degree",
         "topicType": "str",
         "className": "",
-        "x": 200,
-        "y": 320,
+        "x": 190,
+        "y": 280,
         "wires": [
             [
                 "apply_filters"
@@ -518,8 +518,8 @@
         "topic": "filter_fee",
         "topicType": "str",
         "className": "",
-        "x": 400,
-        "y": 320,
+        "x": 350,
+        "y": 300,
         "wires": [
             [
                 "apply_filters"
@@ -566,7 +566,7 @@
         "topic": "filter_language",
         "topicType": "str",
         "className": "",
-        "x": 600,
+        "x": 550,
         "y": 320,
         "wires": [
             [
@@ -586,8 +586,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 320,
+        "x": 790,
+        "y": 280,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -619,7 +619,7 @@
         "payloadType": "str",
         "topic": "reset_filters",
         "topicType": "str",
-        "x": 200,
+        "x": 130,
         "y": 400,
         "wires": [
             [
@@ -929,7 +929,7 @@
         "type": "function",
         "z": "api_tab",
         "name": "Flush DB & Context",
-        "func": "// 1) clear context & disk\nconst empty = { courses: [], universities: [], newCourses: [], lastUpdated: 'Never' };\nflow.set('courses', empty.courses);\nflow.set('universities', empty.universities);\nflow.set('newCourses', empty.newCourses);\nflow.set('lastUpdated', empty.lastUpdated);\nflow.set('knownCourseIds', []);\n\n// 2) write empty DB to disk\nmsg.payload = JSON.stringify(empty, null, 2);\n\n// 3) ALSO emit clear‐UI messages on a second output:\nconst clearMsgs = [\n    { payload: 0, topic: \"total_courses\" }, // gauge 1\n    { payload: 0, topic: \"total_universities\" }, // gauge 2\n    { payload: 'Never', topic: \"last_updated\" }, // text\n    { payload: [], topic: \"university_table\" }, // table 1\n    { payload: [], topic: \"new_courses\" }  // table 2\n];\n\nreturn [msg, clearMsgs];\n",
+        "func": "// 1) clear context & disk\nconst empty = { courses: [], universities: [], newCourses: [], lastUpdated: 'Never' };\nflow.set('courses', empty.courses);\nflow.set('universities', empty.universities);\nflow.set('newCourses', empty.newCourses);\nflow.set('lastUpdated', empty.lastUpdated);\nflow.set('knownCourseIds', []);\n\n// 2) Also reset filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// 3) write empty DB to disk\nmsg.payload = JSON.stringify(empty, null, 2);\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -955,8 +955,33 @@
         "y": 620,
         "wires": [
             [
-                "d2410cdfd6a1ab2c"
+                "clear_dashboard_after_flush"
             ]
+        ]
+    },
+    {
+        "id": "clear_dashboard_after_flush",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Clear Dashboard UI",
+        "func": "// Send clear messages to all dashboard UI components\nreturn [\n    { payload: 0, topic: \"total_courses\" },\n    { payload: 0, topic: \"total_universities\" },\n    { payload: 'Never', topic: \"last_updated\" },\n    { payload: [], topic: \"university_table\" },\n    { payload: [], topic: \"new_courses\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" }\n];",
+        "outputs": 8,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 620,
+        "wires": [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
         ]
     }
 ]

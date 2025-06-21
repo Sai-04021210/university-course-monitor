@@ -14,6 +14,184 @@
         "info": ""
     },
     {
+        "id": "ea553a0b38d67ae1",
+        "type": "group",
+        "z": "main_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "610fb7c1abfec3a7",
+            "f6b6a91e8fd6a27d",
+            "01c2b672b9e605ab",
+            "4387649ad40e0abe",
+            "4836d526aba8c061"
+        ],
+        "x": 14,
+        "y": 216.5,
+        "w": 1092,
+        "h": 127
+    },
+    {
+        "id": "6b00bc2cfff9870a",
+        "type": "group",
+        "z": "main_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "filter_degree_type",
+            "filter_tuition_fee",
+            "filter_language",
+            "apply_filters",
+            "reset_filters",
+            "reset_filter_values",
+            "init_filters"
+        ],
+        "x": 14,
+        "y": 559,
+        "w": 1132,
+        "h": 262
+    },
+    {
+        "id": "09254e3fcc8249fb",
+        "type": "group",
+        "z": "main_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "be6c7eff2c1cd630",
+            "57f94c4b3fbe219c",
+            "4db4717ae5376421",
+            "f0938154c1f233d9",
+            "48dc04fc966d1424"
+        ],
+        "x": 1534,
+        "y": 159,
+        "w": 212,
+        "h": 422
+    },
+    {
+        "id": "60ee1b8cd88bd9c1",
+        "type": "group",
+        "z": "main_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "b83d6188736c9f48",
+            "2915ee5c04e7f5b1"
+        ],
+        "x": 154,
+        "y": 19,
+        "w": 272,
+        "h": 142
+    },
+    {
+        "id": "c19452ddee5fb968",
+        "type": "group",
+        "z": "api_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "3833ecb6c6a97520",
+            "c6575511a55cc273",
+            "3a542954ebbdfc43",
+            "clear_dashboard_after_flush"
+        ],
+        "x": 74,
+        "y": 574,
+        "w": 1072,
+        "h": 172
+    },
+    {
+        "id": "3c03637913376ef3",
+        "type": "group",
+        "z": "api_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "e88871c03a08b266",
+            "d2410cdfd6a1ab2c"
+        ],
+        "x": 134,
+        "y": 799,
+        "w": 402,
+        "h": 82
+    },
+    {
+        "id": "6eaffb013b6195d9",
+        "type": "group",
+        "z": "api_tab",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "api_scheduler",
+            "manual_trigger",
+            "fetch_daad_api",
+            "process_daad_data",
+            "store_course_data",
+            "check_new_courses",
+            "save_to_file",
+            "notify_new_courses",
+            "update_dashboard",
+            "fetch_hochschulkompass_data",
+            "process_hochschulkompass_data",
+            "fetch_daad_all_programmes",
+            "process_daad_all_programmes"
+        ],
+        "x": 34,
+        "y": 99,
+        "w": 1952,
+        "h": 342
+    },
+    {
         "id": "ui_tab_main",
         "type": "ui_tab",
         "name": "University Monitor",
@@ -111,6 +289,7 @@
         "id": "be6c7eff2c1cd630",
         "type": "ui_gauge",
         "z": "main_tab",
+        "g": "09254e3fcc8249fb",
         "name": "",
         "group": "ui_group_stats",
         "order": 1,
@@ -131,14 +310,15 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1220,
-        "y": 40,
+        "x": 1640,
+        "y": 200,
         "wires": []
     },
     {
         "id": "57f94c4b3fbe219c",
         "type": "ui_gauge",
         "z": "main_tab",
+        "g": "09254e3fcc8249fb",
         "name": "",
         "group": "ui_group_stats",
         "order": 2,
@@ -159,14 +339,15 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1210,
-        "y": 120,
+        "x": 1630,
+        "y": 280,
         "wires": []
     },
     {
         "id": "4db4717ae5376421",
         "type": "ui_text",
         "z": "main_tab",
+        "g": "09254e3fcc8249fb",
         "group": "ui_group_stats",
         "order": 3,
         "width": 0,
@@ -175,14 +356,15 @@
         "label": "Last Updated",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
-        "x": 1220,
-        "y": 200,
+        "x": 1640,
+        "y": 360,
         "wires": []
     },
     {
         "id": "f0938154c1f233d9",
         "type": "ui_table",
         "z": "main_tab",
+        "g": "09254e3fcc8249fb",
         "group": "ui_group_universities",
         "name": "",
         "order": 1,
@@ -232,14 +414,15 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1190,
-        "y": 280,
+        "x": 1610,
+        "y": 440,
         "wires": []
     },
     {
         "id": "48dc04fc966d1424",
         "type": "ui_table",
         "z": "main_tab",
+        "g": "09254e3fcc8249fb",
         "group": "ui_group_new_courses",
         "name": "",
         "order": 1,
@@ -289,14 +472,15 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1190,
-        "y": 380,
+        "x": 1610,
+        "y": 540,
         "wires": []
     },
     {
         "id": "b83d6188736c9f48",
         "type": "ui_template",
         "z": "main_tab",
+        "g": "60ee1b8cd88bd9c1",
         "group": "ui_group_data_sources",
         "name": "Data Sources Information",
         "order": 1,
@@ -308,8 +492,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 170,
-        "y": 100,
+        "x": 290,
+        "y": 120,
         "wires": [
             []
         ]
@@ -318,6 +502,7 @@
         "id": "2915ee5c04e7f5b1",
         "type": "ui_template",
         "z": "main_tab",
+        "g": "60ee1b8cd88bd9c1",
         "group": "ui_group_new_courses",
         "name": "Table Styling",
         "order": 0,
@@ -329,8 +514,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 150,
-        "y": 40,
+        "x": 270,
+        "y": 60,
         "wires": [
             []
         ]
@@ -339,6 +524,7 @@
         "id": "610fb7c1abfec3a7",
         "type": "inject",
         "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
         "name": "🔄 Load DB on Startup",
         "props": [
             {
@@ -353,7 +539,7 @@
         "payload": "",
         "payloadType": "str",
         "x": 170,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "f6b6a91e8fd6a27d"
@@ -364,11 +550,12 @@
         "id": "f6b6a91e8fd6a27d",
         "type": "file in",
         "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
         "name": "Read DB",
         "filename": "/data/course_database.json",
         "format": "utf8",
         "x": 400,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "01c2b672b9e605ab"
@@ -379,9 +566,10 @@
         "id": "01c2b672b9e605ab",
         "type": "json",
         "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
         "name": "Parse JSON",
         "x": 570,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "4387649ad40e0abe"
@@ -392,11 +580,12 @@
         "id": "4387649ad40e0abe",
         "type": "function",
         "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
         "name": "Set flow context",
         "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
         "outputs": 1,
         "x": 760,
-        "y": 180,
+        "y": 280,
         "wires": [
             [
                 "4836d526aba8c061"
@@ -407,6 +596,7 @@
         "id": "4836d526aba8c061",
         "type": "function",
         "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
         "name": "Load Existing Data",
         "func": "// Load Existing Data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst newCourses = flow.get('newCourses') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\nif (courses.length === 0) {\n    return [\n        { payload: 0, topic: \"total_courses\" },\n        { payload: 0, topic: \"total_universities\" },\n        { payload: lastUpdated, topic: \"last_updated\" },\n        { payload: [], topic: \"university_table\" },\n        { payload: [], topic: \"new_courses\" }\n    ];\n}\n\n// Map each uni to include sn, category, and counts\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        // determine category\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: lastUpdated, topic: \"last_updated\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: newCourses.slice(0, 10), topic: \"new_courses\" }\n];\n",
         "outputs": 5,
@@ -415,8 +605,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
-        "y": 140,
+        "x": 990,
+        "y": 280,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -439,6 +629,7 @@
         "id": "filter_degree_type",
         "type": "ui_dropdown",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Degree Type",
         "label": "Course Type",
         "tooltip": "Filter by degree type",
@@ -470,8 +661,8 @@
         "topic": "filter_degree",
         "topicType": "str",
         "className": "",
-        "x": 190,
-        "y": 280,
+        "x": 730,
+        "y": 660,
         "wires": [
             [
                 "apply_filters"
@@ -482,6 +673,7 @@
         "id": "filter_tuition_fee",
         "type": "ui_dropdown",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Tuition Fee",
         "label": "Tuition Fee",
         "tooltip": "Filter by tuition fee range",
@@ -518,8 +710,8 @@
         "topic": "filter_fee",
         "topicType": "str",
         "className": "",
-        "x": 410,
-        "y": 260,
+        "x": 730,
+        "y": 720,
         "wires": [
             [
                 "apply_filters"
@@ -530,6 +722,7 @@
         "id": "filter_language",
         "type": "ui_dropdown",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Course Language",
         "label": "Language",
         "tooltip": "Filter by course language",
@@ -566,8 +759,8 @@
         "topic": "filter_language",
         "topicType": "str",
         "className": "",
-        "x": 550,
-        "y": 320,
+        "x": 750,
+        "y": 780,
         "wires": [
             [
                 "apply_filters"
@@ -578,6 +771,7 @@
         "id": "apply_filters",
         "type": "function",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Apply Filters",
         "func": "// Store filter values in context\nconst topic = msg.topic;\nconst value = msg.payload;\n\n// Initialize filters if not exist\nlet filters = flow.get('courseFilters') || {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n};\n\n// Update the specific filter\nif (topic === 'filter_degree') {\n    filters.degree = Array.isArray(value) ? value : [value];\n} else if (topic === 'filter_fee') {\n    filters.fee = value;\n} else if (topic === 'filter_language') {\n    filters.language = value;\n}\n\n// Store updated filters\nflow.set('courseFilters', filters);\n\n// Get all courses and universities\nconst allCourses = flow.get('courses') || [];\nconst allUniversities = flow.get('universities') || [];\n\n// Apply filters to courses\nlet filteredCourses = allCourses.filter(course => {\n    // Degree filter\n    if (!filters.degree.includes('all')) {\n        const degreeMatch = filters.degree.some(deg => {\n            if (deg === 'bachelor') {\n                return course.degree && course.degree.toLowerCase().includes('bachelor');\n            } else if (deg === 'master') {\n                return course.degree && course.degree.toLowerCase().includes('master');\n            }\n            return false;\n        });\n        if (!degreeMatch) return false;\n    }\n    \n    // Fee filter\n    if (filters.fee !== 'all') {\n        const feeText = (course.fees || '').toLowerCase();\n        if (filters.fee === 'no_fee') {\n            if (!feeText.includes('no fee') && !feeText.includes('free') && !feeText.includes('none')) {\n                return false;\n            }\n        } else if (filters.fee === 'up_to_500') {\n            // Check if fee is numeric and <= 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            if (feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!feeText.includes('no fee') && !feeText.includes('free')) {\n                return false;\n            }\n        } else if (filters.fee === 'affordable') {\n            // No fee OR up to 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            const isNoFee = feeText.includes('no fee') || feeText.includes('free') || feeText.includes('none');\n            if (!isNoFee && feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!isNoFee && !feeMatch) {\n                return false;\n            }\n        }\n    }\n    \n    // Language filter\n    if (filters.language !== 'all') {\n        const langText = (course.language || '').toLowerCase();\n        if (filters.language === 'english') {\n            if (!langText.includes('english')) return false;\n        } else if (filters.language === 'german') {\n            if (!langText.includes('german') && !langText.includes('deutsch')) return false;\n        } else if (filters.language === 'en_de') {\n            if (!langText.includes('english') && !langText.includes('german') && !langText.includes('deutsch')) {\n                return false;\n            }\n        }\n    }\n    \n    return true;\n});\n\n// Calculate filtered university counts\nconst universityCourseCounts = {};\nfilteredCourses.forEach(course => {\n    if (!universityCourseCounts[course.university]) {\n        universityCourseCounts[course.university] = 0;\n    }\n    universityCourseCounts[course.university]++;\n});\n\n// Update university data with filtered counts\nconst filteredUniversities = allUniversities.map((uni, idx) => {\n    const filteredCount = universityCourseCounts[uni.name] || 0;\n    if (filteredCount === 0) return null; // Hide universities with no matching courses\n    \n    // Determine category\n    const name = uni.name.toLowerCase();\n    let category = 'University';\n    if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical university')) {\n        category = 'Technical University';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        sn: idx + 1,\n        name: uni.name,\n        category: category,\n        courses: filteredCount\n    };\n}).filter(uni => uni !== null)\n  .sort((a, b) => a.name.localeCompare(b.name))\n  .map((uni, idx) => ({ ...uni, sn: idx + 1 })); // Re-number after filtering\n\n// Return updated data\nreturn [\n    { payload: filteredCourses.length, topic: \"total_courses\" },\n    { payload: filteredUniversities.length, topic: \"total_universities\" },\n    { payload: filteredUniversities, topic: \"university_table\" }\n];",
         "outputs": 3,
@@ -586,8 +780,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 750,
-        "y": 280,
+        "x": 1050,
+        "y": 700,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -604,6 +798,7 @@
         "id": "reset_filters",
         "type": "ui_button",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Reset Filters",
         "group": "ui_group_filters",
         "order": 4,
@@ -620,7 +815,7 @@
         "topic": "reset_filters",
         "topicType": "str",
         "x": 130,
-        "y": 400,
+        "y": 600,
         "wires": [
             [
                 "reset_filter_values"
@@ -631,6 +826,7 @@
         "id": "reset_filter_values",
         "type": "function",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Reset Filter Values",
         "func": "// Reset all filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// Get original data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\n// Prepare original university data\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\n// Send reset values to dropdowns and update dashboard\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" }\n];",
         "outputs": 6,
@@ -639,8 +835,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
-        "y": 520,
+        "x": 430,
+        "y": 640,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -666,6 +862,7 @@
         "id": "init_filters",
         "type": "inject",
         "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
         "name": "Initialize Filters",
         "props": [
             {
@@ -679,8 +876,8 @@
         "topic": "init_filters",
         "payload": "",
         "payloadType": "str",
-        "x": 170,
-        "y": 480,
+        "x": 140,
+        "y": 700,
         "wires": [
             [
                 "reset_filter_values"
@@ -691,6 +888,7 @@
         "id": "api_scheduler",
         "type": "inject",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "API Scheduler (Every 4 hours)",
         "props": [
             {
@@ -704,8 +902,8 @@
         "topic": "",
         "payload": "start_api_polling",
         "payloadType": "str",
-        "x": 190,
-        "y": 40,
+        "x": 210,
+        "y": 260,
         "wires": [
             [
                 "fetch_daad_api",
@@ -718,6 +916,7 @@
         "id": "manual_trigger",
         "type": "inject",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Manual Refresh",
         "props": [
             {
@@ -731,8 +930,8 @@
         "topic": "",
         "payload": "manual_refresh",
         "payloadType": "str",
-        "x": 200,
-        "y": 160,
+        "x": 260,
+        "y": 320,
         "wires": [
             [
                 "fetch_daad_api",
@@ -745,6 +944,7 @@
         "id": "fetch_daad_api",
         "type": "http request",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Fetch DAAD API",
         "method": "GET",
         "ret": "obj",
@@ -757,8 +957,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 440,
-        "y": 120,
+        "x": 740,
+        "y": 180,
         "wires": [
             [
                 "process_daad_data"
@@ -769,16 +969,17 @@
         "id": "process_daad_data",
         "type": "function",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Process DAAD Data",
-        "func": "// Process DAAD Data\n\n// 1) grab raw array and dedupe by raw ID\nconst raw = msg.payload.courses || [];\nconst dedupedById = {};\nraw.forEach(c => {\n    dedupedById[c.id] = c;\n});\nconst unique = Object.values(dedupedById);\n\n// 2) map to normalized courses\nconst timestamp = new Date().toISOString();\nconst courses = unique.map(course => ({\n    id: `daad_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD',  // ← used by store to strip old entries\n    url: `https://www2.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'Varies',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// 3) group by university — now with source!\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD'       // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// 4) output payload with source\nmsg.payload = {\n    source: 'DAAD',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// update node status\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD: ${courses.length} unique courses`\n});\n\nreturn msg;\n",
+        "func": "// Process DAAD Data\n\n// Helper function to determine degree type from DAAD courseType\nfunction getDegreeType(course) {\n    const courseType = course.courseType;\n    const courseName = (course.courseName || '').toLowerCase();\n    \n    // DAAD courseType mapping:\n    // 1 = Bachelor's degree course\n    // 2 = Master's degree course  \n    // 3 = PhD course\n    // 4 = Short course\n    // 5-7 = Language/Preparation courses\n    \n    if (courseType === 1) return 'Bachelor';\n    if (courseType === 2) return 'Master';\n    if (courseType === 3) return 'PhD';\n    \n    // Fallback: analyze course name\n    if (courseName.includes('bachelor')) return 'Bachelor';\n    if (courseName.includes('master')) return 'Master';\n    if (courseName.includes('phd') || courseName.includes('doctoral')) return 'PhD';\n    \n    return 'Other';\n}\n\n// 1) grab raw array and dedupe by raw ID\nconst raw = msg.payload.courses || [];\nconst dedupedById = {};\nraw.forEach(c => {\n    dedupedById[c.id] = c;\n});\nconst unique = Object.values(dedupedById);\n\n// 2) map to normalized courses\nconst timestamp = new Date().toISOString();\nconst courses = unique.map(course => ({\n    id: `daad_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: getDegreeType(course),\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD',  // ← used by store to strip old entries\n    url: `https://www2.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'Varies',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// 3) group by university — now with source!\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD'       // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// 4) output payload with source\nmsg.payload = {\n    source: 'DAAD',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// update node status\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD: ${courses.length} unique courses`\n});\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 680,
-        "y": 100,
+        "x": 1120,
+        "y": 180,
         "wires": [
             [
                 "store_course_data",
@@ -790,6 +991,7 @@
         "id": "store_course_data",
         "type": "function",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Store in Context Database",
         "func": "// Get existing data from context\nlet allCourses = flow.get('courses') || [];\nlet allUniversities = flow.get('universities') || [];\n\nconst newData = msg.payload;\nconst source = newData.source;\n\n// Remove old data from same source\nallCourses = allCourses.filter(course => course.source !== source);\nallUniversities = allUniversities.filter(uni => uni.source !== source);\n\n// Add new data\nallCourses = allCourses.concat(newData.courses);\nallUniversities = allUniversities.concat(newData.universities);\n\n// Store back to context\nflow.set('courses', allCourses);\nflow.set('universities', allUniversities);\nflow.set('lastUpdated', new Date().toISOString());\n\n// Also save to file for persistence\nmsg.payload = {\n    courses: allCourses,\n    universities: allUniversities,\n    totalCourses: allCourses.length,\n    totalUniversities: allUniversities.length,\n    lastUpdated: flow.get('lastUpdated')\n};\n\nnode.status({fill: \"blue\", shape: \"dot\", text: `Stored: ${allCourses.length} total courses`});\n\nreturn msg;",
         "outputs": 1,
@@ -798,8 +1000,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 140,
+        "x": 1460,
+        "y": 220,
         "wires": [
             [
                 "save_to_file",
@@ -811,6 +1013,7 @@
         "id": "check_new_courses",
         "type": "function",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Detect New Courses",
         "func": "// Get previous IDs and current IDs\nconst previous = flow.get('knownCourseIds') || [];\nconst courses = msg.payload.courses || [];\nconst current = courses.map(c => c.id);\n\n// Figure out added & removed\nconst added = current.filter(id => !previous.includes(id));\nconst removed = previous.filter(id => !current.includes(id));\n\n// Always update the stored IDs\nflow.set('knownCourseIds', current);\n\nlet text = '';\nif (added.length) text += `🆕 ${added.length} new course(s) added. `;\nif (removed.length) text += `🗑️ ${removed.length} course(s) removed. `;\n\n// Only notify if something changed\nif (text) {\n    return { payload: text };\n}\n\n// no change → nothing\nreturn null;\n",
         "outputs": 1,
@@ -819,8 +1022,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 960,
-        "y": 280,
+        "x": 1460,
+        "y": 320,
         "wires": [
             [
                 "notify_new_courses"
@@ -831,6 +1034,7 @@
         "id": "save_to_file",
         "type": "file",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Save Database",
         "filename": "/data/course_database.json",
         "filenameType": "str",
@@ -838,8 +1042,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "utf8",
-        "x": 1300,
-        "y": 40,
+        "x": 1800,
+        "y": 140,
         "wires": [
             []
         ]
@@ -848,6 +1052,7 @@
         "id": "notify_new_courses",
         "type": "function",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Update New Course Dashboard",
         "func": "// Realistic semester-based course data from actual German universities\nconst realisticSemesterData = [\n    {\n        semester: '2024 Winter',\n        coursesAdded: 12,\n        university: 'Technical University of Munich',\n        courseNames: 'Robotics & AI • Data Engineering & Analytics • Advanced Manufacturing • Computational Engineering • Digital Innovation'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 8,\n        university: 'RWTH Aachen University',\n        courseNames: 'Automotive Engineering • Production Systems • Materials Engineering • Process Technology'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 15,\n        university: 'University of Stuttgart',\n        courseNames: 'Aerospace Engineering MSc; Computational Mechanics of Materials and Structures; Software Technology MSc; Air Quality Control, Solid Waste and Waste Water Process Engineering'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 18,\n        university: 'Karlsruhe Institute of Technology',\n        courseNames: 'Energy Engineering and Management; Information Systems Engineering and Management; Mechanical Engineering MSc; Optics and Photonics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 14,\n        university: 'Technische Universität Berlin',\n        courseNames: 'Computer Science MSc; Urban Management MSc; Environmental Planning MSc; Renewable Energy MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 22,\n        university: 'Ludwig-Maximilians-Universität München',\n        courseNames: 'Bioinformatics MSc; Data Science MSc; Economics MSc; Logic and Philosophy of Science MA; English Studies MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 9,\n        university: 'University of Heidelberg',\n        courseNames: 'Molecular Biotechnology MSc; Health and Society in South Asia MA; Scientific Computing MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 16,\n        university: 'Humboldt-Universität zu Berlin',\n        courseNames: 'European and American Studies MA; Global History MA; Physics MSc; Statistics MSc; Social Sciences MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 11,\n        university: 'University of Freiburg',\n        courseNames: 'Forest Ecology and Management MSc; European Forestry MSc; Renewable Energy Management MSc; English and American Studies MA'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 7,\n        university: 'Universität Mannheim',\n        courseNames: 'Management MSc; Economics MSc; Data Science MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 13,\n        university: 'Dresden University of Technology',\n        courseNames: 'Computational Engineering MSc; Tropical Forestry MSc; Hydro Science and Engineering MSc; Molecular Bioengineering MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 10,\n        university: 'University of Göttingen',\n        courseNames: 'Applied Computer Science MSc; International Nature Conservation MSc; Sustainable International Agriculture MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 20,\n        university: 'RWTH Aachen University',\n        courseNames: 'Software Systems Engineering MSc; Computational Engineering Science MSc; Electrical Engineering MSc; Biomedical Engineering MSc; Mathematics MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 6,\n        university: 'University of Tübingen',\n        courseNames: 'Machine Learning MSc; Applied & Environmental Geoscience MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 17,\n        university: 'University of Bonn',\n        courseNames: 'Geography of Environmental Risks and Human Security MSc; Economics MSc; Computer Science MSc; Life and Medical Sciences MSc; Agricultural Sciences MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 19,\n        university: 'University of Hamburg',\n        courseNames: 'European Master in Migration and Intercultural Relations; Intelligent Adaptive Systems MSc; Peace and Security Studies MA; Maritime Affairs MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 8,\n        university: 'Frankfurt School of Finance',\n        courseNames: 'Applied Data Science MSc; Digital Transformation MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 14,\n        university: 'University of Cologne',\n        courseNames: 'Economics MSc; Information Systems MSc; Regional Studies East Central Europe MA; Media Culture Analysis MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 21,\n        university: 'Technical University of Darmstadt',\n        courseNames: 'Computational Engineering MSc; Information and Communication Engineering MSc; Mechatronics MSc; Cognitive Science MSc; Distributed Software Systems MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 11,\n        university: 'University of Würzburg',\n        courseNames: 'FOKUS Life Sciences MSc; Computational Mathematics MSc; Human Geography MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 16,\n        university: 'University of Erlangen-Nuremberg',\n        courseNames: 'Advanced Materials and Processes MSc; International Information Systems MSc; Medical Process Management MSc; Computational Engineering MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 13,\n        university: 'Ruhr University Bochum',\n        courseNames: 'IT-Security MSc; Applied IT Security MSc; Management and Economics MSc; Computational Engineering MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 12,\n        university: 'University of Duisburg-Essen',\n        courseNames: 'Water Science MSc; Transnational Ecosystem-based Water Management MSc; Communication Design MA'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 15,\n        university: 'Leibniz University Hannover',\n        courseNames: 'Water Resources and Environmental Management MSc; Computational Methods in Engineering MSc; Geodesy and Geoinformatics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 9,\n        university: 'University of Kiel',\n        courseNames: 'Environmental Management MSc; Quantitative Economics MSc; Digital Communications MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 18,\n        university: 'Technical University of Braunschweig',\n        courseNames: 'Automotive Engineering MSc; Computer Science MSc; Sustainable Chemistry MSc; Bioengineering MSc; Physics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 7,\n        university: 'University of Oldenburg',\n        courseNames: 'Renewable Energy MSc; Marine Environmental Sciences MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 20,\n        university: 'University of Konstanz',\n        courseNames: 'Economics MSc; Psychology MSc; Computer and Information Science MSc; Life Science MSc; Social and Economic Data Science MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 10,\n        university: 'Jacobs University Bremen',\n        courseNames: 'Data Engineering MSc; Supply Chain Engineering & Management MSc; Robotics MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 12,\n        university: 'University of Bayreuth',\n        courseNames: 'Polymer Science MSc; Environmental Geography MSc; African Verbal and Visual Arts MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 14,\n        university: 'University of Passau',\n        courseNames: 'European Studies MA; Internet Computing MSc; Business Administration MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 16,\n        university: 'Saarland University',\n        courseNames: 'Cybersecurity MSc; Language Science and Technology MSc; European Management MSc; Biomedical Engineering MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 11,\n        university: 'University of Siegen',\n        courseNames: 'Human Computer Interaction MSc; Roads to Democracy MA; Accounting and Finance MSc'\n    }\n];\n\nmsg.payload = realisticSemesterData;\nmsg.topic = \"semester_courses_update\";\n\nreturn msg;",
         "outputs": 1,
@@ -856,8 +1061,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1330,
-        "y": 220,
+        "x": 1830,
+        "y": 360,
         "wires": [
             []
         ]
@@ -866,6 +1071,7 @@
         "id": "update_dashboard",
         "type": "function",
         "z": "api_tab",
+        "g": "6eaffb013b6195d9",
         "name": "Update Main Dashboard",
         "func": "const data = msg.payload;\n\n// Prepare statistics\nconst stats = {\n    totalCourses: data.totalCourses,\n    totalUniversities: data.totalUniversities,\n    lastUpdated: data.lastUpdated\n};\n\n// Prepare university table data with categorization\nconst universityData = data.universities.map(uni => {\n    let category = 'University';\n    const name = uni.name.toLowerCase();\n    \n    if (name.includes('hochschule') || name.includes('university of applied sciences')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical')) {\n        category = 'Technical University';\n    } else if (name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        name: uni.name,\n        courses: uni.courses,\n        category: category\n    };\n}).sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically\n\n// Send multiple messages for different dashboard components\nreturn [\n    { payload: stats.totalCourses, topic: \"total_courses\" },\n    { payload: stats.totalUniversities, topic: \"total_universities\" },\n    { payload: stats.lastUpdated, topic: \"last_updated\" },\n    { payload: universityData, topic: \"university_table\" }\n];",
         "outputs": 4,
@@ -874,8 +1080,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1310,
-        "y": 120,
+        "x": 1810,
+        "y": 260,
         "wires": [
             [],
             [],
@@ -887,11 +1093,12 @@
         "id": "e88871c03a08b266",
         "type": "function",
         "z": "api_tab",
+        "g": "3c03637913376ef3",
         "name": "Update Main Dashboard",
         "func": "// … your existing stats + uniData logic …\n// then fire link out:\nreturn msg;",
         "outputs": 1,
-        "x": 790,
-        "y": 720,
+        "x": 270,
+        "y": 840,
         "wires": [
             [
                 "d2410cdfd6a1ab2c"
@@ -902,25 +1109,27 @@
         "id": "d2410cdfd6a1ab2c",
         "type": "link out",
         "z": "api_tab",
+        "g": "3c03637913376ef3",
         "name": "reload dashboard",
         "links": [
             "reload_dash_link"
         ],
-        "x": 1175,
-        "y": 600,
+        "x": 495,
+        "y": 840,
         "wires": []
     },
     {
         "id": "3833ecb6c6a97520",
         "type": "ui_button",
         "z": "api_tab",
+        "g": "c19452ddee5fb968",
         "name": "Emergency Flush",
         "group": "ui_group_data_sources",
         "order": 2,
         "label": "🚨 Flush All Data",
         "bgcolor": "#d9534f",
         "icon": "fa-trash",
-        "x": 250,
+        "x": 190,
         "y": 660,
         "wires": [
             [
@@ -932,6 +1141,7 @@
         "id": "c6575511a55cc273",
         "type": "function",
         "z": "api_tab",
+        "g": "c19452ddee5fb968",
         "name": "Flush DB & Context",
         "func": "// 1) clear context & disk\nconst empty = { courses: [], universities: [], newCourses: [], lastUpdated: 'Never' };\nflow.set('courses', empty.courses);\nflow.set('universities', empty.universities);\nflow.set('newCourses', empty.newCourses);\nflow.set('lastUpdated', empty.lastUpdated);\nflow.set('knownCourseIds', []);\n\n// 2) Also reset filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// 3) write empty DB to disk\nmsg.payload = JSON.stringify(empty, null, 2);\n\nreturn msg;",
         "outputs": 1,
@@ -941,7 +1151,7 @@
         "finalize": "",
         "libs": [],
         "x": 490,
-        "y": 620,
+        "y": 660,
         "wires": [
             [
                 "3a542954ebbdfc43"
@@ -952,11 +1162,12 @@
         "id": "3a542954ebbdfc43",
         "type": "file",
         "z": "api_tab",
+        "g": "c19452ddee5fb968",
         "name": "Overwrite DB",
         "filename": "/data/course_database.json",
         "overwriteFile": "true",
-        "x": 790,
-        "y": 620,
+        "x": 730,
+        "y": 660,
         "wires": [
             [
                 "clear_dashboard_after_flush"
@@ -967,6 +1178,7 @@
         "id": "clear_dashboard_after_flush",
         "type": "function",
         "z": "api_tab",
+        "g": "c19452ddee5fb968",
         "name": "Clear Dashboard UI",
         "func": "// Send clear messages to all dashboard UI components\nreturn [\n    { payload: 0, topic: \"total_courses\" },\n    { payload: 0, topic: \"total_universities\" },\n    { payload: 'Never', topic: \"last_updated\" },\n    { payload: [], topic: \"university_table\" },\n    { payload: [], topic: \"new_courses\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" }\n];",
         "outputs": 8,
@@ -975,8 +1187,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1020,
-        "y": 620,
+        "x": 1030,
+        "y": 660,
         "wires": [
             [],
             [],
@@ -992,6 +1204,8 @@
         "id": "fetch_hochschulkompass_data",
         "type": "function",
         "z": "api_tab",
+        "d": true,
+        "g": "6eaffb013b6195d9",
         "name": "Fetch Hochschulkompass Data",
         "func": "// Hochschulkompass curated data - Major German Universities\n// Since Hochschulkompass doesn't have public API, using curated data\n// from their official database of German domestic programs\n\nconst timestamp = new Date().toISOString();\n\n// Curated list of major German universities with domestic programs\nconst hochschulkompassData = [\n    // Technical Universities\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Electrical Engineering, Information Technology and Computer Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-electrical-engineering\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-computer-science\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Mechanical Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mechanical-engineering\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Mathematics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mathematics\"\n    },\n    {\n        academy: \"Dresden University of Technology\",\n        courseName: \"Physics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-physics\"\n    },\n    // Classical Universities\n    {\n        academy: \"Ludwig-Maximilians-Universität München\",\n        courseName: \"Economics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-economics\"\n    },\n    {\n        academy: \"Heidelberg University\",\n        courseName: \"Medicine\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"12 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-medicine\"\n    },\n    {\n        academy: \"University of Freiburg\",\n        courseName: \"Law\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"9 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-law\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"Psychology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-psychology\"\n    },\n    {\n        academy: \"University of Hamburg\",\n        courseName: \"Business Administration\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-business-administration\"\n    },\n    // Universities of Applied Sciences\n    {\n        academy: \"Munich University of Applied Sciences\",\n        courseName: \"Applied Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-applied-computer-science\"\n    },\n    {\n        academy: \"Frankfurt University of Applied Sciences\",\n        courseName: \"Social Work\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-social-work\"\n    },\n    {\n        academy: \"Cologne University of Applied Sciences\",\n        courseName: \"Architecture\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-architecture\"\n    },\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"Media Technology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-media-technology\"\n    },\n    {\n        academy: \"Stuttgart University of Applied Sciences\",\n        courseName: \"Industrial Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-industrial-engineering\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = hochschulkompassData.map((course, index) => ({\n    id: `hsk_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `Hochschulkompass: ${courses.length} domestic courses`\n});\n\nreturn msg;",
         "outputs": 1,
@@ -1000,8 +1214,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 200,
+        "x": 690,
+        "y": 280,
         "wires": [
             [
                 "process_hochschulkompass_data"
@@ -1012,6 +1226,8 @@
         "id": "process_hochschulkompass_data",
         "type": "function",
         "z": "api_tab",
+        "d": true,
+        "g": "6eaffb013b6195d9",
         "name": "Process Hochschulkompass Data",
         "func": "// Process Hochschulkompass Data (domestic German programs)\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `hsk_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Bachelor',\n    language: (course.languages || []).join(', ') || 'German',\n    source: 'Hochschulkompass',  // ← used by store to strip old entries\n    url: `https://www.hochschulkompass.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'Hochschulkompass'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'Hochschulkompass',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} domestic courses`\n});\n\nreturn msg;",
         "outputs": 1,
@@ -1020,8 +1236,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 200,
+        "x": 1080,
+        "y": 280,
         "wires": [
             [
                 "store_course_data",
@@ -1033,6 +1249,8 @@
         "id": "fetch_daad_all_programmes",
         "type": "function",
         "z": "api_tab",
+        "d": true,
+        "g": "6eaffb013b6195d9",
         "name": "Fetch DAAD All Programmes",
         "func": "// DAAD All Degree Programmes - Extended Coverage\n// Complementing the international programmes API with additional German programs\n// Covering both domestic and international programmes not in the main API\n\nconst timestamp = new Date().toISOString();\n\n// Extended DAAD programmes covering the broader database\nconst daadAllProgrammes = [\n    // Technical Universities - Additional Programs\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/data-science-master\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Informatics\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/informatics-master\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Computer Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/computer-science-master\"\n    },\n    {\n        academy: \"University of Stuttgart\",\n        courseName: \"Automotive Software Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/automotive-software-engineering\"\n    },\n    {\n        academy: \"Technical University of Darmstadt\",\n        courseName: \"Autonomous Systems\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/autonomous-systems\"\n    },\n    // Business and Economics\n    {\n        academy: \"University of Mannheim\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-master\"\n    },\n    {\n        academy: \"Frankfurt School of Finance & Management\",\n        courseName: \"Finance\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"42000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/finance-master\"\n    },\n    {\n        academy: \"WHU – Otto Beisheim School of Management\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"36000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-whu\"\n    },\n    // Life Sciences\n    {\n        academy: \"University of Göttingen\",\n        courseName: \"Molecular Biology\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/molecular-biology\"\n    },\n    {\n        academy: \"University of Tübingen\",\n        courseName: \"Biochemistry\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/biochemistry-master\"\n    },\n    // Engineering\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Renewable Energy Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/renewable-energy\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Environmental Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/environmental-engineering\"\n    },\n    // Social Sciences\n    {\n        academy: \"University of Konstanz\",\n        courseName: \"Social and Economic Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/social-economic-data-science\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"North American Studies\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/north-american-studies\"\n    },\n    // Applied Sciences\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"International Business\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"3 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/international-business-master\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = daadAllProgrammes.map((course, index) => ({\n    id: `daad_all_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD All: ${courses.length} extended programmes`\n});\n\nreturn msg;",
         "outputs": 1,
@@ -1041,8 +1259,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 340,
+        "x": 700,
+        "y": 400,
         "wires": [
             [
                 "process_daad_all_programmes"
@@ -1053,6 +1271,8 @@
         "id": "process_daad_all_programmes",
         "type": "function",
         "z": "api_tab",
+        "d": true,
+        "g": "6eaffb013b6195d9",
         "name": "Process DAAD All Programmes",
         "func": "// Process DAAD All Degree Programmes data\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `daad_all_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD_All',  // ← used by store to strip old entries\n    url: `https://www.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD_All'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'DAAD_All',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} extended programmes`\n});\n\nreturn msg;",
         "outputs": 1,
@@ -1061,8 +1281,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 710,
-        "y": 340,
+        "x": 1090,
+        "y": 400,
         "wires": [
             [
                 "store_course_data",

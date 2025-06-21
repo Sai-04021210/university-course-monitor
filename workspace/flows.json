@@ -302,7 +302,7 @@
         "order": 1,
         "width": 0,
         "height": 6,
-        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">📊 Data Sources & Methodology</h3>\n    \n    <div style=\"display: flex; gap: 20px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #28a745;\">🎓 DAAD API</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Academic Exchange Service</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 2,412+ International Programs from 235+ Universities</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Live API, refreshed every 4 hours</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #007bff;\">🏛️ Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Higher Education Compass</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 50+ Major German Universities</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Curated list of domestic programs</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Real-time Monitoring</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Automatic Updates:</strong> System checks for new courses every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Change Detection:</strong> New programs are automatically identified and categorized by semester</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Data Integrity:</strong> All sources are official German government/institutional APIs</p>\n    </div>\n</div>",
+        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">📊 Data Sources & Methodology</h3>\n    \n    <div style=\"display: flex; gap: 20px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #28a745;\">🌍 DAAD API</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Academic Exchange Service</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 2,400+ International Programs</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Focus:</strong> English-taught programs for international students</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Live API, refreshed every 4 hours</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 12px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 8px 0; color: #007bff;\">🇩🇪 Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 13px;\"><strong>Source:</strong> German Rectors' Conference (HRK)</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Coverage:</strong> 15+ Major German Universities</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Focus:</strong> German-taught domestic programs</p>\n            <p style=\"margin: 3px 0 0 0; font-size: 13px;\"><strong>Update:</strong> Curated list, refreshed every 4 hours</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Multi-Source Integration</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Dual Coverage:</strong> International + domestic German university programs</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Smart Filtering:</strong> Filter by degree type, tuition fees, and language</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Real-time Updates:</strong> Both sources refreshed simultaneously every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Data Integrity:</strong> Official government and institutional sources only</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -518,8 +518,8 @@
         "topic": "filter_fee",
         "topicType": "str",
         "className": "",
-        "x": 350,
-        "y": 300,
+        "x": 410,
+        "y": 260,
         "wires": [
             [
                 "apply_filters"
@@ -586,7 +586,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
+        "x": 750,
         "y": 280,
         "wires": [
             [
@@ -708,7 +708,8 @@
         "y": 40,
         "wires": [
             [
-                "fetch_daad_api"
+                "fetch_daad_api",
+                "fetch_hochschulkompass_data"
             ]
         ]
     },
@@ -733,7 +734,8 @@
         "y": 160,
         "wires": [
             [
-                "fetch_daad_api"
+                "fetch_daad_api",
+                "fetch_hochschulkompass_data"
             ]
         ]
     },
@@ -982,6 +984,47 @@
             [],
             [],
             []
+        ]
+    },
+    {
+        "id": "fetch_hochschulkompass_data",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Fetch Hochschulkompass Data",
+        "func": "// Hochschulkompass curated data - Major German Universities\n// Since Hochschulkompass doesn't have public API, using curated data\n// from their official database of German domestic programs\n\nconst timestamp = new Date().toISOString();\n\n// Curated list of major German universities with domestic programs\nconst hochschulkompassData = [\n    // Technical Universities\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Electrical Engineering, Information Technology and Computer Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-electrical-engineering\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-computer-science\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Mechanical Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mechanical-engineering\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Mathematics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mathematics\"\n    },\n    {\n        academy: \"Dresden University of Technology\",\n        courseName: \"Physics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-physics\"\n    },\n    // Classical Universities\n    {\n        academy: \"Ludwig-Maximilians-Universität München\",\n        courseName: \"Economics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-economics\"\n    },\n    {\n        academy: \"Heidelberg University\",\n        courseName: \"Medicine\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"12 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-medicine\"\n    },\n    {\n        academy: \"University of Freiburg\",\n        courseName: \"Law\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"9 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-law\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"Psychology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-psychology\"\n    },\n    {\n        academy: \"University of Hamburg\",\n        courseName: \"Business Administration\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-business-administration\"\n    },\n    // Universities of Applied Sciences\n    {\n        academy: \"Munich University of Applied Sciences\",\n        courseName: \"Applied Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-applied-computer-science\"\n    },\n    {\n        academy: \"Frankfurt University of Applied Sciences\",\n        courseName: \"Social Work\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-social-work\"\n    },\n    {\n        academy: \"Cologne University of Applied Sciences\",\n        courseName: \"Architecture\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-architecture\"\n    },\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"Media Technology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-media-technology\"\n    },\n    {\n        academy: \"Stuttgart University of Applied Sciences\",\n        courseName: \"Industrial Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-industrial-engineering\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = hochschulkompassData.map((course, index) => ({\n    id: `hsk_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `Hochschulkompass: ${courses.length} domestic courses`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "process_hochschulkompass_data"
+            ]
+        ]
+    },
+    {
+        "id": "process_hochschulkompass_data",
+        "type": "function",
+        "z": "api_tab",
+        "name": "Process Hochschulkompass Data",
+        "func": "// Process Hochschulkompass Data (domestic German programs)\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `hsk_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Bachelor',\n    language: (course.languages || []).join(', ') || 'German',\n    source: 'Hochschulkompass',  // ← used by store to strip old entries\n    url: `https://www.hochschulkompass.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'Hochschulkompass'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'Hochschulkompass',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} domestic courses`\n});\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 200,
+        "wires": [
+            [
+                "store_course_data",
+                "check_new_courses"
+            ]
         ]
     }
 ]

@@ -1,0 +1,130 @@
+name: Repository Usage Monitor
+
+on:
+  fork:
+  watch:
+    types: [started]
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+
+jobs:
+  notify-owner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify on Fork
+        if: github.event_name == 'fork'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const forker = context.payload.forkee.owner.login;
+            const forkUrl = context.payload.forkee.html_url;
+            
+            // Create an issue to track this fork
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title: `🚨 FORK ALERT: Repository forked by @${forker}`,
+              body: `
+            ## 🔔 Fork Notification
+            
+            **Forked by:** [@${forker}](https://github.com/${forker})
+            **Fork URL:** ${forkUrl}
+            **Time:** ${new Date().toISOString()}
+            
+            ---
+            
+            **⚠️ REMINDER TO FORKER:**
+            This repository is under a **RESTRICTED USE LICENSE**. 
+            
+            **Before using this code:**
+            1. Read the [LICENSE](/${owner}/${repo}/blob/main/LICENSE) file
+            2. Create a [Usage Request Issue](/${owner}/${repo}/issues/new/choose)
+            3. Wait for explicit permission
+            
+            **Unauthorized use may result in legal action.**
+            
+            ---
+            
+            **Action Required:** Review this fork and determine if follow-up is needed.
+              `,
+              labels: ['fork-alert', 'license-violation-risk', 'needs-review']
+            });
+
+      - name: Notify on Star
+        if: github.event_name == 'watch'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const starrer = context.payload.sender.login;
+            console.log(`⭐ Repository starred by @${starrer}`);
+            
+            // Optional: Create issue for stars (might be too noisy)
+            // You can enable this if you want to track stars too
+
+      - name: Auto-label Usage Requests
+        if: github.event_name == 'issues' && contains(github.event.issue.title, 'USAGE REQUEST')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['usage-request', 'needs-review', 'high-priority']
+            });
+
+      - name: Auto-respond to Usage Requests
+        if: github.event_name == 'issues' && contains(github.event.issue.title, 'USAGE REQUEST')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `
+            ## 👋 Thank you for your usage request!
+            
+            Your request has been received and will be reviewed within 3-5 business days.
+            
+            **What happens next:**
+            1. ✅ Your request is automatically labeled for review
+            2. 🔍 I'll review your intended use case
+            3. 📧 You'll receive a response via this issue
+            4. ✅ If approved, you'll get written permission
+            
+            **While you wait:**
+            - Feel free to study the code for educational purposes
+            - Do NOT deploy or use commercially until approved
+            - Check out the [documentation](../README.md) for more details
+            
+            **Questions?** Comment on this issue.
+              `
+            });
+
+      - name: Send Email Notification
+        if: github.event_name == 'fork' || (github.event_name == 'issues' && contains(github.event.issue.title, 'USAGE REQUEST'))
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🚨 Repository Activity Alert - ${{ github.event_name }}"
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: GitHub Actions <noreply@github.com>
+          body: |
+            Repository Activity Detected:
+            
+            Event: ${{ github.event_name }}
+            Repository: ${{ github.repository }}
+            Actor: ${{ github.actor }}
+            Time: ${{ github.event.head_commit.timestamp }}
+            
+            ${{ github.event_name == 'fork' && format('Fork URL: {0}', github.event.forkee.html_url) || '' }}
+            ${{ github.event_name == 'issues' && format('Issue: {0}', github.event.issue.html_url) || '' }}
+            
+            Please review and take appropriate action if needed.

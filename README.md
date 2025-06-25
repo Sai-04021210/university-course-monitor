@@ -1,5 +1,11 @@
 # German University Course Monitor
 
+> **⚠️ IMPORTANT: RESTRICTED USE LICENSE**
+> 
+> This repository is under a **restricted use license**. Viewing and studying the code is permitted for educational purposes, but **commercial use, deployment, and redistribution require explicit written permission**. 
+> 
+> **Before using this code:** Please read the [LICENSE](./docs/legal/LICENSE) file and submit a [Usage Request](../../issues/new/choose) if you plan to use this beyond educational study.
+
 A comprehensive monitoring system that tracks English-taught degree programmes at German universities using official data sources. The system provides automated data collection, processing, and visualization through a modern ETL pipeline and dashboard interface.
 
 ## 🎯 Current Status (June 2025)

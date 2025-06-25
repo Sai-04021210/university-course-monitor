@@ -14,6 +14,13 @@
         "info": ""
     },
     {
+        "id": "monitor_tab",
+        "type": "tab",
+        "label": "🔔 Daily Monitoring",
+        "disabled": false,
+        "info": "Automated daily monitoring for new English-taught programmes"
+    },
+    {
         "id": "ea553a0b38d67ae1",
         "type": "group",
         "z": "main_tab",
@@ -191,12 +198,13 @@
             "fetch_hochschulkompass_data",
             "process_hochschulkompass_data",
             "fetch_daad_all_programmes",
-            "process_daad_all_programmes"
+            "process_daad_all_programmes",
+            "8570189419bd5fc4"
         ],
         "x": 34,
         "y": 99,
         "w": 1952,
-        "h": 342
+        "h": 349.5
     },
     {
         "id": "ui_tab_main",
@@ -592,7 +600,7 @@
         "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
         "outputs": 1,
         "x": 780,
-        "y": 240,
+        "y": 260,
         "wires": [
             [
                 "4836d526aba8c061"
@@ -1209,34 +1217,35 @@
     },
     {
         "id": "fetch_hochschulkompass_data",
-        "type": "function",
+        "type": "exec",
         "z": "api_tab",
-        "d": true,
         "g": "6eaffb013b6195d9",
-        "name": "Fetch Hochschulkompass Data",
-        "func": "// Hochschulkompass curated data - Major German Universities\n// Since Hochschulkompass doesn't have public API, using curated data\n// from their official database of German domestic programs\n\nconst timestamp = new Date().toISOString();\n\n// Curated list of major German universities with domestic programs\nconst hochschulkompassData = [\n    // Technical Universities\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Electrical Engineering, Information Technology and Computer Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-electrical-engineering\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-computer-science\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Mechanical Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mechanical-engineering\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Mathematics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-mathematics\"\n    },\n    {\n        academy: \"Dresden University of Technology\",\n        courseName: \"Physics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-physics\"\n    },\n    // Classical Universities\n    {\n        academy: \"Ludwig-Maximilians-Universität München\",\n        courseName: \"Economics\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-economics\"\n    },\n    {\n        academy: \"Heidelberg University\",\n        courseName: \"Medicine\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"12 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-medicine\"\n    },\n    {\n        academy: \"University of Freiburg\",\n        courseName: \"Law\",\n        degreeType: \"State Examination\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"9 semesters\",\n        country: \"Germany\",\n        link: \"/studium/state-exam-law\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"Psychology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-psychology\"\n    },\n    {\n        academy: \"University of Hamburg\",\n        courseName: \"Business Administration\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-business-administration\"\n    },\n    // Universities of Applied Sciences\n    {\n        academy: \"Munich University of Applied Sciences\",\n        courseName: \"Applied Computer Science\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-applied-computer-science\"\n    },\n    {\n        academy: \"Frankfurt University of Applied Sciences\",\n        courseName: \"Social Work\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-social-work\"\n    },\n    {\n        academy: \"Cologne University of Applied Sciences\",\n        courseName: \"Architecture\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"6 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-architecture\"\n    },\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"Media Technology\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-media-technology\"\n    },\n    {\n        academy: \"Stuttgart University of Applied Sciences\",\n        courseName: \"Industrial Engineering\",\n        degreeType: \"Bachelor\",\n        languages: [\"German\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"7 semesters\",\n        country: \"Germany\",\n        link: \"/studium/bachelor-industrial-engineering\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = hochschulkompassData.map((course, index) => ({\n    id: `hsk_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `Hochschulkompass: ${courses.length} domestic courses`\n});\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
+        "command": "/opt/scrapers/daad_scraper.py hochschulkompass --max-courses 5000",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Scrape Hochschulkompass (Python)",
         "x": 690,
         "y": 280,
         "wires": [
             [
-                "process_hochschulkompass_data"
-            ]
+                "process_hochschulkompass_data",
+                "8570189419bd5fc4"
+            ],
+            [],
+            []
         ]
     },
     {
         "id": "process_hochschulkompass_data",
         "type": "function",
         "z": "api_tab",
-        "d": true,
         "g": "6eaffb013b6195d9",
         "name": "Process Hochschulkompass Data",
-        "func": "// Process Hochschulkompass Data (domestic German programs)\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `hsk_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Bachelor',\n    language: (course.languages || []).join(', ') || 'German',\n    source: 'Hochschulkompass',  // ← used by store to strip old entries\n    url: `https://www.hochschulkompass.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'Hochschulkompass'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'Hochschulkompass',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} domestic courses`\n});\n\nreturn msg;",
+        "func": "// Process Python scraper output for Hochschulkompass\n\ntry {\n    const scraperOutput = msg.payload || '';\n    let data;\n    \n    // Parse JSON output from Python scraper\n    try {\n        data = JSON.parse(scraperOutput);\n    } catch (e) {\n        node.error('Failed to parse scraper output: ' + e.message);\n        throw e;\n    }\n    \n    if (data.error) {\n        node.error('Scraper error: ' + data.error);\n        throw new Error(data.error);\n    }\n    \n    const rawCourses = data.courses || [];\n    const timestamp = data.timestamp || new Date().toISOString();\n    \n    // Map to normalized course format\n    const courses = rawCourses.map(course => ({\n        id: `hsk_${course.id}`,\n        title: course.courseName,\n        university: course.academy,\n        country: course.country || 'Germany',\n        degree: course.degreeType || 'Bachelor',\n        language: (course.languages || []).join(', ') || 'German',\n        source: 'Hochschulkompass',\n        url: `https://www.hochschulkompass.de${course.link}`,\n        lastUpdated: timestamp,\n        fees: course.tuitionFees || 'No tuition fees',\n        duration: course.programmeDuration || 'Not specified'\n    }));\n    \n    // Group by university\n    const universityCounts = {};\n    courses.forEach(c => {\n        if (!universityCounts[c.university]) {\n            universityCounts[c.university] = {\n                name: c.university,\n                courses: 0,\n                source: 'Hochschulkompass'\n            };\n        }\n        universityCounts[c.university].courses++;\n    });\n    const universities = Object.values(universityCounts);\n    \n    // Output payload with source\n    msg.payload = {\n        source: 'Hochschulkompass',\n        courses: courses,\n        universities: universities,\n        totalCourses: courses.length,\n        timestamp: timestamp\n    };\n    \n    // Update node status\n    node.status({\n        fill: \"green\",\n        shape: \"dot\",\n        text: `Scraped: ${courses.length} domestic courses`\n    });\n    \n    return msg;\n    \n} catch (error) {\n    node.error('Processing failed: ' + error.message);\n    node.status({\n        fill: \"red\",\n        shape: \"ring\",\n        text: \"Scraping failed\"\n    });\n    return null;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -1244,7 +1253,7 @@
         "finalize": "",
         "libs": [],
         "x": 1080,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "store_course_data",
@@ -1254,34 +1263,34 @@
     },
     {
         "id": "fetch_daad_all_programmes",
-        "type": "function",
+        "type": "exec",
         "z": "api_tab",
-        "d": true,
         "g": "6eaffb013b6195d9",
-        "name": "Fetch DAAD All Programmes",
-        "func": "// DAAD All Degree Programmes - Extended Coverage\n// Complementing the international programmes API with additional German programs\n// Covering both domestic and international programmes not in the main API\n\nconst timestamp = new Date().toISOString();\n\n// Extended DAAD programmes covering the broader database\nconst daadAllProgrammes = [\n    // Technical Universities - Additional Programs\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/data-science-master\"\n    },\n    {\n        academy: \"Technical University of Munich\",\n        courseName: \"Informatics\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/informatics-master\"\n    },\n    {\n        academy: \"Karlsruhe Institute of Technology\",\n        courseName: \"Computer Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/computer-science-master\"\n    },\n    {\n        academy: \"University of Stuttgart\",\n        courseName: \"Automotive Software Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/automotive-software-engineering\"\n    },\n    {\n        academy: \"Technical University of Darmstadt\",\n        courseName: \"Autonomous Systems\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/autonomous-systems\"\n    },\n    // Business and Economics\n    {\n        academy: \"University of Mannheim\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-master\"\n    },\n    {\n        academy: \"Frankfurt School of Finance & Management\",\n        courseName: \"Finance\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"42000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/finance-master\"\n    },\n    {\n        academy: \"WHU – Otto Beisheim School of Management\",\n        courseName: \"Management\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"36000 EUR for the entire program\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/management-whu\"\n    },\n    // Life Sciences\n    {\n        academy: \"University of Göttingen\",\n        courseName: \"Molecular Biology\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/molecular-biology\"\n    },\n    {\n        academy: \"University of Tübingen\",\n        courseName: \"Biochemistry\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/biochemistry-master\"\n    },\n    // Engineering\n    {\n        academy: \"RWTH Aachen University\",\n        courseName: \"Renewable Energy Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/renewable-energy\"\n    },\n    {\n        academy: \"Technical University of Berlin\",\n        courseName: \"Environmental Engineering\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/environmental-engineering\"\n    },\n    // Social Sciences\n    {\n        academy: \"University of Konstanz\",\n        courseName: \"Social and Economic Data Science\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"1500 EUR per semester\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/social-economic-data-science\"\n    },\n    {\n        academy: \"Humboldt-Universität zu Berlin\",\n        courseName: \"North American Studies\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"4 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/north-american-studies\"\n    },\n    // Applied Sciences\n    {\n        academy: \"Hamburg University of Applied Sciences\",\n        courseName: \"International Business\",\n        degreeType: \"Master\",\n        languages: [\"English\"],\n        tuitionFees: \"No tuition fees\",\n        programmeDuration: \"3 semesters\",\n        country: \"Germany\",\n        link: \"/studiengang/international-business-master\"\n    }\n];\n\n// Add unique IDs and create course objects\nconst courses = daadAllProgrammes.map((course, index) => ({\n    id: `daad_all_${Date.now()}_${index}`,\n    ...course\n}));\n\nmsg.payload = {\n    courses: courses,\n    timestamp: timestamp\n};\n\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD All: ${courses.length} extended programmes`\n});\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
+        "command": "/opt/scrapers/daad_scraper.py daad --keyword '' --max-courses 10000",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Scrape DAAD All Programmes (Python)",
         "x": 700,
         "y": 400,
         "wires": [
             [
                 "process_daad_all_programmes"
-            ]
+            ],
+            [],
+            []
         ]
     },
     {
         "id": "process_daad_all_programmes",
         "type": "function",
         "z": "api_tab",
-        "d": true,
         "g": "6eaffb013b6195d9",
         "name": "Process DAAD All Programmes",
-        "func": "// Process DAAD All Degree Programmes data\n\nconst raw = msg.payload.courses || [];\nconst timestamp = msg.payload.timestamp;\n\n// Map to normalized course format\nconst courses = raw.map(course => ({\n    id: `daad_all_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: course.degreeType || 'Master',\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD_All',  // ← used by store to strip old entries\n    url: `https://www.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'No tuition fees',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// Group by university\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD_All'  // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// Output payload with source\nmsg.payload = {\n    source: 'DAAD_All',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// Update node status\nnode.status({\n    fill: \"blue\",\n    shape: \"dot\",\n    text: `Processed: ${courses.length} extended programmes`\n});\n\nreturn msg;",
+        "func": "// Process Python scraper output for DAAD All Programmes\n\ntry {\n    const scraperOutput = msg.payload || '';\n    let data;\n    \n    // Parse JSON output from Python scraper\n    try {\n        data = JSON.parse(scraperOutput);\n    } catch (e) {\n        node.error('Failed to parse DAAD scraper output: ' + e.message);\n        throw e;\n    }\n    \n    if (data.error) {\n        node.error('DAAD scraper error: ' + data.error);\n        throw new Error(data.error);\n    }\n    \n    const rawCourses = data.courses || [];\n    const timestamp = data.timestamp || new Date().toISOString();\n    \n    // Map to normalized course format\n    const courses = rawCourses.map(course => ({\n        id: `daad_all_${course.id}`,\n        title: course.courseName,\n        university: course.academy,\n        country: course.country || 'Germany',\n        degree: course.degreeType || 'Master',\n        language: (course.languages || []).join(', ') || 'English',\n        source: 'DAAD_All',\n        url: course.link || `https://www.daad.de/studiengang/course-${course.id}`,\n        lastUpdated: timestamp,\n        fees: course.tuitionFees || 'No tuition fees',\n        duration: course.programmeDuration || 'Not specified'\n    }));\n    \n    // Group by university\n    const universityCounts = {};\n    courses.forEach(c => {\n        if (!universityCounts[c.university]) {\n            universityCounts[c.university] = {\n                name: c.university,\n                courses: 0,\n                source: 'DAAD_All'\n            };\n        }\n        universityCounts[c.university].courses++;\n    });\n    const universities = Object.values(universityCounts);\n    \n    // Output payload with source\n    msg.payload = {\n        source: 'DAAD_All',\n        courses: courses,\n        universities: universities,\n        totalCourses: courses.length,\n        timestamp: timestamp\n    };\n    \n    // Update node status\n    node.status({\n        fill: \"green\",\n        shape: \"dot\",\n        text: `Scraped: ${courses.length} DAAD programmes`\n    });\n    \n    return msg;\n    \n} catch (error) {\n    node.error('DAAD processing failed: ' + error.message);\n    node.status({\n        fill: \"red\",\n        shape: \"ring\",\n        text: \"DAAD scraping failed\"\n    });\n    return null;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -1296,5 +1305,219 @@
                 "check_new_courses"
             ]
         ]
+    },
+    {
+        "id": "8570189419bd5fc4",
+        "type": "debug",
+        "z": "api_tab",
+        "g": "6eaffb013b6195d9",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "daily-trigger",
+        "type": "inject",
+        "z": "monitor_tab",
+        "name": "Daily ETL Trigger (2 AM)",
+        "repeat": "",
+        "crontab": "00 02 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "run-etl"
+            ]
+        ]
+    },
+    {
+        "id": "manual-trigger",
+        "type": "inject",
+        "z": "monitor_tab",
+        "name": "Manual Test",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "run-etl"
+            ]
+        ]
+    },
+    {
+        "id": "run-etl",
+        "type": "exec",
+        "z": "monitor_tab",
+        "command": "python3 /opt/scrapers/etl_pipeline.py",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Run ETL Pipeline",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "parse-etl-output"
+            ],
+            [
+                "etl-error"
+            ],
+            [
+                "etl-error"
+            ]
+        ]
+    },
+    {
+        "id": "parse-etl-output",
+        "type": "function",
+        "z": "monitor_tab",
+        "name": "Parse ETL Stats",
+        "func": "try {\n    const stats = JSON.parse(msg.payload);\n    msg.etl_stats = stats;\n    node.status({fill:\"green\",shape:\"dot\",text:`${stats.new_programmes} new programmes`});\n    return msg;\n} catch (e) {\n    node.error('Failed to parse ETL output: ' + e.message);\n    node.status({fill:\"red\",shape:\"ring\",text:\"Parse error\"});\n    return null;\n}",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 80,
+        "wires": [
+            [
+                "check-new-programmes"
+            ]
+        ]
+    },
+    {
+        "id": "check-new-programmes",
+        "type": "switch",
+        "z": "monitor_tab",
+        "name": "Check New Programmes",
+        "property": "etl_stats.new_programmes",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 240,
+        "wires": [
+            [
+                "query-new-programmes"
+            ],
+            [
+                "log-no-new"
+            ]
+        ]
+    },
+    {
+        "id": "query-new-programmes",
+        "type": "function",
+        "z": "monitor_tab",
+        "name": "Query New Programmes",
+        "func": "// Since we don't have PostgreSQL node installed, simulate the query\n// In production, you would use node-red-contrib-postgresql\nconst newProgrammes = [\n    {\n        program_name: \"Master of Data Science\",\n        institution: \"Technical University of Munich\",\n        degree: \"M.Sc.\",\n        language: \"English\",\n        tuition_fee: 0,\n        start_date: \"Winter 2024\",\n        source_url: \"https://example.com/program1\"\n    }\n];\n\nmsg.payload = newProgrammes;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 970,
+        "y": 120,
+        "wires": [
+            [
+                "format-notification"
+            ]
+        ]
+    },
+    {
+        "id": "format-notification",
+        "type": "function",
+        "z": "monitor_tab",
+        "name": "Format Notification",
+        "func": "const programmes = msg.payload;\nif (!programmes || programmes.length === 0) {\n    return null;\n}\n\nlet message = `🎓 New English-taught Programmes in Germany (${new Date().toDateString()})\\n\\n`;\n\nprogrammes.forEach((prog, index) => {\n    const tuition = prog.tuition_fee > 0 ? `€${prog.tuition_fee}/semester` : 'Tuition-free';\n    const startDate = prog.start_date || 'TBA';\n    \n    message += `${index + 1}. ${prog.program_name}\\n`;\n    message += `   🏛️ ${prog.institution}\\n`;\n    message += `   🎓 ${prog.degree}\\n`;\n    message += `   💰 ${tuition}\\n`;\n    message += `   📅 Start: ${startDate}\\n`;\n    if (prog.source_url) {\n        message += `   🔗 ${prog.source_url}\\n`;\n    }\n    message += `\\n`;\n});\n\nmessage += `Total: ${programmes.length} new programme(s)`;\n\nmsg.payload = message;\nmsg.subject = `New English Programmes in Germany - ${programmes.length} found`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1190,
+        "y": 120,
+        "wires": [
+            [
+                "notification-output"
+            ]
+        ]
+    },
+    {
+        "id": "notification-output",
+        "type": "debug",
+        "z": "monitor_tab",
+        "name": "Notification Ready",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "log-no-new",
+        "type": "debug",
+        "z": "monitor_tab",
+        "name": "No New Programmes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1260,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "etl-error",
+        "type": "debug",
+        "z": "monitor_tab",
+        "name": "ETL Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 560,
+        "y": 320,
+        "wires": []
     }
 ]

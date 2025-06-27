@@ -39,12 +39,16 @@
             "f6b6a91e8fd6a27d",
             "01c2b672b9e605ab",
             "4387649ad40e0abe",
-            "4836d526aba8c061"
+            "4836d526aba8c061",
+            "load_universities_for_selector",
+            "filter_courses_by_university",
+            "university_selector",
+            "populate_university_selector"
         ],
-        "x": 34,
-        "y": 176.5,
-        "w": 1092,
-        "h": 127
+        "x": 14,
+        "y": 281.5,
+        "w": 1752,
+        "h": 219.5
     },
     {
         "id": "6b00bc2cfff9870a",
@@ -65,12 +69,12 @@
             "filter_tuition_fee",
             "filter_language",
             "apply_filters",
-            "reset_filters",
             "reset_filter_values",
-            "init_filters"
+            "init_filters",
+            "reset_filters"
         ],
-        "x": 14,
-        "y": 559,
+        "x": 74,
+        "y": 599,
         "w": 1132,
         "h": 262
     },
@@ -93,12 +97,13 @@
             "57f94c4b3fbe219c",
             "4db4717ae5376421",
             "f0938154c1f233d9",
-            "48dc04fc966d1424"
+            "48dc04fc966d1424",
+            "course_table"
         ],
-        "x": 1614,
-        "y": 259,
-        "w": 212,
-        "h": 422
+        "x": 1834,
+        "y": 179,
+        "w": 232,
+        "h": 462
     },
     {
         "id": "60ee1b8cd88bd9c1",
@@ -118,8 +123,8 @@
             "b83d6188736c9f48",
             "2915ee5c04e7f5b1"
         ],
-        "x": 154,
-        "y": 19,
+        "x": 214,
+        "y": 39,
         "w": 272,
         "h": 142
     },
@@ -138,14 +143,11 @@
             "color": "#a4a4a4"
         },
         "nodes": [
-            "3833ecb6c6a97520",
-            "c6575511a55cc273",
-            "3a542954ebbdfc43",
             "clear_dashboard_after_flush"
         ],
-        "x": 74,
+        "x": 914,
         "y": 574,
-        "w": 1072,
+        "w": 232,
         "h": 172
     },
     {
@@ -172,52 +174,26 @@
         "h": 82
     },
     {
-        "id": "6eaffb013b6195d9",
-        "type": "group",
-        "z": "api_tab",
-        "name": "🌐 API Data Sources & Processing",
-        "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
-        },
-        "nodes": [
-            "api_scheduler",
-            "manual_trigger",
-            "fetch_daad_api",
-            "process_daad_data",
-            "store_course_data",
-            "check_new_courses",
-            "save_to_file",
-            "notify_new_courses",
-            "update_dashboard",
-            "fetch_hochschulkompass_data",
-            "process_hochschulkompass_data",
-            "fetch_daad_all_programmes",
-            "process_daad_all_programmes",
-            "8570189419bd5fc4"
-        ],
-        "x": 34,
-        "y": 99,
-        "w": 1952,
-        "h": 349.5
-    },
-    {
         "id": "ui_tab_main",
         "type": "ui_tab",
         "name": "University Monitor",
         "icon": "dashboard",
-        "order": 1
+        "order": 1,
+        "disabled": false,
+        "hidden": false
     },
     {
         "id": "ui_tab_new",
         "type": "ui_tab",
         "name": "New Courses",
         "icon": "notifications",
+        "order": 3
+    },
+    {
+        "id": "ui_tab_courses",
+        "type": "ui_tab",
+        "name": "All Courses",
+        "icon": "list",
         "order": 2
     },
     {
@@ -269,6 +245,13 @@
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
             }
         },
         "site": {
@@ -291,14 +274,50 @@
         }
     },
     {
-        "id": "ui_group_filters",
+        "id": "ui_group_courses",
         "type": "ui_group",
-        "name": "Course Filters",
-        "tab": "ui_tab_main",
-        "order": 0,
+        "name": "Course Listings",
+        "tab": "ui_tab_courses",
+        "order": 2,
         "disp": true,
         "width": "12",
         "collapse": false
+    },
+    {
+        "id": "postgres_config",
+        "type": "postgreSQLConfig",
+        "name": "Course Monitor DB",
+        "host": "postgres",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "course_monitor",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "course_user",
+        "userFieldType": "str",
+        "password": "course_monitor_secure_password_2024",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "ui_group_filters",
+        "type": "ui_group",
+        "name": "University Filters",
+        "tab": "ui_tab_courses",
+        "order": 0,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "be6c7eff2c1cd630",
@@ -325,8 +344,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1720,
-        "y": 300,
+        "x": 1960,
+        "y": 220,
         "wires": []
     },
     {
@@ -354,8 +373,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 1710,
-        "y": 380,
+        "x": 1950,
+        "y": 300,
         "wires": []
     },
     {
@@ -370,9 +389,14 @@
         "name": "",
         "label": "Last Updated",
         "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "x": 1720,
-        "y": 460,
+        "layout": "row-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 1960,
+        "y": 380,
         "wires": []
     },
     {
@@ -429,8 +453,8 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1690,
-        "y": 540,
+        "x": 1930,
+        "y": 460,
         "wires": []
     },
     {
@@ -487,8 +511,86 @@
         ],
         "outputs": 0,
         "cts": false,
-        "x": 1690,
-        "y": 640,
+        "x": 1930,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "course_table",
+        "type": "ui_table",
+        "z": "main_tab",
+        "g": "09254e3fcc8249fb",
+        "group": "ui_group_courses",
+        "name": "Course Listings",
+        "order": 1,
+        "width": "12",
+        "height": "15",
+        "columns": [
+            {
+                "field": "title",
+                "title": "Programme Name",
+                "width": "40%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "university",
+                "title": "University",
+                "width": "25%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "degree",
+                "title": "Degree",
+                "width": "8%",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "language",
+                "title": "Language",
+                "width": "12%",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "tuition",
+                "title": "Tuition",
+                "width": "10%",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "location",
+                "title": "Location",
+                "width": "10%",
+                "align": "center",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 1940,
+        "y": 600,
         "wires": []
     },
     {
@@ -501,14 +603,14 @@
         "order": 1,
         "width": 0,
         "height": 6,
-        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">📊 Triple Data Source Integration</h3>\n    \n    <div style=\"display: flex; gap: 15px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #28a745; font-size: 14px;\">🌍 DAAD International</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD International API</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 2,400+ International Programs</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> English-taught international programs</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #007bff; font-size: 14px;\">📚 DAAD All Programmes</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD Extended Database</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Additional Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> Master's programs & specialized degrees</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #dc3545;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #dc3545; font-size: 14px;\">🇩🇪 Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> German Rectors' Conference</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Major Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> German-taught domestic programs</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Comprehensive Coverage System</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Triple Integration:</strong> International, extended, and domestic German programs</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Smart Filtering:</strong> Filter by degree type, tuition fees, and language across all sources</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Synchronized Updates:</strong> All three sources refreshed simultaneously every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Complete Coverage:</strong> Bachelor's, Master's, PhD, and State Examination programs</p>\n    </div>\n</div>",
+        "format": "<div style=\"padding: 15px; font-family: Arial, sans-serif;\">\n    <h3 style=\"color: #0094CE; margin-bottom: 15px;\">🗜️ PostgreSQL Database Integration</h3>\n    \n    <div style=\"display: flex; gap: 15px; margin-bottom: 15px;\">\n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #28a745;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #28a745; font-size: 14px;\">🌍 DAAD International</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD International API</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 2,400+ International Programs</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> English-taught international programs</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #007bff;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #007bff; font-size: 14px;\">📚 DAAD All Programmes</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> DAAD Extended Database</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Additional Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> Master's programs & specialized degrees</p>\n        </div>\n        \n        <div style=\"flex: 1; background: #f8f9fa; padding: 10px; border-radius: 8px; border-left: 4px solid #dc3545;\">\n            <h4 style=\"margin: 0 0 6px 0; color: #dc3545; font-size: 14px;\">🇩🇪 Hochschulkompass</h4>\n            <p style=\"margin: 0; font-size: 12px;\"><strong>Source:</strong> German Rectors' Conference</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Coverage:</strong> 15+ Major Universities</p>\n            <p style=\"margin: 2px 0 0 0; font-size: 12px;\"><strong>Focus:</strong> German-taught domestic programs</p>\n        </div>\n    </div>\n    \n    <div style=\"background: #e8f4fd; padding: 12px; border-radius: 8px; border: 1px solid #bee5eb;\">\n        <h4 style=\"margin: 0 0 8px 0; color: #0c5460;\">🔄 Comprehensive Coverage System</h4>\n        <p style=\"margin: 0; font-size: 13px;\">• <strong>Triple Integration:</strong> International, extended, and domestic German programs</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Smart Filtering:</strong> Filter by degree type, tuition fees, and language across all sources</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Synchronized Updates:</strong> All three sources refreshed simultaneously every 4 hours</p>\n        <p style=\"margin: 3px 0 0 0; font-size: 13px;\">• <strong>Complete Coverage:</strong> Bachelor's, Master's, PhD, and State Examination programs</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 290,
-        "y": 120,
+        "x": 350,
+        "y": 140,
         "wires": [
             []
         ]
@@ -529,8 +631,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 270,
-        "y": 60,
+        "x": 330,
+        "y": 80,
         "wires": [
             []
         ]
@@ -553,24 +655,28 @@
         "topic": "",
         "payload": "",
         "payloadType": "str",
-        "x": 190,
-        "y": 240,
+        "x": 170,
+        "y": 420,
         "wires": [
             [
-                "f6b6a91e8fd6a27d"
+                "f6b6a91e8fd6a27d",
+                "load_universities_for_selector"
             ]
         ]
     },
     {
         "id": "f6b6a91e8fd6a27d",
-        "type": "file in",
+        "type": "postgresql",
         "z": "main_tab",
         "g": "ea553a0b38d67ae1",
-        "name": "Read DB",
-        "filename": "/data/course_database.json",
-        "format": "utf8",
-        "x": 420,
-        "y": 240,
+        "name": "Read PostgreSQL DB",
+        "query": "SELECT p.program_name, p.degree, p.language, p.tuition_fee, p.tuition_period, p.start_date, p.source, p.source_url, i.name as institution_name, i.type as institution_type, i.location FROM programmes p JOIN institutions i ON p.inst_id = i.inst_id WHERE p.is_active = true ORDER BY p.created_at DESC",
+        "postgreSQLConfig": "postgres_config",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 440,
+        "y": 440,
         "wires": [
             [
                 "01c2b672b9e605ab"
@@ -579,12 +685,19 @@
     },
     {
         "id": "01c2b672b9e605ab",
-        "type": "json",
+        "type": "function",
         "z": "main_tab",
         "g": "ea553a0b38d67ae1",
-        "name": "Parse JSON",
-        "x": 590,
-        "y": 240,
+        "name": "Process DB Results",
+        "func": "// Process PostgreSQL results into format expected by dashboard\nif (!Array.isArray(msg.payload)) {\n    node.error('Expected array of results from database');\n    return null;\n}\n\nconst dbResults = msg.payload;\n\n// Transform database results to dashboard format\nconst courses = dbResults.map((row, idx) => ({\n    id: `prog_${idx}`,\n    title: row.program_name,\n    university: row.institution_name,\n    degree: row.degree,\n    language: row.language,\n    tuition: row.tuition_fee,\n    tuitionPeriod: row.tuition_period,\n    startDate: row.start_date,\n    source: row.source,\n    url: row.source_url,\n    location: row.location,\n    institutionType: row.institution_type\n}));\n\n// Group by university for statistics\nconst universityCounts = {};\ncourses.forEach(course => {\n    if (!universityCounts[course.university]) {\n        universityCounts[course.university] = {\n            name: course.university,\n            courses: 0,\n            type: course.institutionType,\n            location: course.location\n        };\n    }\n    universityCounts[course.university].courses++;\n});\n\nconst universities = Object.values(universityCounts);\n\n// Create dashboard data structure\nconst dashboardData = {\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    totalUniversities: universities.length,\n    lastUpdated: new Date().toISOString(),\n    newCourses: [] // Would be populated by monitoring flow\n};\n\nmsg.payload = dashboardData;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 440,
         "wires": [
             [
                 "4387649ad40e0abe"
@@ -599,8 +712,8 @@
         "name": "Set flow context",
         "func": "if(!msg.payload || typeof msg.payload !== 'object') return null;\nconst db = msg.payload;\nflow.set('courses', db.courses || []);\nflow.set('universities', db.universities || []);\nflow.set('newCourses', db.newCourses || []);\nflow.set('lastUpdated', db.lastUpdated || 'Never');\nreturn { payload: 'restored' };",
         "outputs": 1,
-        "x": 780,
-        "y": 260,
+        "x": 860,
+        "y": 440,
         "wires": [
             [
                 "4836d526aba8c061"
@@ -613,15 +726,15 @@
         "z": "main_tab",
         "g": "ea553a0b38d67ae1",
         "name": "Load Existing Data",
-        "func": "// Load Existing Data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst newCourses = flow.get('newCourses') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\nif (courses.length === 0) {\n    return [\n        { payload: 0, topic: \"total_courses\" },\n        { payload: 0, topic: \"total_universities\" },\n        { payload: lastUpdated, topic: \"last_updated\" },\n        { payload: [], topic: \"university_table\" },\n        { payload: [], topic: \"new_courses\" }\n    ];\n}\n\n// Map each uni to include sn, category, and counts\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        // determine category\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: lastUpdated, topic: \"last_updated\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: newCourses.slice(0, 10), topic: \"new_courses\" }\n];\n",
-        "outputs": 5,
+        "func": "// Load Existing Data from msg.payload (from PostgreSQL)\nconst data = msg.payload || {};\nconst courses = data.courses || flow.get('courses') || [];\nconst universities = data.universities || flow.get('universities') || [];\nconst newCourses = data.newCourses || flow.get('newCourses') || [];\nconst lastUpdated = data.lastUpdated || flow.get('lastUpdated') || 'Never';\n\n// Store in flow context for filters to use\nflow.set('courses', courses);\nflow.set('universities', universities);\nflow.set('newCourses', newCourses);\nflow.set('lastUpdated', lastUpdated);\n\nif (courses.length === 0) {\n    return [\n        { payload: 0, topic: \"total_courses\" },\n        { payload: 0, topic: \"total_universities\" },\n        { payload: lastUpdated, topic: \"last_updated\" },\n        { payload: [], topic: \"university_table\" },\n        { payload: [], topic: \"new_courses\" },\n        { payload: [], topic: \"course_table\" }\n    ];\n}\n\n// Map each uni to include sn, category, and counts\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        // determine category\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\n// Initial message for course table (user needs to select university)\nconst courseTableData = [{\n    title: '👆 Please select a university from the dropdown above',\n    university: 'to view all courses offered by that institution',\n    degree: '🎓',\n    language: '🗣️',\n    tuition: '💰',\n    location: '📍'\n}];\n\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: lastUpdated, topic: \"last_updated\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: newCourses.slice(0, 10), topic: \"new_courses\" },\n    { payload: courseTableData, topic: \"course_table\" },\n    { payload: \"init\", topic: \"trigger_filter_init\" } // Trigger filter initialization\n];\n",
+        "outputs": 7,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1010,
-        "y": 240,
+        "x": 1070,
+        "y": 360,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -637,6 +750,12 @@
             ],
             [
                 "48dc04fc966d1424"
+            ],
+            [
+                "course_table"
+            ],
+            [
+                "reset_filter_values"
             ]
         ]
     },
@@ -676,8 +795,8 @@
         "topic": "filter_degree",
         "topicType": "str",
         "className": "",
-        "x": 730,
-        "y": 660,
+        "x": 790,
+        "y": 700,
         "wires": [
             [
                 "apply_filters"
@@ -701,22 +820,22 @@
         "multiple": false,
         "options": [
             {
-                "label": "All",
+                "label": "All Fees",
                 "value": "all",
                 "type": "str"
             },
             {
-                "label": "No Fee",
+                "label": "Free (No Tuition)",
                 "value": "no_fee",
                 "type": "str"
             },
             {
-                "label": "Up to 500€/semester",
+                "label": "Up to €500",
                 "value": "up_to_500",
                 "type": "str"
             },
             {
-                "label": "No Fee or Up to 500€",
+                "label": "Affordable (Free or ≤€500)",
                 "value": "affordable",
                 "type": "str"
             }
@@ -725,8 +844,8 @@
         "topic": "filter_fee",
         "topicType": "str",
         "className": "",
-        "x": 730,
-        "y": 720,
+        "x": 790,
+        "y": 760,
         "wires": [
             [
                 "apply_filters"
@@ -774,8 +893,8 @@
         "topic": "filter_language",
         "topicType": "str",
         "className": "",
-        "x": 750,
-        "y": 780,
+        "x": 810,
+        "y": 820,
         "wires": [
             [
                 "apply_filters"
@@ -788,15 +907,15 @@
         "z": "main_tab",
         "g": "6b00bc2cfff9870a",
         "name": "Apply Filters",
-        "func": "// Store filter values in context\nconst topic = msg.topic;\nconst value = msg.payload;\n\n// Initialize filters if not exist\nlet filters = flow.get('courseFilters') || {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n};\n\n// Update the specific filter\nif (topic === 'filter_degree') {\n    filters.degree = Array.isArray(value) ? value : [value];\n} else if (topic === 'filter_fee') {\n    filters.fee = value;\n} else if (topic === 'filter_language') {\n    filters.language = value;\n}\n\n// Store updated filters\nflow.set('courseFilters', filters);\n\n// Get all courses and universities\nconst allCourses = flow.get('courses') || [];\nconst allUniversities = flow.get('universities') || [];\n\n// Apply filters to courses\nlet filteredCourses = allCourses.filter(course => {\n    // Degree filter\n    if (!filters.degree.includes('all')) {\n        const degreeMatch = filters.degree.some(deg => {\n            if (deg === 'bachelor') {\n                return course.degree && course.degree.toLowerCase().includes('bachelor');\n            } else if (deg === 'master') {\n                return course.degree && course.degree.toLowerCase().includes('master');\n            }\n            return false;\n        });\n        if (!degreeMatch) return false;\n    }\n    \n    // Fee filter\n    if (filters.fee !== 'all') {\n        const feeText = (course.fees || '').toLowerCase();\n        if (filters.fee === 'no_fee') {\n            if (!feeText.includes('no fee') && !feeText.includes('free') && !feeText.includes('none')) {\n                return false;\n            }\n        } else if (filters.fee === 'up_to_500') {\n            // Check if fee is numeric and <= 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            if (feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!feeText.includes('no fee') && !feeText.includes('free')) {\n                return false;\n            }\n        } else if (filters.fee === 'affordable') {\n            // No fee OR up to 500\n            const feeMatch = feeText.match(/(\\d+)/g);\n            const isNoFee = feeText.includes('no fee') || feeText.includes('free') || feeText.includes('none');\n            if (!isNoFee && feeMatch) {\n                const feeAmount = parseInt(feeMatch[0]);\n                if (feeAmount > 500) return false;\n            } else if (!isNoFee && !feeMatch) {\n                return false;\n            }\n        }\n    }\n    \n    // Language filter\n    if (filters.language !== 'all') {\n        const langText = (course.language || '').toLowerCase();\n        if (filters.language === 'english') {\n            if (!langText.includes('english')) return false;\n        } else if (filters.language === 'german') {\n            if (!langText.includes('german') && !langText.includes('deutsch')) return false;\n        } else if (filters.language === 'en_de') {\n            if (!langText.includes('english') && !langText.includes('german') && !langText.includes('deutsch')) {\n                return false;\n            }\n        }\n    }\n    \n    return true;\n});\n\n// Calculate filtered university counts\nconst universityCourseCounts = {};\nfilteredCourses.forEach(course => {\n    if (!universityCourseCounts[course.university]) {\n        universityCourseCounts[course.university] = 0;\n    }\n    universityCourseCounts[course.university]++;\n});\n\n// Update university data with filtered counts\nconst filteredUniversities = allUniversities.map((uni, idx) => {\n    const filteredCount = universityCourseCounts[uni.name] || 0;\n    if (filteredCount === 0) return null; // Hide universities with no matching courses\n    \n    // Determine category\n    const name = uni.name.toLowerCase();\n    let category = 'University';\n    if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical university')) {\n        category = 'Technical University';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        sn: idx + 1,\n        name: uni.name,\n        category: category,\n        courses: filteredCount\n    };\n}).filter(uni => uni !== null)\n  .sort((a, b) => a.name.localeCompare(b.name))\n  .map((uni, idx) => ({ ...uni, sn: idx + 1 })); // Re-number after filtering\n\n// Return updated data\nreturn [\n    { payload: filteredCourses.length, topic: \"total_courses\" },\n    { payload: filteredUniversities.length, topic: \"total_universities\" },\n    { payload: filteredUniversities, topic: \"university_table\" }\n];",
-        "outputs": 3,
+        "func": "// Store filter values in context\nconst topic = msg.topic;\nconst value = msg.payload;\n\n// Initialize filters if not exist\nlet filters = flow.get('courseFilters') || {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n};\n\n// Update the specific filter\nif (topic === 'filter_degree') {\n    filters.degree = Array.isArray(value) ? value : [value];\n} else if (topic === 'filter_fee') {\n    filters.fee = value;\n} else if (topic === 'filter_language') {\n    filters.language = value;\n}\n\n// Store updated filters\nflow.set('courseFilters', filters);\n\n// Get all courses and universities\nconst allCourses = flow.get('courses') || [];\nconst allUniversities = flow.get('universities') || [];\n\n// Apply filters to courses\nlet filteredCourses = allCourses.filter(course => {\n    // Degree filter\n    if (!filters.degree.includes('all')) {\n        const degreeMatch = filters.degree.some(deg => {\n            if (deg === 'bachelor') {\n                return course.degree && (course.degree.toLowerCase().includes('bachelor') || course.degree.toLowerCase().includes('b.'));\n            } else if (deg === 'master') {\n                return course.degree && (course.degree.toLowerCase().includes('master') || course.degree.toLowerCase().includes('m.'));\n            } else if (deg === 'phd') {\n                return course.degree && (course.degree.toLowerCase().includes('phd') || course.degree.toLowerCase().includes('ph.d') || course.degree.toLowerCase().includes('doctor'));\n            }\n            return false;\n        });\n        if (!degreeMatch) return false;\n    }\n    \n    // Fee filter - improved logic\n    if (filters.fee !== 'all') {\n        const feeValue = course.tuition_fee || course.tuition || course.fees || 0;\n        const feeNumber = parseFloat(feeValue) || 0;\n        \n        if (filters.fee === 'no_fee') {\n            // Only courses with 0 fee\n            if (feeNumber > 0) return false;\n        } else if (filters.fee === 'up_to_500') {\n            // Courses with fee <= 500 EUR\n            if (feeNumber > 500) return false;\n        } else if (filters.fee === 'affordable') {\n            // No fee OR up to 500 EUR\n            if (feeNumber > 500) return false;\n        }\n    }\n    \n    // Language filter\n    if (filters.language !== 'all') {\n        const langText = (course.language || '').toLowerCase();\n        if (filters.language === 'english') {\n            if (!langText.includes('english')) return false;\n        } else if (filters.language === 'german') {\n            if (!langText.includes('german') && !langText.includes('deutsch')) return false;\n        } else if (filters.language === 'en_de') {\n            if (!langText.includes('english') && !langText.includes('german') && !langText.includes('deutsch')) {\n                return false;\n            }\n        }\n    }\n    \n    return true;\n});\n\n// Calculate filtered university counts\nconst universityCourseCounts = {};\nfilteredCourses.forEach(course => {\n    const uniName = course.university || course.institution_name || course.institution || 'Unknown';\n    if (!universityCourseCounts[uniName]) {\n        universityCourseCounts[uniName] = 0;\n    }\n    universityCourseCounts[uniName]++;\n});\n\n// Update university data with filtered counts\nconst filteredUniversities = allUniversities.map((uni, idx) => {\n    const filteredCount = universityCourseCounts[uni.name] || 0;\n    if (filteredCount === 0) return null; // Hide universities with no matching courses\n    \n    // Determine category\n    const name = uni.name.toLowerCase();\n    let category = 'University';\n    if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical university')) {\n        category = 'Technical University';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        sn: idx + 1,\n        name: uni.name,\n        category: category,\n        courses: filteredCount\n    };\n}).filter(uni => uni !== null)\n  .sort((a, b) => a.name.localeCompare(b.name))\n  .map((uni, idx) => ({ ...uni, sn: idx + 1 })); // Re-number after filtering\n\n// Format filtered courses for table display (limit to first 100 for performance)\nconst filteredCourseTableData = filteredCourses.slice(0, 100).map(course => {\n    const feeValue = course.tuition_fee || course.tuition || course.fees || 0;\n    const feeNumber = parseFloat(feeValue) || 0;\n    let tuitionDisplay = 'Free';\n    \n    if (feeNumber > 0) {\n        tuitionDisplay = `€${feeNumber}`;\n        // Add period if available\n        const period = course.tuition_period || 'semester';\n        if (period && period !== 'course') {\n            tuitionDisplay += `/${period}`;\n        }\n    }\n    \n    return {\n        title: course.title || course.program_name,\n        university: course.university || course.institution_name || course.institution,\n        degree: course.degree,\n        language: course.language,\n        tuition: tuitionDisplay,\n        location: course.location || 'Germany'\n    };\n});\n\n// Create university selector options from filtered universities\nconst universityOptions = [\"🏛️ Select a University\"];\nfilteredUniversities.forEach(uni => {\n    universityOptions.push(`${uni.name} (${uni.courses} courses)`);\n});\n\n// Return updated data\nreturn [\n    { payload: filteredCourses.length, topic: \"total_courses\" },\n    { payload: filteredUniversities.length, topic: \"total_universities\" },\n    { payload: filteredUniversities, topic: \"university_table\" },\n    { payload: filteredCourseTableData, topic: \"course_table\" },\n    { options: universityOptions, payload: \"\" } // Update university selector\n];",
+        "outputs": 5,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1050,
-        "y": 700,
+        "x": 1110,
+        "y": 760,
         "wires": [
             [
                 "be6c7eff2c1cd630"
@@ -806,6 +925,166 @@
             ],
             [
                 "f0938154c1f233d9"
+            ],
+            [
+                "course_table"
+            ],
+            [
+                "university_selector"
+            ]
+        ]
+    },
+    {
+        "id": "reset_filter_values",
+        "type": "function",
+        "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
+        "name": "Reset Filter Values",
+        "func": "// Reset all filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// Get original data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\n// Prepare original university data\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\n// Create university selector options from all universities\nconst universityOptions = [\"🏛️ Select a University\"];\nuniversities.forEach(uni => {\n    universityOptions.push(`${uni.name} (${uni.courses} courses)`);\n});\n\n// Send reset values to dropdowns and update dashboard\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" },\n    { options: universityOptions, payload: \"\" } // Reset university selector\n];",
+        "outputs": 7,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 680,
+        "wires": [
+            [
+                "be6c7eff2c1cd630"
+            ],
+            [
+                "57f94c4b3fbe219c"
+            ],
+            [
+                "f0938154c1f233d9"
+            ],
+            [
+                "filter_degree_type"
+            ],
+            [
+                "filter_tuition_fee"
+            ],
+            [
+                "filter_language"
+            ],
+            [
+                "university_selector"
+            ]
+        ]
+    },
+    {
+        "id": "init_filters",
+        "type": "inject",
+        "z": "main_tab",
+        "g": "6b00bc2cfff9870a",
+        "name": "Initialize Filters",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 2,
+        "topic": "init_filters",
+        "payload": "",
+        "payloadType": "str",
+        "x": 200,
+        "y": 740,
+        "wires": [
+            [
+                "reset_filter_values"
+            ]
+        ]
+    },
+    {
+        "id": "university_selector",
+        "type": "ui_dropdown",
+        "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
+        "name": "University Selector",
+        "label": "Select University",
+        "tooltip": "Choose a university to view its courses",
+        "place": "Select a university",
+        "group": "ui_group_filters",
+        "order": 0,
+        "width": "8",
+        "height": 1,
+        "passthru": true,
+        "multiple": false,
+        "options": [],
+        "payload": "",
+        "topic": "selected_university",
+        "topicType": "str",
+        "className": "",
+        "x": 1650,
+        "y": 440,
+        "wires": [
+            [
+                "filter_courses_by_university"
+            ]
+        ]
+    },
+    {
+        "id": "filter_courses_by_university",
+        "type": "function",
+        "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
+        "name": "Filter Courses by University",
+        "func": "// Get selected university\nconst selectedUniversity = msg.payload;\n\n// Get all courses and current filters from flow context\nconst allCourses = flow.get('courses') || [];\nconst filters = flow.get('courseFilters') || {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n};\n\nif (!selectedUniversity || selectedUniversity === 'all' || selectedUniversity.includes('Select a University')) {\n    // Show message to select a university\n    const selectMessage = [{\n        title: 'Please select a university from the dropdown above',\n        university: 'to view courses offered by that institution',\n        degree: '---',\n        language: '---',\n        tuition: '---',\n        location: '---'\n    }];\n    \n    return { payload: selectMessage, topic: \"course_table\" };\n}\n\n// Extract university name from the display format \"University Name (X courses)\"\nlet universityName = selectedUniversity;\nif (selectedUniversity.includes(' (') && selectedUniversity.includes(' courses)')) {\n    universityName = selectedUniversity.split(' (')[0];\n}\n\nnode.log(`Filtering courses for university: ${universityName}`);\nnode.log(`Current filters:`, filters);\n\n// First filter by university, then apply other filters\nlet universityCourses = allCourses.filter(course => {\n    const courseUniversity = course.university || course.institution_name || course.institution || '';\n    return courseUniversity.toLowerCase().includes(universityName.toLowerCase());\n});\n\n// Apply additional filters to university courses\nlet filteredCourses = universityCourses.filter(course => {\n    // Degree filter\n    if (!filters.degree.includes('all')) {\n        const degreeMatch = filters.degree.some(deg => {\n            if (deg === 'bachelor') {\n                return course.degree && (course.degree.toLowerCase().includes('bachelor') || course.degree.toLowerCase().includes('b.'));\n            } else if (deg === 'master') {\n                return course.degree && (course.degree.toLowerCase().includes('master') || course.degree.toLowerCase().includes('m.'));\n            } else if (deg === 'phd') {\n                return course.degree && (course.degree.toLowerCase().includes('phd') || course.degree.toLowerCase().includes('ph.d') || course.degree.toLowerCase().includes('doctor'));\n            }\n            return false;\n        });\n        if (!degreeMatch) return false;\n    }\n    \n    // Fee filter - improved logic\n    if (filters.fee !== 'all') {\n        const feeValue = course.tuition_fee || course.tuition || course.fees || 0;\n        const feeNumber = parseFloat(feeValue) || 0;\n        \n        if (filters.fee === 'no_fee') {\n            // Only courses with 0 fee or explicitly marked as free\n            if (feeNumber > 0) return false;\n        } else if (filters.fee === 'up_to_500') {\n            // Courses with fee <= 500 EUR\n            if (feeNumber > 500) return false;\n        } else if (filters.fee === 'affordable') {\n            // No fee OR up to 500 EUR\n            if (feeNumber > 500) return false;\n        }\n    }\n    \n    // Language filter\n    if (filters.language !== 'all') {\n        const langText = (course.language || '').toLowerCase();\n        if (filters.language === 'english') {\n            if (!langText.includes('english')) return false;\n        } else if (filters.language === 'german') {\n            if (!langText.includes('german') && !langText.includes('deutsch')) return false;\n        } else if (filters.language === 'en_de') {\n            if (!langText.includes('english') && !langText.includes('german') && !langText.includes('deutsch')) {\n                return false;\n            }\n        }\n    }\n    \n    return true;\n});\n\nnode.log(`Found ${filteredCourses.length} filtered courses for ${universityName}`);\n\n// Format courses for table display with improved tuition display\nconst courseTableData = filteredCourses.map(course => {\n    const feeValue = course.tuition_fee || course.tuition || course.fees || 0;\n    const feeNumber = parseFloat(feeValue) || 0;\n    let tuitionDisplay = 'Free';\n    \n    if (feeNumber > 0) {\n        tuitionDisplay = `€${feeNumber}`;\n        // Add period if available\n        const period = course.tuition_period || 'semester';\n        if (period && period !== 'course') {\n            tuitionDisplay += `/${period}`;\n        }\n    }\n    \n    return {\n        title: course.title || course.program_name,\n        university: course.university || course.institution_name || course.institution,\n        degree: course.degree,\n        language: course.language,\n        tuition: tuitionDisplay,\n        location: course.location || 'Germany'\n    };\n});\n\nif (courseTableData.length === 0) {\n    const noCoursesMessage = [{\n        title: `No courses found for \"${universityName}\" with current filters`,\n        university: 'Try adjusting your filters or selecting a different university',\n        degree: '---',\n        language: '---',\n        tuition: '---',\n        location: '---'\n    }];\n    \n    return { payload: noCoursesMessage, topic: \"course_table\" };\n}\n\nreturn { payload: courseTableData, topic: \"course_table\" };",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1600,
+        "y": 360,
+        "wires": [
+            [
+                "course_table"
+            ]
+        ]
+    },
+    {
+        "id": "populate_university_selector",
+        "type": "function",
+        "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
+        "name": "Populate University Selector",
+        "func": "// Transform database results into dropdown options\nconst dbResults = msg.payload;\n\nnode.log(`Received ${dbResults ? dbResults.length : 0} universities from database`);\n\nif (!Array.isArray(dbResults) || dbResults.length === 0) {\n    node.warn(\"No university data received\");\n    // Send message to update dropdown with no options\n    return {\n        options: [\"🏛️ No Universities Available\"],\n        payload: \"\"\n    };\n}\n\n// Create options array with default option\nconst options = [\"🏛️ Select a University\"];\n\n// Add university options from database\ndbResults.forEach((row, index) => {\n    if (row && row.name) {\n        const courseCount = parseInt(row.course_count) || 0;\n        options.push(`${row.name} (${courseCount} courses)`);\n        \n        // Log first few entries for debugging\n        if (index < 3) {\n            node.log(`Added university: ${row.name} with ${courseCount} courses`);\n        }\n    }\n});\n\nnode.log(`Successfully populated ${options.length - 1} universities`);\n\n// Return message to update dropdown options\n// For Node-RED UI dropdown, we need to send the options in msg.options\nreturn {\n    options: options,\n    payload: \"\"\n};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 460,
+        "wires": [
+            [
+                "university_selector"
+            ]
+        ]
+    },
+    {
+        "id": "load_universities_for_selector",
+        "type": "postgresql",
+        "z": "main_tab",
+        "g": "ea553a0b38d67ae1",
+        "name": "Load Universities for Selector",
+        "query": "SELECT i.name, COUNT(p.prog_id) as course_count FROM institutions i JOIN programmes p ON i.inst_id = p.inst_id WHERE p.is_active = true GROUP BY i.inst_id, i.name ORDER BY i.name",
+        "postgreSQLConfig": "postgres_config",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "populate_university_selector"
             ]
         ]
     },
@@ -829,279 +1108,12 @@
         "payloadType": "str",
         "topic": "reset_filters",
         "topicType": "str",
-        "x": 130,
-        "y": 600,
-        "wires": [
-            [
-                "reset_filter_values"
-            ]
-        ]
-    },
-    {
-        "id": "reset_filter_values",
-        "type": "function",
-        "z": "main_tab",
-        "g": "6b00bc2cfff9870a",
-        "name": "Reset Filter Values",
-        "func": "// Reset all filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// Get original data\nconst courses = flow.get('courses') || [];\nconst universities = flow.get('universities') || [];\nconst lastUpdated = flow.get('lastUpdated') || 'Never';\n\n// Prepare original university data\nconst uniData = universities\n    .sort((a, b) => a.name.localeCompare(b.name))\n    .map((uni, idx) => {\n        const name = uni.name.toLowerCase();\n        let category = 'University';\n        if (name.includes('hochschule') || name.includes('university of applied sciences') || name.includes('fachhochschule')) {\n            category = 'University of Applied Sciences';\n        } else if (name.includes('technische') || name.includes('technical university')) {\n            category = 'Technical University';\n        } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n            category = 'Arts/Music University';\n        }\n        return {\n            sn: idx + 1,\n            name: uni.name,\n            category: category,\n            courses: uni.courses\n        };\n    });\n\n// Send reset values to dropdowns and update dashboard\nreturn [\n    { payload: courses.length, topic: \"total_courses\" },\n    { payload: universities.length, topic: \"total_universities\" },\n    { payload: uniData, topic: \"university_table\" },\n    { payload: ['all'], topic: \"filter_degree\" },\n    { payload: 'all', topic: \"filter_fee\" },\n    { payload: 'all', topic: \"filter_language\" }\n];",
-        "outputs": 6,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
+        "x": 190,
         "y": 640,
         "wires": [
             [
-                "be6c7eff2c1cd630"
-            ],
-            [
-                "57f94c4b3fbe219c"
-            ],
-            [
-                "f0938154c1f233d9"
-            ],
-            [
-                "filter_degree_type"
-            ],
-            [
-                "filter_tuition_fee"
-            ],
-            [
-                "filter_language"
-            ]
-        ]
-    },
-    {
-        "id": "init_filters",
-        "type": "inject",
-        "z": "main_tab",
-        "g": "6b00bc2cfff9870a",
-        "name": "Initialize Filters",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 2,
-        "topic": "init_filters",
-        "payload": "",
-        "payloadType": "str",
-        "x": 140,
-        "y": 700,
-        "wires": [
-            [
                 "reset_filter_values"
             ]
-        ]
-    },
-    {
-        "id": "api_scheduler",
-        "type": "inject",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "API Scheduler (Every 4 hours)",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "14400",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 5,
-        "topic": "",
-        "payload": "start_api_polling",
-        "payloadType": "str",
-        "x": 210,
-        "y": 260,
-        "wires": [
-            [
-                "fetch_daad_api",
-                "fetch_hochschulkompass_data",
-                "fetch_daad_all_programmes"
-            ]
-        ]
-    },
-    {
-        "id": "manual_trigger",
-        "type": "inject",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Manual Refresh",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "manual_refresh",
-        "payloadType": "str",
-        "x": 260,
-        "y": 320,
-        "wires": [
-            [
-                "fetch_daad_api",
-                "fetch_hochschulkompass_data",
-                "fetch_daad_all_programmes"
-            ]
-        ]
-    },
-    {
-        "id": "fetch_daad_api",
-        "type": "http request",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Fetch DAAD API",
-        "method": "GET",
-        "ret": "obj",
-        "paytoqs": "ignore",
-        "url": "https://www2.daad.de/deutschland/studienangebote/international-programmes/api/solr/en/search.json?rows=5000",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 740,
-        "y": 180,
-        "wires": [
-            [
-                "process_daad_data"
-            ]
-        ]
-    },
-    {
-        "id": "process_daad_data",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Process DAAD Data",
-        "func": "// Process DAAD Data\n\n// Helper function to determine degree type from DAAD courseType\nfunction getDegreeType(course) {\n    const courseType = course.courseType;\n    const courseName = (course.courseName || '').toLowerCase();\n    \n    // DAAD courseType mapping:\n    // 1 = Bachelor's degree course\n    // 2 = Master's degree course  \n    // 3 = PhD course\n    // 4 = Short course\n    // 5-7 = Language/Preparation courses\n    \n    if (courseType === 1) return 'Bachelor';\n    if (courseType === 2) return 'Master';\n    if (courseType === 3) return 'PhD';\n    \n    // Fallback: analyze course name\n    if (courseName.includes('bachelor')) return 'Bachelor';\n    if (courseName.includes('master')) return 'Master';\n    if (courseName.includes('phd') || courseName.includes('doctoral')) return 'PhD';\n    \n    return 'Other';\n}\n\n// 1) grab raw array and dedupe by raw ID\nconst raw = msg.payload.courses || [];\nconst dedupedById = {};\nraw.forEach(c => {\n    dedupedById[c.id] = c;\n});\nconst unique = Object.values(dedupedById);\n\n// 2) map to normalized courses\nconst timestamp = new Date().toISOString();\nconst courses = unique.map(course => ({\n    id: `daad_${course.id}`,\n    title: course.courseName,\n    university: course.academy,\n    country: course.country || 'Germany',\n    degree: getDegreeType(course),\n    language: (course.languages || []).join(', ') || 'English',\n    source: 'DAAD',  // ← used by store to strip old entries\n    url: `https://www2.daad.de${course.link}`,\n    lastUpdated: timestamp,\n    fees: course.tuitionFees || 'Varies',\n    duration: course.programmeDuration || 'Not specified'\n}));\n\n// 3) group by university — now with source!\nconst universityCounts = {};\ncourses.forEach(c => {\n    if (!universityCounts[c.university]) {\n        universityCounts[c.university] = {\n            name: c.university,\n            courses: 0,\n            source: 'DAAD'       // ← tag it here\n        };\n    }\n    universityCounts[c.university].courses++;\n});\nconst universities = Object.values(universityCounts);\n\n// 4) output payload with source\nmsg.payload = {\n    source: 'DAAD',\n    courses: courses,\n    universities: universities,\n    totalCourses: courses.length,\n    timestamp: timestamp\n};\n\n// update node status\nnode.status({\n    fill: \"green\",\n    shape: \"dot\",\n    text: `DAAD: ${courses.length} unique courses`\n});\n\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1120,
-        "y": 180,
-        "wires": [
-            [
-                "store_course_data",
-                "check_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "store_course_data",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Store in Context Database",
-        "func": "// Get existing data from context\nlet allCourses = flow.get('courses') || [];\nlet allUniversities = flow.get('universities') || [];\n\nconst newData = msg.payload;\nconst source = newData.source;\n\n// Remove old data from same source\nallCourses = allCourses.filter(course => course.source !== source);\nallUniversities = allUniversities.filter(uni => uni.source !== source);\n\n// Add new data\nallCourses = allCourses.concat(newData.courses);\nallUniversities = allUniversities.concat(newData.universities);\n\n// Store back to context\nflow.set('courses', allCourses);\nflow.set('universities', allUniversities);\nflow.set('lastUpdated', new Date().toISOString());\n\n// Also save to file for persistence\nmsg.payload = {\n    courses: allCourses,\n    universities: allUniversities,\n    totalCourses: allCourses.length,\n    totalUniversities: allUniversities.length,\n    lastUpdated: flow.get('lastUpdated')\n};\n\nnode.status({fill: \"blue\", shape: \"dot\", text: `Stored: ${allCourses.length} total courses`});\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 220,
-        "wires": [
-            [
-                "save_to_file",
-                "update_dashboard"
-            ]
-        ]
-    },
-    {
-        "id": "check_new_courses",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Detect New Courses",
-        "func": "// Get previous IDs and current IDs\nconst previous = flow.get('knownCourseIds') || [];\nconst courses = msg.payload.courses || [];\nconst current = courses.map(c => c.id);\n\n// Figure out added & removed\nconst added = current.filter(id => !previous.includes(id));\nconst removed = previous.filter(id => !current.includes(id));\n\n// Always update the stored IDs\nflow.set('knownCourseIds', current);\n\nlet text = '';\nif (added.length) text += `🆕 ${added.length} new course(s) added. `;\nif (removed.length) text += `🗑️ ${removed.length} course(s) removed. `;\n\n// Only notify if something changed\nif (text) {\n    return { payload: text };\n}\n\n// no change → nothing\nreturn null;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 320,
-        "wires": [
-            [
-                "notify_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "save_to_file",
-        "type": "file",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Save Database",
-        "filename": "/data/course_database.json",
-        "filenameType": "str",
-        "appendNewline": false,
-        "createDir": true,
-        "overwriteFile": "true",
-        "encoding": "utf8",
-        "x": 1800,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "notify_new_courses",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Update New Course Dashboard",
-        "func": "// Realistic semester-based course data from actual German universities\nconst realisticSemesterData = [\n    {\n        semester: '2024 Winter',\n        coursesAdded: 12,\n        university: 'Technical University of Munich',\n        courseNames: 'Robotics & AI • Data Engineering & Analytics • Advanced Manufacturing • Computational Engineering • Digital Innovation'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 8,\n        university: 'RWTH Aachen University',\n        courseNames: 'Automotive Engineering • Production Systems • Materials Engineering • Process Technology'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 15,\n        university: 'University of Stuttgart',\n        courseNames: 'Aerospace Engineering MSc; Computational Mechanics of Materials and Structures; Software Technology MSc; Air Quality Control, Solid Waste and Waste Water Process Engineering'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 18,\n        university: 'Karlsruhe Institute of Technology',\n        courseNames: 'Energy Engineering and Management; Information Systems Engineering and Management; Mechanical Engineering MSc; Optics and Photonics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 14,\n        university: 'Technische Universität Berlin',\n        courseNames: 'Computer Science MSc; Urban Management MSc; Environmental Planning MSc; Renewable Energy MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 22,\n        university: 'Ludwig-Maximilians-Universität München',\n        courseNames: 'Bioinformatics MSc; Data Science MSc; Economics MSc; Logic and Philosophy of Science MA; English Studies MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 9,\n        university: 'University of Heidelberg',\n        courseNames: 'Molecular Biotechnology MSc; Health and Society in South Asia MA; Scientific Computing MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 16,\n        university: 'Humboldt-Universität zu Berlin',\n        courseNames: 'European and American Studies MA; Global History MA; Physics MSc; Statistics MSc; Social Sciences MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 11,\n        university: 'University of Freiburg',\n        courseNames: 'Forest Ecology and Management MSc; European Forestry MSc; Renewable Energy Management MSc; English and American Studies MA'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 7,\n        university: 'Universität Mannheim',\n        courseNames: 'Management MSc; Economics MSc; Data Science MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 13,\n        university: 'Dresden University of Technology',\n        courseNames: 'Computational Engineering MSc; Tropical Forestry MSc; Hydro Science and Engineering MSc; Molecular Bioengineering MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 10,\n        university: 'University of Göttingen',\n        courseNames: 'Applied Computer Science MSc; International Nature Conservation MSc; Sustainable International Agriculture MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 20,\n        university: 'RWTH Aachen University',\n        courseNames: 'Software Systems Engineering MSc; Computational Engineering Science MSc; Electrical Engineering MSc; Biomedical Engineering MSc; Mathematics MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 6,\n        university: 'University of Tübingen',\n        courseNames: 'Machine Learning MSc; Applied & Environmental Geoscience MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 17,\n        university: 'University of Bonn',\n        courseNames: 'Geography of Environmental Risks and Human Security MSc; Economics MSc; Computer Science MSc; Life and Medical Sciences MSc; Agricultural Sciences MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 19,\n        university: 'University of Hamburg',\n        courseNames: 'European Master in Migration and Intercultural Relations; Intelligent Adaptive Systems MSc; Peace and Security Studies MA; Maritime Affairs MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 8,\n        university: 'Frankfurt School of Finance',\n        courseNames: 'Applied Data Science MSc; Digital Transformation MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 14,\n        university: 'University of Cologne',\n        courseNames: 'Economics MSc; Information Systems MSc; Regional Studies East Central Europe MA; Media Culture Analysis MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 21,\n        university: 'Technical University of Darmstadt',\n        courseNames: 'Computational Engineering MSc; Information and Communication Engineering MSc; Mechatronics MSc; Cognitive Science MSc; Distributed Software Systems MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 11,\n        university: 'University of Würzburg',\n        courseNames: 'FOKUS Life Sciences MSc; Computational Mathematics MSc; Human Geography MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 16,\n        university: 'University of Erlangen-Nuremberg',\n        courseNames: 'Advanced Materials and Processes MSc; International Information Systems MSc; Medical Process Management MSc; Computational Engineering MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 13,\n        university: 'Ruhr University Bochum',\n        courseNames: 'IT-Security MSc; Applied IT Security MSc; Management and Economics MSc; Computational Engineering MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 12,\n        university: 'University of Duisburg-Essen',\n        courseNames: 'Water Science MSc; Transnational Ecosystem-based Water Management MSc; Communication Design MA'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 15,\n        university: 'Leibniz University Hannover',\n        courseNames: 'Water Resources and Environmental Management MSc; Computational Methods in Engineering MSc; Geodesy and Geoinformatics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 9,\n        university: 'University of Kiel',\n        courseNames: 'Environmental Management MSc; Quantitative Economics MSc; Digital Communications MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 18,\n        university: 'Technical University of Braunschweig',\n        courseNames: 'Automotive Engineering MSc; Computer Science MSc; Sustainable Chemistry MSc; Bioengineering MSc; Physics MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 7,\n        university: 'University of Oldenburg',\n        courseNames: 'Renewable Energy MSc; Marine Environmental Sciences MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 20,\n        university: 'University of Konstanz',\n        courseNames: 'Economics MSc; Psychology MSc; Computer and Information Science MSc; Life Science MSc; Social and Economic Data Science MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 10,\n        university: 'Jacobs University Bremen',\n        courseNames: 'Data Engineering MSc; Supply Chain Engineering & Management MSc; Robotics MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 12,\n        university: 'University of Bayreuth',\n        courseNames: 'Polymer Science MSc; Environmental Geography MSc; African Verbal and Visual Arts MA'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 14,\n        university: 'University of Passau',\n        courseNames: 'European Studies MA; Internet Computing MSc; Business Administration MSc'\n    },\n    {\n        semester: '2024 Winter',\n        coursesAdded: 16,\n        university: 'Saarland University',\n        courseNames: 'Cybersecurity MSc; Language Science and Technology MSc; European Management MSc; Biomedical Engineering MSc'\n    },\n    {\n        semester: '2025 Summer',\n        coursesAdded: 11,\n        university: 'University of Siegen',\n        courseNames: 'Human Computer Interaction MSc; Roads to Democracy MA; Accounting and Finance MSc'\n    }\n];\n\nmsg.payload = realisticSemesterData;\nmsg.topic = \"semester_courses_update\";\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1830,
-        "y": 360,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "update_dashboard",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Update Main Dashboard",
-        "func": "const data = msg.payload;\n\n// Prepare statistics\nconst stats = {\n    totalCourses: data.totalCourses,\n    totalUniversities: data.totalUniversities,\n    lastUpdated: data.lastUpdated\n};\n\n// Prepare university table data with categorization\nconst universityData = data.universities.map(uni => {\n    let category = 'University';\n    const name = uni.name.toLowerCase();\n    \n    if (name.includes('hochschule') || name.includes('university of applied sciences')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('technische') || name.includes('technical')) {\n        category = 'Technical University';\n    } else if (name.includes('fachhochschule')) {\n        category = 'University of Applied Sciences';\n    } else if (name.includes('kunst') || name.includes('art') || name.includes('music')) {\n        category = 'Arts/Music University';\n    }\n    \n    return {\n        name: uni.name,\n        courses: uni.courses,\n        category: category\n    };\n}).sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically\n\n// Send multiple messages for different dashboard components\nreturn [\n    { payload: stats.totalCourses, topic: \"total_courses\" },\n    { payload: stats.totalUniversities, topic: \"total_universities\" },\n    { payload: stats.lastUpdated, topic: \"last_updated\" },\n    { payload: universityData, topic: \"university_table\" }\n];",
-        "outputs": 4,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1810,
-        "y": 260,
-        "wires": [
-            [],
-            [],
-            [],
-            []
         ]
     },
     {
@@ -1134,62 +1146,6 @@
         "wires": []
     },
     {
-        "id": "3833ecb6c6a97520",
-        "type": "ui_button",
-        "z": "api_tab",
-        "g": "c19452ddee5fb968",
-        "name": "Emergency Flush",
-        "group": "ui_group_data_sources",
-        "order": 2,
-        "label": "🚨 Flush All Data",
-        "bgcolor": "#d9534f",
-        "icon": "fa-trash",
-        "x": 190,
-        "y": 660,
-        "wires": [
-            [
-                "c6575511a55cc273"
-            ]
-        ]
-    },
-    {
-        "id": "c6575511a55cc273",
-        "type": "function",
-        "z": "api_tab",
-        "g": "c19452ddee5fb968",
-        "name": "Flush DB & Context",
-        "func": "// 1) clear context & disk\nconst empty = { courses: [], universities: [], newCourses: [], lastUpdated: 'Never' };\nflow.set('courses', empty.courses);\nflow.set('universities', empty.universities);\nflow.set('newCourses', empty.newCourses);\nflow.set('lastUpdated', empty.lastUpdated);\nflow.set('knownCourseIds', []);\n\n// 2) Also reset filters to default\nflow.set('courseFilters', {\n    degree: ['all'],\n    fee: 'all',\n    language: 'all'\n});\n\n// 3) write empty DB to disk\nmsg.payload = JSON.stringify(empty, null, 2);\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 490,
-        "y": 660,
-        "wires": [
-            [
-                "3a542954ebbdfc43"
-            ]
-        ]
-    },
-    {
-        "id": "3a542954ebbdfc43",
-        "type": "file",
-        "z": "api_tab",
-        "g": "c19452ddee5fb968",
-        "name": "Overwrite DB",
-        "filename": "/data/course_database.json",
-        "overwriteFile": "true",
-        "x": 730,
-        "y": 660,
-        "wires": [
-            [
-                "clear_dashboard_after_flush"
-            ]
-        ]
-    },
-    {
         "id": "clear_dashboard_after_flush",
         "type": "function",
         "z": "api_tab",
@@ -1214,114 +1170,6 @@
             [],
             []
         ]
-    },
-    {
-        "id": "fetch_hochschulkompass_data",
-        "type": "exec",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "command": "/opt/scrapers/daad_scraper.py hochschulkompass --max-courses 5000",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Scrape Hochschulkompass (Python)",
-        "x": 690,
-        "y": 280,
-        "wires": [
-            [
-                "process_hochschulkompass_data",
-                "8570189419bd5fc4"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "process_hochschulkompass_data",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Process Hochschulkompass Data",
-        "func": "// Process Python scraper output for Hochschulkompass\n\ntry {\n    const scraperOutput = msg.payload || '';\n    let data;\n    \n    // Parse JSON output from Python scraper\n    try {\n        data = JSON.parse(scraperOutput);\n    } catch (e) {\n        node.error('Failed to parse scraper output: ' + e.message);\n        throw e;\n    }\n    \n    if (data.error) {\n        node.error('Scraper error: ' + data.error);\n        throw new Error(data.error);\n    }\n    \n    const rawCourses = data.courses || [];\n    const timestamp = data.timestamp || new Date().toISOString();\n    \n    // Map to normalized course format\n    const courses = rawCourses.map(course => ({\n        id: `hsk_${course.id}`,\n        title: course.courseName,\n        university: course.academy,\n        country: course.country || 'Germany',\n        degree: course.degreeType || 'Bachelor',\n        language: (course.languages || []).join(', ') || 'German',\n        source: 'Hochschulkompass',\n        url: `https://www.hochschulkompass.de${course.link}`,\n        lastUpdated: timestamp,\n        fees: course.tuitionFees || 'No tuition fees',\n        duration: course.programmeDuration || 'Not specified'\n    }));\n    \n    // Group by university\n    const universityCounts = {};\n    courses.forEach(c => {\n        if (!universityCounts[c.university]) {\n            universityCounts[c.university] = {\n                name: c.university,\n                courses: 0,\n                source: 'Hochschulkompass'\n            };\n        }\n        universityCounts[c.university].courses++;\n    });\n    const universities = Object.values(universityCounts);\n    \n    // Output payload with source\n    msg.payload = {\n        source: 'Hochschulkompass',\n        courses: courses,\n        universities: universities,\n        totalCourses: courses.length,\n        timestamp: timestamp\n    };\n    \n    // Update node status\n    node.status({\n        fill: \"green\",\n        shape: \"dot\",\n        text: `Scraped: ${courses.length} domestic courses`\n    });\n    \n    return msg;\n    \n} catch (error) {\n    node.error('Processing failed: ' + error.message);\n    node.status({\n        fill: \"red\",\n        shape: \"ring\",\n        text: \"Scraping failed\"\n    });\n    return null;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1080,
-        "y": 260,
-        "wires": [
-            [
-                "store_course_data",
-                "check_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "fetch_daad_all_programmes",
-        "type": "exec",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "command": "/opt/scrapers/daad_scraper.py daad --keyword '' --max-courses 10000",
-        "addpay": false,
-        "append": "",
-        "useSpawn": "false",
-        "timer": "",
-        "winHide": false,
-        "oldrc": false,
-        "name": "Scrape DAAD All Programmes (Python)",
-        "x": 700,
-        "y": 400,
-        "wires": [
-            [
-                "process_daad_all_programmes"
-            ],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "process_daad_all_programmes",
-        "type": "function",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "Process DAAD All Programmes",
-        "func": "// Process Python scraper output for DAAD All Programmes\n\ntry {\n    const scraperOutput = msg.payload || '';\n    let data;\n    \n    // Parse JSON output from Python scraper\n    try {\n        data = JSON.parse(scraperOutput);\n    } catch (e) {\n        node.error('Failed to parse DAAD scraper output: ' + e.message);\n        throw e;\n    }\n    \n    if (data.error) {\n        node.error('DAAD scraper error: ' + data.error);\n        throw new Error(data.error);\n    }\n    \n    const rawCourses = data.courses || [];\n    const timestamp = data.timestamp || new Date().toISOString();\n    \n    // Map to normalized course format\n    const courses = rawCourses.map(course => ({\n        id: `daad_all_${course.id}`,\n        title: course.courseName,\n        university: course.academy,\n        country: course.country || 'Germany',\n        degree: course.degreeType || 'Master',\n        language: (course.languages || []).join(', ') || 'English',\n        source: 'DAAD_All',\n        url: course.link || `https://www.daad.de/studiengang/course-${course.id}`,\n        lastUpdated: timestamp,\n        fees: course.tuitionFees || 'No tuition fees',\n        duration: course.programmeDuration || 'Not specified'\n    }));\n    \n    // Group by university\n    const universityCounts = {};\n    courses.forEach(c => {\n        if (!universityCounts[c.university]) {\n            universityCounts[c.university] = {\n                name: c.university,\n                courses: 0,\n                source: 'DAAD_All'\n            };\n        }\n        universityCounts[c.university].courses++;\n    });\n    const universities = Object.values(universityCounts);\n    \n    // Output payload with source\n    msg.payload = {\n        source: 'DAAD_All',\n        courses: courses,\n        universities: universities,\n        totalCourses: courses.length,\n        timestamp: timestamp\n    };\n    \n    // Update node status\n    node.status({\n        fill: \"green\",\n        shape: \"dot\",\n        text: `Scraped: ${courses.length} DAAD programmes`\n    });\n    \n    return msg;\n    \n} catch (error) {\n    node.error('DAAD processing failed: ' + error.message);\n    node.status({\n        fill: \"red\",\n        shape: \"ring\",\n        text: \"DAAD scraping failed\"\n    });\n    return null;\n}",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1090,
-        "y": 400,
-        "wires": [
-            [
-                "store_course_data",
-                "check_new_courses"
-            ]
-        ]
-    },
-    {
-        "id": "8570189419bd5fc4",
-        "type": "debug",
-        "z": "api_tab",
-        "g": "6eaffb013b6195d9",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1040,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "daily-trigger",
@@ -1372,6 +1220,7 @@
         "append": "",
         "useSpawn": "false",
         "timer": "",
+        "winHide": false,
         "oldrc": false,
         "name": "Run ETL Pipeline",
         "x": 370,

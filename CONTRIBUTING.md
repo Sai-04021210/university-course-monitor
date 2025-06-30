@@ -2,29 +2,29 @@
 
 Thank you for your interest in contributing! This project welcomes contributions while maintaining usage restrictions.
 
-## 🚀 Quick Start
+##  Quick Start
 
 1. **Read the [License](./docs/legal/LICENSE)** - Understand usage terms
 2. **Check [Open Issues](../../issues)** - See what needs work
 3. **Submit [Usage Request](../../issues/new/choose)** - If needed for your contribution type
 4. **Fork & Submit PR** - Follow standard GitHub workflow
 
-## 🎯 Contribution Types
+##  Contribution Types
 
-### **✅ Always Welcome (No Permission Needed)**
-- 🐛 **Bug fixes** - Fix broken functionality
-- 📝 **Documentation** - Improve docs, comments, README
-- 🧪 **Tests** - Add test coverage
-- 🎨 **Code quality** - Refactoring, formatting, linting
-- 💡 **Feature suggestions** - Ideas and proposals (via issues)
+### ** Always Welcome (No Permission Needed)**
+- **Bug fixes** - Fix broken functionality
+- **Documentation** - Improve docs, comments, README
+- **Tests** - Add test coverage
+- **Code quality** - Refactoring, formatting, linting
+- **Feature suggestions** - Ideas and proposals (via issues)
 
-### **⚠️ Permission Required**
-- 🚀 **New features** - Major functionality additions
-- 🔧 **Architecture changes** - Significant structural modifications
-- 📊 **Data source additions** - New scraping targets
-- 🌐 **API modifications** - External interface changes
+### ** Permission Required**
+-  **New features** - Major functionality additions
+-  **Architecture changes** - Significant structural modifications
+- **Data source additions** - New scraping targets
+- **API modifications** - External interface changes
 
-## 📝 Contribution Process
+## Contribution Process
 
 ### **1. Bug Fixes & Minor Improvements**
 ```bash
@@ -46,7 +46,7 @@ Thank you for your interest in contributing! This project welcomes contributions
 5. Follow standard PR process
 ```
 
-## 🛠️ Development Setup
+## Development Setup
 
 ### **Prerequisites**
 - Docker & Docker Compose
@@ -70,7 +70,7 @@ docker compose up -d --build
 # Database: localhost:5432
 ```
 
-## 📊 Project Structure
+## Project Structure
 
 ```
 university-course-monitor/
@@ -99,7 +99,7 @@ university-course-monitor/
     └── settings.js       # Node-RED configuration
 ```
 
-## 🧪 Testing Guidelines
+## Testing Guidelines
 
 ### **Before Submitting PR**
 - [ ] Code runs without errors
@@ -125,7 +125,7 @@ curl http://localhost:1880/ui
 docker compose exec postgres psql -U course_user -d course_monitor -c "\dt"
 ```
 
-## 📋 Code Standards
+##  Code Standards
 
 ### **Python Code**
 - Follow PEP 8 style guidelines
@@ -151,21 +151,21 @@ docs(readme): update installation instructions
 refactor(database): optimize query performance
 ```
 
-## 🔍 Review Process
+## Review Process
 
 ### **What We Look For**
-- ✅ **Functionality** - Does it work as intended?
-- ✅ **Quality** - Is the code well-written and maintainable?
-- ✅ **Security** - Are there any security concerns?
-- ✅ **Compatibility** - Does it work with existing system?
-- ✅ **Documentation** - Is it properly documented?
+-  **Functionality** - Does it work as intended?
+-  **Quality** - Is the code well-written and maintainable?
+-  **Security** - Are there any security concerns?
+-  **Compatibility** - Does it work with existing system?
+-  **Documentation** - Is it properly documented?
 
 ### **Review Timeline**
 - **Simple fixes**: 1-3 days
 - **Feature additions**: 3-7 days
 - **Major changes**: 1-2 weeks
 
-## 🎖️ Recognition
+## Recognition
 
 Contributors will be:
 - Listed in repository credits
@@ -173,7 +173,7 @@ Contributors will be:
 - Given appropriate GitHub repository permissions
 - Considered for collaboration opportunities
 
-## 📞 Questions?
+## Questions?
 
 - **General questions**: Create an issue with "question" label
 - **Technical support**: Check [docs/system_analysis_and_fixes.md](./docs/system_analysis_and_fixes.md)

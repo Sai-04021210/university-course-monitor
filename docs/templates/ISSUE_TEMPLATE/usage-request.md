@@ -8,9 +8,9 @@ assignees: ['your-github-username']
 
 ## Usage Permission Request
 
-**⚠️ IMPORTANT: This repository requires explicit permission for most uses beyond viewing/studying the code.**
+** IMPORTANT: This repository requires explicit permission for most uses beyond viewing/studying the code.**
 
-### 📋 Request Details
+### Request Details
 
 **Intended Use:**
 - [ ] Educational/Learning purposes
@@ -32,7 +32,7 @@ assignees: ['your-github-username']
 **Modifications:**
 <!-- Do you plan to modify the code? If so, how? -->
 
-### 👤 About You
+### About You
 
 **Name:** 
 **Organization (if applicable):** 
@@ -40,14 +40,14 @@ assignees: ['your-github-username']
 **GitHub Profile:** 
 **Website/Portfolio:** 
 
-### 📄 Legal Acknowledgment
+### Legal Acknowledgment
 
 - [ ] I have read and understand the LICENSE terms
 - [ ] I agree to the usage restrictions
 - [ ] I will provide proper attribution
 - [ ] I understand this request may be denied
 
-### 📞 Contact Preference
+### Contact Preference
 
 How should I contact you with the decision?
 - [ ] GitHub comment on this issue

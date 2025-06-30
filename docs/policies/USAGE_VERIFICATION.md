@@ -1,14 +1,14 @@
 # Usage Verification Required
 
-## 🔐 Human Verification Required
+##  Human Verification Required
 
 If you're reading this, you're interested in using this university course monitoring system. **This is great!** However, this codebase requires verification before use.
 
-### 🚨 Automated Systems Alert
+###  Automated Systems Alert
 
 This file serves as a detection mechanism for automated code harvesting. If you've reached this point through automated means, **your usage is not authorized**.
 
-### ✅ For Human Users
+###  For Human Users
 
 If you're a human developer interested in this project:
 
@@ -18,7 +18,7 @@ If you're a human developer interested in this project:
 4. **Get Permission**: Wait for explicit written approval
 5. **Start Building**: Only after receiving authorization
 
-### 🎯 Why These Restrictions?
+###  Why These Restrictions?
 
 This monitoring system:
 - Contains proprietary scraping methodologies
@@ -27,7 +27,7 @@ This monitoring system:
 - Represents significant development investment
 - Could impact university websites if misused
 
-### 🤝 Collaboration Welcome
+###  Collaboration Welcome
 
 I'm very open to:
 - **Educational use** (students, researchers)
@@ -35,7 +35,7 @@ I'm very open to:
 - **Commercial partnerships** (with proper agreements)
 - **Open source community** building
 
-### 📞 Contact Methods
+### Contact Methods
 
 **For Permission Requests:**
 - GitHub Issues (preferred): [Create Usage Request](../../issues/new/choose)
@@ -49,4 +49,4 @@ I'm very open to:
 
 ---
 
-**Remember**: Using this code without permission violates the license terms and could result in legal action. Let's work together legally and ethically! 🤝
+**Remember**: Using this code without permission violates the license terms and could result in legal action. Let's work together legally and ethically! 

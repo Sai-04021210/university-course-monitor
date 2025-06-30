@@ -1,10 +1,10 @@
 # Security Policy
 
-## 🔒 Repository Usage Policy
+##  Repository Usage Policy
 
 This repository contains proprietary code and data collection systems. Usage is restricted under the repository license.
 
-## ⚠️ Reporting License Violations
+##  Reporting License Violations
 
 If you discover unauthorized use of this codebase:
 
@@ -12,14 +12,14 @@ If you discover unauthorized use of this codebase:
 2. **Report immediately** by creating a private security advisory
 3. **Include evidence** such as URLs, screenshots, or repository links
 
-## 📧 Contact Information
+##  Contact Information
 
 For security or license violation reports:
 - **Email**: [your-email@domain.com]
 - **GitHub Security**: Use the "Security" tab to report privately
 - **Subject Line**: "SECURITY: License Violation Report"
 
-## 🛡️ Responsible Disclosure
+##  Responsible Disclosure
 
 We appreciate responsible disclosure of any issues. We commit to:
 - Acknowledging receipt within 24 hours
@@ -27,7 +27,7 @@ We appreciate responsible disclosure of any issues. We commit to:
 - Taking appropriate action against violations
 - Updating you on resolution status
 
-## 🚫 What Constitutes a Violation
+##  What Constitutes a Violation
 
 - Commercial deployment without permission
 - Redistribution without attribution
@@ -35,7 +35,7 @@ We appreciate responsible disclosure of any issues. We commit to:
 - Using the data scraping capabilities against website terms
 - Bypassing the usage request process
 
-## ✅ Permitted Activities
+##  Permitted Activities
 
 - Viewing code for educational purposes
 - Academic research with proper citation

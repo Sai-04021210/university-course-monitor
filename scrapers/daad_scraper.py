@@ -32,6 +32,11 @@ class DAADScraper:
             logger.info("Fetching all DAAD programmes from JSON API")
             programmes = self._fetch_from_json_api()
 
+            # If no programmes found, try alternative API endpoints
+            if not programmes:
+                logger.info("No programmes found with primary API, trying alternative endpoints")
+                programmes = self._fetch_from_alternative_api()
+
             logger.info(f"DAAD API scraper completed. Found {len(programmes)} programmes")
 
         except Exception as e:
@@ -44,9 +49,10 @@ class DAADScraper:
         programmes = []
 
         try:
-            # Parameters for the JSON API - get all programmes
+            # Updated parameters for the current DAAD API
             params = {
-                'rows': '5000'  # Get up to 5000 programmes (all available)
+                'rows': '5000',  # Get up to 5000 programmes
+                'start': '0'
             }
 
             logger.info("Making request to DAAD JSON API...")
@@ -61,12 +67,25 @@ class DAADScraper:
             logger.info(f"Saved API response to /tmp/daad_api_response.json")
             logger.info(f"Response keys: {list(data.keys()) if isinstance(data, dict) else 'Not a dict'}")
 
-            if 'courses' not in data:
-                logger.error(f"No 'courses' key in API response. Available keys: {list(data.keys()) if isinstance(data, dict) else 'Not a dict'}")
-                return programmes
+            # Check for different possible response structures
+            docs = []
+            total_found = 0
 
-            docs = data['courses']
-            total_found = data.get('numResults', 0)
+            if 'response' in data and 'docs' in data['response']:
+                # Solr-style response
+                docs = data['response']['docs']
+                total_found = data['response'].get('numFound', 0)
+            elif 'courses' in data:
+                # Legacy response format
+                docs = data['courses']
+                total_found = data.get('numResults', 0)
+            elif 'docs' in data:
+                # Direct docs format
+                docs = data['docs']
+                total_found = len(docs)
+            else:
+                logger.error(f"Unexpected API response structure. Available keys: {list(data.keys()) if isinstance(data, dict) else 'Not a dict'}")
+                return programmes
 
             logger.info(f"API returned {len(docs)} programmes out of {total_found} total")
 
@@ -85,25 +104,91 @@ class DAADScraper:
 
         return programmes
 
+    def _fetch_from_alternative_api(self) -> List[Dict]:
+        """Try alternative DAAD API endpoints"""
+        programmes = []
+
+        # Alternative API endpoints to try
+        alternative_urls = [
+            "https://www2.daad.de/deutschland/studienangebote/international-programmes/api/search",
+            "https://www2.daad.de/api/v1/programmes",
+            "https://www.daad.de/api/programmes"
+        ]
+
+        for url in alternative_urls:
+            try:
+                logger.info(f"Trying alternative API: {url}")
+
+                params = {
+                    'language': 'en',
+                    'format': 'json',
+                    'limit': 5000
+                }
+
+                response = self.session.get(url, params=params, timeout=30)
+                if response.status_code == 200:
+                    data = response.json()
+
+                    # Try to extract programmes from different response formats
+                    if isinstance(data, list):
+                        for item in data:
+                            programme = self._extract_programme_from_json(item)
+                            if programme:
+                                programmes.append(programme)
+                    elif isinstance(data, dict):
+                        # Try common keys
+                        for key in ['programmes', 'courses', 'data', 'results']:
+                            if key in data and isinstance(data[key], list):
+                                for item in data[key]:
+                                    programme = self._extract_programme_from_json(item)
+                                    if programme:
+                                        programmes.append(programme)
+                                break
+
+                    if programmes:
+                        logger.info(f"Found {len(programmes)} programmes from alternative API: {url}")
+                        break
+
+            except Exception as e:
+                logger.debug(f"Alternative API {url} failed: {e}")
+                continue
+
+        return programmes
+
     def _extract_programme_from_json(self, doc: Dict) -> Dict:
         """Extract programme information from JSON API response"""
         try:
-            # Extract basic information using actual API field names
-            program_name = doc.get('courseName', '')
-            if not program_name:
+            # Try multiple field names for programme name
+            program_name = (doc.get('courseName') or
+                          doc.get('name') or
+                          doc.get('title') or
+                          doc.get('programme_name') or
+                          doc.get('programName') or '')
+
+            if not program_name or len(program_name.strip()) < 3:
                 return None
 
-            # Extract institution information
-            institution = doc.get('academy', '')
+            # Extract institution information with multiple possible field names
+            institution = (doc.get('academy') or
+                         doc.get('institution') or
+                         doc.get('university') or
+                         doc.get('hochschule') or
+                         doc.get('institutionName') or 'Unknown')
 
-            # Extract degree information from course type
-            course_type = doc.get('courseType', 0)
-            degree = self._normalize_degree_from_course_type(course_type)
+            # Extract degree information from course type or direct field
+            degree = 'Unknown'
+            if 'courseType' in doc:
+                course_type = doc.get('courseType', 0)
+                degree = self._normalize_degree_from_course_type(course_type)
+            elif 'degree' in doc:
+                degree = doc.get('degree', 'Unknown')
+            elif 'degreeType' in doc:
+                degree = doc.get('degreeType', 'Unknown')
 
-            # Extract language information
-            languages = doc.get('languages', [])
+            # Extract language information with multiple possible formats
+            languages = doc.get('languages', doc.get('language', []))
             if isinstance(languages, list):
-                language = ', '.join(languages) if languages else 'Unknown'
+                language = ', '.join(str(lang) for lang in languages) if languages else 'Unknown'
             else:
                 language = str(languages) if languages else 'Unknown'
 

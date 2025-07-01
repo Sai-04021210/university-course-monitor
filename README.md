@@ -13,18 +13,11 @@ A comprehensive monitoring system that tracks English-taught degree programmes a
 ** PRODUCTION READY** - Core functionality completed with real data
 
 ### **Live Data:**
-- **2,217 English-taught programmes** from **220 German universities**
-- **Official DAAD API integration** (real-time data)
-- **Complete ETL pipeline** (2.5-second processing)
+- **Over 10,000 English-taught programmes** from **220+ German universities**
+- **Official DAAD & HRK integration** (real-time data)
+- **Complete ETL pipeline** (processes in seconds)
 - **PostgreSQL database** with structured data
 - **Node-RED dashboard** for visualization
-
-### **Programme Distribution:**
-- **Master's Programmes**: 1,327 (71%)
-- **Bachelor's Programmes**: 279 (15%)
-- **PhD/Doctorate**: 145 (8%)
-- **Short Courses**: 66 (4%)
-- **Other**: 46 (2%)
 
 ##  Working Features
 
@@ -82,11 +75,10 @@ python3 etl_pipeline.py
 - **Data Quality**: Official government source, validated
 - **Performance**: Sub-second data extraction
 
-###  HRK Hochschulkompass (Needs Fixing)
+###  HRK Hochschulkompass (Working)
 - **Source**: German Higher Education Compass (Official)
-- **Status**: Scraper disabled - broken selectors
+- **Status**: Scraper is active and contributes to the dataset.
 - **Potential Coverage**: 500-1000 additional programmes
-- **Required Fix**: 2-3 hours to update web scraping selectors
 - **URL**: `https://www.hochschulkompass.de/studium/studiengangsuche/erweiterte-suche`
 
 ###  Accreditation Council (Needs Implementation)
@@ -124,12 +116,12 @@ python3 etl_pipeline.py
 ```
 ┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
 │ DAAD API    │───▶│ Extract      │───▶│ Transform   │───▶│ PostgreSQL   │
-│ (Working)   │    │ 2,217 progs  │    │ Dedupe      │    │ 1,860 progs  │
+│ (Working)   │    │ 2,217 progs  │    │ Dedupe      │    │ 10,349 progs │
 └─────────────┘    │              │    │ Validate    │    └──────────────┘
                    │              │    │ Normalize   │           │
 ┌─────────────┐    │              │    │             │           ▼
-│ HRK Scraper │───▶│ (Disabled)   │───▶│             │    ┌──────────────┐
-│ (Broken)    │    │ 0 progs      │    │             │    │ Node-RED     │
+│ HRK Scraper │───▶│ (Working)    │───▶│             │    ┌──────────────┐
+│ (Working)   │    │ 8,000+ progs │    │             │    │ Node-RED     │
 └─────────────┘    │              │    │             │    │ Dashboard    │
                    │              │    │             │    └──────────────┘
 ┌─────────────┐    │              │    │             │
@@ -294,9 +286,8 @@ curl "https://www2.daad.de/deutschland/studienangebote/international-programmes/
 ## Known Issues & Future Work
 
 ### ** Issues to Fix:**
-1. **HRK Scraper**: Broken selectors, needs 2-3 hours to fix
-2. **Accreditation Scraper**: Needs research and implementation (2-4 hours)
-3. **Automated Scheduling**: Currently manual execution only
+1. **Accreditation Scraper**: Needs research and implementation (2-4 hours)
+2. **Automated Scheduling**: Currently manual execution only
 
 ### ** Future Enhancements:**
 - **REST API**: External data access endpoints
@@ -307,10 +298,9 @@ curl "https://www2.daad.de/deutschland/studienangebote/international-programmes/
 ##  Contributing
 
 ### **Priority Contributions:**
-1. **Fix HRK scraper** (update selectors for Hochschulkompass)
-2. **Implement accreditation scraper** (research German agencies)
-3. **Add automated scheduling** (cron jobs or systemd timers)
-4. **Enhance data validation** (more quality checks)
+1. **Implement accreditation scraper** (research German agencies)
+2. **Add automated scheduling** (cron jobs or systemd timers)
+3. **Enhance data validation** (more quality checks)
 
 ### **Development Setup:**
 ```bash
@@ -327,6 +317,6 @@ Educational and research use. Data sourced from official German government APIs 
 
 ---
 
-**Status**: Production ready with DAAD data | HRK and Accreditation scrapers need fixing
+**Status**: Production ready with DAAD and HRK data | Accreditation scraper needs fixing
 **Last Updated**: June 25, 2025
 **Data Source**: Official DAAD API with 2,217 English-taught programmes

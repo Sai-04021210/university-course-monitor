@@ -24,7 +24,7 @@ services:
     image: university-course-monitor/nodered:custom
     container_name: node-red
     ports:
-      - "1880:1880"
+      - "1882:1880"
     volumes:
       - ./workspace:/data
     env_file:

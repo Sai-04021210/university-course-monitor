@@ -3,57 +3,57 @@
 
 This document outlines the professional organization of the University Course Monitor repository.
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 university-course-monitor/
-├── 📄 README.md                    # Main project overview and quick start
-├── 📄 LICENSE                      # License summary (full text in docs/legal/)
-├── 📄 CONTRIBUTING.md              # Contribution guidelines and process
-├── 📄 PROJECT_STRUCTURE.md         # This file - project organization
+├──  README.md                    # Main project overview and quick start
+├──  LICENSE                      # License summary (full text in docs/legal/)
+├──  CONTRIBUTING.md              # Contribution guidelines and process
+├──  PROJECT_STRUCTURE.md         # This file - project organization
 ├── 🐳 docker-compose.yml           # Multi-container orchestration
 ├── 🐳 Dockerfile                   # Container build definition
-├── ⚙️ .env                         # Environment configuration
+├──  .env                         # Environment configuration
 │
-├── 📁 .github/                     # GitHub-specific configurations
-│   ├── 📁 ISSUE_TEMPLATE/          # Issue templates for bug reports, features
+├──  .github/                     # GitHub-specific configurations
+│   ├──  ISSUE_TEMPLATE/          # Issue templates for bug reports, features
 │   │   └── usage-request.md        # Usage permission request template
-│   └── 📁 workflows/               # GitHub Actions automation
+│   └──  workflows/               # GitHub Actions automation
 │       └── monitor-usage.yml       # Repository monitoring and notifications
 │
-├── 📁 config/                      # Configuration files and settings
-│   └── 📁 database/                # Database configuration
+├──  config/                      # Configuration files and settings
+│   └──  database/                # Database configuration
 │       └── init.sql                # PostgreSQL schema and initial data
 │
-├── 📁 docs/                        # Comprehensive project documentation
-│   ├── 📄 README.md                # Documentation index and navigation
-│   ├── 📄 system_analysis_and_fixes.md # Technical analysis and status
-│   ├── 📁 legal/                   # Legal documents and licensing
+├──  docs/                        # Comprehensive project documentation
+│   ├──  README.md                # Documentation index and navigation
+│   ├──  system_analysis_and_fixes.md # Technical analysis and status
+│   ├──  legal/                   # Legal documents and licensing
 │   │   └── LICENSE                 # Full restricted use license text
-│   ├── 📁 policies/                # Policies and guidelines
+│   ├──  policies/                # Policies and guidelines
 │   │   ├── SECURITY.md             # Security policy and violation reporting
 │   │   └── USAGE_VERIFICATION.md   # Usage verification requirements
-│   └── 📁 templates/               # Documentation templates
-│       └── 📁 ISSUE_TEMPLATE/      # Backup of GitHub issue templates
+│   └──  templates/               # Documentation templates
+│       └──  ISSUE_TEMPLATE/      # Backup of GitHub issue templates
 │
-├── 📁 scrapers/                    # Data extraction and processing
+├──  scrapers/                    # Data extraction and processing
 │   ├── 🐍 etl_pipeline.py          # Main ETL orchestrator and data pipeline
 │   ├── 🐍 daad_scraper.py          # DAAD API integration (working)
 │   ├── 🐍 hrk_scraper.py           # HRK website scraper (needs fixes)
 │   ├── 🐍 accreditation_scraper.py # Accreditation Council scraper (placeholder)
-│   └── 📄 requirements.txt         # Python dependencies
+│   └──  requirements.txt         # Python dependencies
 │
-├── 📁 scripts/                     # Utility and automation scripts
-│   └── 🔧 run-etl.sh               # Manual ETL pipeline execution
+├──  scripts/                     # Utility and automation scripts
+│   └──  run-etl.sh               # Manual ETL pipeline execution
 │
-├── 📁 tests/                       # Test suite (future implementation)
+├──  tests/                       # Test suite (future implementation)
 │   └── (test files will go here)
 │
-└── 📁 workspace/                   # Node-RED workspace and flows
-    ├── 📄 flows.json               # Node-RED flow definitions
-    ├── 📄 flows_cred.json          # Node-RED credentials (gitignored)
-    ├── 📄 settings.js              # Node-RED configuration
-    └── 📁 lib/                     # Node-RED libraries and modules
+└──  workspace/                   # Node-RED workspace and flows
+    ├──  flows.json               # Node-RED flow definitions
+    ├──  flows_cred.json          # Node-RED credentials (gitignored)
+    ├──  settings.js              # Node-RED configuration
+    └──  lib/                     # Node-RED libraries and modules
 ```
 
 ## 🎯 Design Principles
@@ -79,13 +79,13 @@ university-course-monitor/
 
 ## 📋 File Categories
 
-### **🔧 Core Functionality**
+### ** Core Functionality**
 | File | Purpose | Status |
 |------|---------|--------|
-| `scrapers/etl_pipeline.py` | Main data processing pipeline | ✅ Working |
-| `scrapers/daad_scraper.py` | DAAD API integration | ✅ Working |
-| `scrapers/hrk_scraper.py` | HRK website scraper | ❌ Needs fixes |
-| `config/database/init.sql` | Database schema | ✅ Working |
+| `scrapers/etl_pipeline.py` | Main data processing pipeline |  Working |
+| `scrapers/daad_scraper.py` | DAAD API integration |  Working |
+| `scrapers/hrk_scraper.py` | HRK website scraper |  Needs fixes |
+| `config/database/init.sql` | Database schema |  Working |
 
 ### **📖 Documentation**
 | File | Purpose | Audience |
@@ -103,7 +103,7 @@ university-course-monitor/
 | `docs/policies/USAGE_VERIFICATION.md` | Usage requirements | Automated |
 | `.github/workflows/monitor-usage.yml` | Activity monitoring | Automated |
 
-### **🔧 Infrastructure**
+### ** Infrastructure**
 | File | Purpose | Environment |
 |------|---------|-------------|
 | `docker-compose.yml` | Service orchestration | All |
@@ -111,7 +111,7 @@ university-course-monitor/
 | `.env` | Environment config | Local/Production |
 | `scripts/run-etl.sh` | Manual execution | Operations |
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### **For Users**
 1. Read [README.md](./README.md) for project overview

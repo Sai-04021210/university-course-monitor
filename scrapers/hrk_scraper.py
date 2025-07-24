@@ -172,7 +172,7 @@ class HRKScraper:
         """Scrape results from all pages with pagination"""
         programmes = []
         page = 1
-        max_pages = 100  # Start with 100 pages = ~10,000 programmes
+        max_pages = 10  # Quick test: 10 pages = ~1,000 programmes
 
         
         try:

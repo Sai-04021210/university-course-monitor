@@ -97,9 +97,9 @@ class MyGermanUniversityScraper:
         # Track processed URLs to avoid duplicates
         self.processed_urls: Set[str] = set()
         
-        logger.warning("⚠️  MyGermanUniversity scraper initialized")
-        logger.warning("⚠️  This scraper is NOT RECOMMENDED for production use")
-        logger.warning("⚠️  See module docstring for detailed reasons")
+        logger.warning("  MyGermanUniversity scraper initialized")
+        logger.warning("  This scraper is NOT RECOMMENDED for production use")
+        logger.warning("  See module docstring for detailed reasons")
     
     def _setup_driver(self) -> webdriver.Chrome:
         """Setup Chrome WebDriver with appropriate options"""
@@ -278,15 +278,15 @@ def main():
     Main function - demonstrates usage but includes warnings
     """
     print("🚨" * 50)
-    print("⚠️  WARNING: MyGermanUniversity Scraper")
-    print("⚠️  This scraper is NOT RECOMMENDED for production use!")
-    print("⚠️  Reasons:")
-    print("⚠️  1. 85-90% data overlap with existing DAAD + HRK sources")
-    print("⚠️  2. Legal risks - potential ToS violations")
-    print("⚠️  3. Lower data quality vs official sources")
-    print("⚠️  4. High implementation cost, minimal benefit")
-    print("⚠️")
-    print("⚠️  Your current system (10,335 programmes) is superior!")
+    print("  WARNING: MyGermanUniversity Scraper")
+    print("  This scraper is NOT RECOMMENDED for production use!")
+    print("  Reasons:")
+    print("  1. 85-90% data overlap with existing DAAD + HRK sources")
+    print("  2. Legal risks - potential ToS violations")
+    print("  3. Lower data quality vs official sources")
+    print("  4. High implementation cost, minimal benefit")
+    print("")
+    print("  Your current system (10,335 programmes) is superior!")
     print("🚨" * 50)
     
     response = input("\nDo you still want to run this scraper? (yes/no): ")
@@ -302,15 +302,15 @@ def main():
         if programmes:
             scraper.programmes = programmes
             scraper.save_to_json()
-            print(f"\n✅ Scraped {len(programmes)} programmes")
-            print("📁 Saved to mgu_programmes.json")
+            print(f"\n Scraped {len(programmes)} programmes")
+            print(" Saved to mgu_programmes.json")
         else:
-            print("❌ No programmes scraped")
+            print(" No programmes scraped")
             
     except KeyboardInterrupt:
         print("\n🛑 Scraping interrupted by user")
     except Exception as e:
-        print(f"❌ Error during scraping: {e}")
+        print(f" Error during scraping: {e}")
 
 def integrate_with_etl():
     """
